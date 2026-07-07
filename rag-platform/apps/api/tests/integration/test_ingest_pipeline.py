@@ -32,8 +32,8 @@ def test_ingest_pipeline():
 
     # ---------- Step 4: Retrieve ----------
     results = vector_store.similarity_search(
-        query="What is Artificial Intelligence?",
-        k=3,
+        query="Explain me about syllogism",
+        k=1,
     )
 
     assert len(results) > 0
