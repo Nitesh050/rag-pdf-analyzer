@@ -14,5 +14,6 @@ def chat(request: ChatRequest):
     result = rag.ask(request.question)
 
     return ChatResponse(
-        answer=result["answer"]
+        answer=result["answer"],
+        sources=result["sources"],
     )

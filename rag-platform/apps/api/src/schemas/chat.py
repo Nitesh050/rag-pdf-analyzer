@@ -5,5 +5,10 @@ class ChatRequest(BaseModel):
     question: str
 
 
+class Source(BaseModel):
+    page:int | None=None
+    source: str| None=None
+
 class ChatResponse(BaseModel):
-    answer: str
+    answer:str
+    sources: list[Source]

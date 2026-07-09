@@ -37,7 +37,17 @@ class RAGChain:
         answer = self.llm.generate(prompt)
 
         # Step 5: Return answer + sources
+        sources = []
+
+        for doc in documents:
+            sources.append(
+                {
+                    "page": doc.metadata.get("page"),
+                    "source": doc.metadata.get("source"),
+                }
+            )
+
         return {
             "answer": answer,
-            "sources": documents,
+            "sources": sources,
         }
