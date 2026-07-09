@@ -21,3 +21,9 @@ class IngestionPipeline:
         chunks = self.chunker.split(documents)
 
         return chunks
+
+    def run(self, pdf_path: str | Path) -> list[Document]:
+        """
+        Run the full ingestion pipeline for a PDF file.
+        """
+        return self.ingest_pdf(pdf_path)
