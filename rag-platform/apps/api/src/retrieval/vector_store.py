@@ -3,7 +3,7 @@ from pathlib import Path
 from langchain_core.documents import Document
 from langchain_chroma import Chroma
 
-from retrieval.embedder import Embedder
+from .embedder import Embedder
 
 
 class VectorStore:

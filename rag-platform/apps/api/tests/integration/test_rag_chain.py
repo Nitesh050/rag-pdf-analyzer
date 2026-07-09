@@ -6,7 +6,7 @@ def test_rag_chain():
     rag = RAGChain()
 
     result = rag.ask(
-        "What is Artificial Intelligence?"
+        "summary of the whole document ",
     )
 
     print("\n")

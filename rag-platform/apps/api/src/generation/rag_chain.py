@@ -1,6 +1,6 @@
-from generation.ollama_client import OllamaClient
-from generation.prompt_templates import PromptBuilder
-from retrieval.vector_store import VectorStore
+from .ollama_client import OllamaClient
+from .prompt_templates import PromptBuilder
+from ..retrieval.vector_store import VectorStore
 
 
 class RAGChain:

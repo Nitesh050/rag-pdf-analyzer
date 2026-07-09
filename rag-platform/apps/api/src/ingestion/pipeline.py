@@ -2,8 +2,8 @@ from pathlib import Path
 
 from langchain_core.documents import Document
 
-from ingestion.pdf_adapter import PDFAdapter
-from ingestion.chunker import DocumentChunker
+from .pdf_adapter import PDFAdapter
+from .chunker import DocumentChunker
 
 
 class IngestionPipeline:
