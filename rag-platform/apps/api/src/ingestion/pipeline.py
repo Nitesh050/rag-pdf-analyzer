@@ -3,7 +3,7 @@ from pathlib import Path
 
 from langchain_core.documents import Document
 
-from .chunker import DocumentChunker
+from .chunking.chunker import DocumentChunker
 from .pdf_adapter import PDFAdapter
 from ..retrieval.vector_store import VectorStore
 
