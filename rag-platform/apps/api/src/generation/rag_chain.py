@@ -17,7 +17,7 @@ class RAGChain:
         # Step 1: Retrieve relevant chunks
         documents = self.vector_store.similarity_search(
             query=question,
-            k=k,
+            k=1,
         )
 
         # Step 2: If nothing is found
