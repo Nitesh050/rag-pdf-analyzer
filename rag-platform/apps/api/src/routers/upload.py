@@ -23,11 +23,14 @@ async def upload_pdf(file: UploadFile = File(...)):
         f.write(await file.read())
 
     try:
-        pipeline.run(pdf_path)
+        result = pipeline.run(pdf_path)
+
     except (PdfReadError, ValueError, Exception) as exc:
         raise HTTPException(
             status_code=400,
             detail=f"Invalid PDF file: {exc}"
         ) from exc
 
-    return UploadResponse(message="PDF uploaded successfully.")
+    return UploadResponse(
+        message=result["message"]
+    )
