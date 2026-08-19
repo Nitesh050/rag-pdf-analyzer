@@ -5,19 +5,21 @@ from langchain_core.documents import Document
 
 from .chunking.chunker import DocumentChunker
 from .pdf_adapter import PDFAdapter
-from ..retrieval.vector_store import VectorStore
+from ..dependencies import get_retrieval_manager
+from ..retrieval.retrieval_manager import RetrievalManager
 
 
 class IngestionPipeline:
     """
     Complete ingestion pipeline:
-    PDF -> Documents -> Chunks -> ChromaDB
+    PDF -> Documents -> Chunks -> ChromaDB -> BM25 index
     """
 
-    def __init__(self):
+    def __init__(self, retrieval_manager: RetrievalManager | None = None):
         self.pdf_adapter = PDFAdapter()
         self.chunker = DocumentChunker()
-        self.vector_store = VectorStore()
+        self.retrieval_manager = retrieval_manager or get_retrieval_manager()
+        self.vector_store = self.retrieval_manager.vector_store
 
     def ingest_pdf(self, pdf_path: str | Path) -> list[Document]:
         """
@@ -58,6 +60,10 @@ class IngestionPipeline:
 
         # Step 4: Store chunks in ChromaDB
         self.vector_store.add_documents(chunks)
+
+        # Step 5: Rebuild the BM25 keyword index so hybrid search
+        # (used by RAGChain via RetrievalManager) can see the new chunks.
+        self.retrieval_manager.build_indexes()
 
         return {
             "message": "PDF indexed successfully.",

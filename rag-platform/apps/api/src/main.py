@@ -1,10 +1,18 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.dependencies import get_retrieval_manager
 from src.routers.chat import router as chat_router
 from src.routers.upload import router as upload_router
 
 app = FastAPI(title="RAG Platform API")
+
+
+@app.on_event("startup")
+def build_keyword_index_on_startup() -> None:
+    # Chroma persists across restarts, but the BM25 keyword index
+    # used by hybrid search lives in memory and must be rebuilt.
+    get_retrieval_manager().build_indexes()
 
 app.add_middleware(
     CORSMiddleware,

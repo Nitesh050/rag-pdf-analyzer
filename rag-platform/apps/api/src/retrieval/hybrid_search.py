@@ -32,6 +32,16 @@ class HybridRetriever:
         Build BM25 from all documents stored in the vector store.
         """
         documents = self.vector_store.get_all_documents()
+
+        if not documents:
+            # BM25Okapi divides by the average document length, which
+            # is undefined for an empty corpus (e.g. before the first
+            # upload). Leave the index unbuilt; retrieve() falls back
+            # to semantic-only results in that case.
+            self.bm25.clear()
+            self._index_built = False
+            return
+
         self.bm25.build_index(documents)
         self._index_built = True
 
@@ -105,6 +115,13 @@ class HybridRetriever:
             query=query,
             k=fetch_k,
         )
+
+        if not self._index_built:
+            # No keyword index yet (e.g. nothing has been ingested,
+            # or the corpus was empty on the last build). Fall back
+            # to semantic-only results instead of erroring out.
+            return semantic_results[:k]
+
         keyword_results = self.keyword_search(
             query=query,
             k=fetch_k,
