@@ -4,16 +4,20 @@ from .prompt_templates import PromptBuilder
 from .intent.router import IntentRouter
 from .intent.intent import Intent
 
-from ..retrieval.vector_store import VectorStore
+from ..dependencies import get_retrieval_manager
+from ..retrieval.retrieval_manager import RetrievalManager
 
 
 class RAGChain:
     """
-    Orchestrates the complete Retrieval-Augmented Generation pipeline.
+    Orchestrates the complete Retrieval-Augmented Generation pipeline:
+    intent routing -> hybrid retrieval (semantic + BM25 + RRF) ->
+    cross-encoder reranking -> prompt building -> generation.
     """
 
-    def __init__(self):
-        self.vector_store = VectorStore()
+    def __init__(self, retrieval_manager: RetrievalManager | None = None):
+        self.retrieval_manager = retrieval_manager or get_retrieval_manager()
+        self.vector_store = self.retrieval_manager.vector_store
         self.llm = OllamaClient()
         self.router = IntentRouter()
 
@@ -27,21 +31,26 @@ class RAGChain:
 
         # -------------------------------------------------
         # Step 2 : Retrieve Context
+        #
+        # Every intent except SUMMARY goes through the RetrievalManager,
+        # which fuses semantic + BM25 results (RRF) and reranks them
+        # with a cross-encoder. SUMMARY needs the full document instead
+        # of a query-ranked subset, so it bypasses retrieval entirely.
         # -------------------------------------------------
 
         if intent == Intent.QA:
 
-            documents = self.vector_store.similarity_search(
+            documents = self.retrieval_manager.retrieve(
                 query=question,
-                k=k,
+                top_k=k,
             )
 
         elif intent == Intent.EXPLANATION:
 
             # Retrieve more context for teaching/explanation
-            documents = self.vector_store.similarity_search(
+            documents = self.retrieval_manager.retrieve(
                 query=question,
-                k=12,
+                top_k=12,
             )
 
         elif intent == Intent.SUMMARY:
@@ -51,23 +60,23 @@ class RAGChain:
 
         elif intent == Intent.COMPARISON:
 
-            documents = self.vector_store.similarity_search(
+            documents = self.retrieval_manager.retrieve(
                 query=question,
-                k=15,
+                top_k=15,
             )
 
         elif intent == Intent.CHAPTER:
 
-            documents = self.vector_store.similarity_search(
+            documents = self.retrieval_manager.retrieve(
                 query=question,
-                k=8,
+                top_k=8,
             )
 
         else:
 
-            documents = self.vector_store.similarity_search(
+            documents = self.retrieval_manager.retrieve(
                 query=question,
-                k=k,
+                top_k=k,
             )
 
         # -------------------------------------------------

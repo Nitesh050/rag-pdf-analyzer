@@ -1,11 +1,12 @@
 from fastapi import APIRouter
 
+from src.dependencies import get_retrieval_manager
 from src.generation.rag_chain import RAGChain
 from src.schemas.chat import ChatRequest, ChatResponse
 
 router = APIRouter()
 
-rag = RAGChain()
+rag = RAGChain(retrieval_manager=get_retrieval_manager())
 
 
 @router.post("/chat", response_model=ChatResponse)
