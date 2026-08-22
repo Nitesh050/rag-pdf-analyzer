@@ -12,7 +12,7 @@ rag = RAGChain(retrieval_manager=get_retrieval_manager())
 @router.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest):
 
-    result = rag.ask(request.question)
+    result = rag.ask(request.question, document_id=request.document_id)
 
     return ChatResponse(
         answer=result["answer"],

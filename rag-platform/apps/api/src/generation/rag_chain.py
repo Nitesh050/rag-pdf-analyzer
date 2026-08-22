@@ -21,13 +21,18 @@ class RAGChain:
         self.llm = OllamaClient()
         self.router = IntentRouter()
 
-    def ask(self, question: str, k: int = 5) -> dict:
+    def ask(self, question: str, k: int = 5, document_id: str | None = None) -> dict:
 
         # -------------------------------------------------
         # Step 1 : Detect User Intent
         # -------------------------------------------------
 
         intent = self.router.route(question)
+
+        # When a document_id is given, every retrieval path below is
+        # scoped to that document only, so chat never mixes chunks from
+        # other uploads sitting in the same shared vector store.
+        filters = {"document_id": document_id} if document_id else None
 
         # -------------------------------------------------
         # Step 2 : Retrieve Context
@@ -43,6 +48,7 @@ class RAGChain:
             documents = self.retrieval_manager.retrieve(
                 query=question,
                 top_k=k,
+                filters=filters,
             )
 
         elif intent == Intent.EXPLANATION:
@@ -51,18 +57,24 @@ class RAGChain:
             documents = self.retrieval_manager.retrieve(
                 query=question,
                 top_k=12,
+                filters=filters,
             )
 
         elif intent == Intent.SUMMARY:
 
-            # Entire document will be used
-            documents = self.vector_store.get_all_documents()
+            # Entire document will be used. Scoped to document_id when
+            # given, otherwise falls back to the whole corpus.
+            if document_id:
+                documents = self.vector_store.get_document(document_id)
+            else:
+                documents = self.vector_store.get_all_documents()
 
         elif intent == Intent.COMPARISON:
 
             documents = self.retrieval_manager.retrieve(
                 query=question,
                 top_k=15,
+                filters=filters,
             )
 
         elif intent == Intent.CHAPTER:
@@ -70,6 +82,7 @@ class RAGChain:
             documents = self.retrieval_manager.retrieve(
                 query=question,
                 top_k=8,
+                filters=filters,
             )
 
         else:
@@ -77,6 +90,7 @@ class RAGChain:
             documents = self.retrieval_manager.retrieve(
                 query=question,
                 top_k=k,
+                filters=filters,
             )
 
         # -------------------------------------------------

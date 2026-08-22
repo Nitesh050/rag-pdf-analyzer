@@ -1,3 +1,5 @@
+from typing import Any, Optional
+
 from langchain_core.documents import Document
 from rank_bm25 import BM25Okapi
 
@@ -58,6 +60,7 @@ class BM25Retriever:
         self,
         query: str,
         k: int = 5,
+        filter: Optional[dict] = None,
     ) -> list[Document]:
 
         if self.index is None:
@@ -73,10 +76,37 @@ class BM25Retriever:
             reverse=True,
         )
 
+        if filter:
+            ranked = [
+                (score, document)
+                for score, document in ranked
+                if self._matches(document.metadata, filter)
+            ]
+
         return [
             document
             for score, document in ranked[:k]
         ]
+
+    # ---------------------------------------------------------
+
+    def _matches(
+        self,
+        metadata: dict,
+        filter: dict[str, Any],
+    ) -> bool:
+
+        for key, value in filter.items():
+
+            meta_value = metadata.get(key)
+
+            if isinstance(value, (list, tuple, set)):
+                if meta_value not in value:
+                    return False
+            elif meta_value != value:
+                return False
+
+        return True
 
     # ---------------------------------------------------------
 

@@ -12,12 +12,13 @@ class MetadataEnricher:
     def enrich(
         self,
         chunks: list[Document],
+        document_id: str | None = None,
     ) -> list[Document]:
 
         if not chunks:
             return []
 
-        document_id = str(uuid.uuid4())
+        document_id = document_id or str(uuid.uuid4())
         total_chunks = len(chunks)
 
         for index, chunk in enumerate(chunks):

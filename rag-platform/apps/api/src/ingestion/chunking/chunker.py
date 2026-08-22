@@ -32,6 +32,7 @@ class DocumentChunker:
     def split(
         self,
         documents: list[Document],
+        document_id: str | None = None,
     ) -> list[Document]:
 
         if not documents:
@@ -76,6 +77,6 @@ class DocumentChunker:
         # Step 6 : Metadata enrichment
         # ----------------------------------
 
-        chunks = self.metadata.enrich(chunks)
+        chunks = self.metadata.enrich(chunks, document_id=document_id)
 
         return chunks

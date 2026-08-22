@@ -1,4 +1,4 @@
-from generation.rag_chain import RAGChain
+from src.generation.rag_chain import RAGChain
 
 
 def test_rag_chain():
@@ -17,6 +17,6 @@ def test_rag_chain():
     print("\nSources:")
 
     for source in result["sources"]:
-        print(source.metadata)
+        print(source)
 
     assert len(result["answer"]) > 0
