@@ -1,7 +1,7 @@
 import hashlib
 from pathlib import Path
 
-import pymupdf
+from docling.exceptions import ConversionError
 from fastapi import APIRouter, File, HTTPException, UploadFile
 
 from ..dependencies import get_retrieval_manager
@@ -36,7 +36,7 @@ async def upload_pdf(file: UploadFile = File(...)):
     try:
         result = pipeline.run(pdf_path, content_hash=content_hash)
 
-    except pymupdf.FileDataError as exc:
+    except ConversionError as exc:
         raise HTTPException(
             status_code=400,
             detail="Invalid or corrupted PDF file.",
