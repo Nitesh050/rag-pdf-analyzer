@@ -1,0 +1,26 @@
+# Web framework
+fastapi==0.128.5
+uvicorn==0.40.0
+python-multipart==0.0.32
+
+# LLM / RAG orchestration (LangChain + Ollama)
+langchain-core==1.4.8
+langchain-text-splitters==1.1.2
+langchain-ollama==1.1.0
+langchain-chroma==1.1.0
+
+# Vector store + hybrid retrieval
+chromadb==1.5.9
+rank-bm25==0.2.2
+sentence-transformers==6.0.0
+
+# PDF ingestion
+pymupdf==1.28.2
+
+# Schemas / validation
+pydantic==2.12.5
+
+# Testing
+pytest==9.1.1
+pytest-asyncio==1.4.0
+httpx==0.28.1
