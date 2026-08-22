@@ -18,7 +18,12 @@ class RetrievalManager:
 	- Accepts simple filter dicts which are converted to Chroma filters
 	"""
 
-	def __init__(self, reranker_model: Optional[str] = None):
+	def __init__(
+		self,
+		reranker_model: Optional[str] = None,
+		rerank_overfetch_multiplier: int = 3,
+		min_rerank_fetch_k: int = 20,
+	):
 
 		self.vector_store = VectorStore()
 
@@ -30,11 +35,27 @@ class RetrievalManager:
 		if reranker_model:
 			self.reranker = Reranker(model_name=reranker_model)
 
+		# When reranking, the initial retrieval must pull a wider candidate
+		# pool than top_k — otherwise the reranker only ever sees exactly
+		# top_k documents and can merely reorder them instead of surfacing
+		# better candidates that ranked just outside the cutoff.
+		self.rerank_overfetch_multiplier = rerank_overfetch_multiplier
+		self.min_rerank_fetch_k = min_rerank_fetch_k
+
 	# ---------------------------------------------------------
 	def build_indexes(self) -> None:
 		"""Build any secondary indexes (e.g., BM25) used by hybrid retrieval."""
 
 		self.hybrid.build_keyword_index()
+
+	# ---------------------------------------------------------
+	def _compute_fetch_k(self, top_k: int, will_rerank: bool) -> int:
+		"""How many candidates to retrieve before any reranking step."""
+
+		if not will_rerank:
+			return top_k
+
+		return max(top_k * self.rerank_overfetch_multiplier, self.min_rerank_fetch_k)
 
 	# ---------------------------------------------------------
 	def retrieve(
@@ -55,31 +76,31 @@ class RetrievalManager:
 
 		chroma_filter = build_chroma_filter(filters)
 
+		will_rerank = rerank and self.reranker is not None
+		fetch_k = self._compute_fetch_k(top_k, will_rerank)
+
 		if use_hybrid:
 
 			# Hybrid retriever uses the VectorStore internally for semantic
 			# search and BM25 for keywords. BM25 index should be built
 			# beforehand via `build_indexes()` when documents change.
 
-			results = self.hybrid.retrieve(query=query, k=top_k)
+			results = self.hybrid.retrieve(query=query, k=fetch_k, filter=chroma_filter)
 
 		else:
 
 			# Semantic-only search via the vector store
 			results = self.vector_store.similarity_search(
 				query=query,
-				k=top_k,
+				k=fetch_k,
 				filter=chroma_filter,
 			)
 
-		if rerank and self.reranker:
-
-			# Increase candidate pool before reranking to improve recall
-			candidates = results if len(results) >= top_k else results
+		if will_rerank:
 
 			return self.reranker.rerank(
 				query=query,
-				documents=candidates,
+				documents=results,
 				top_k=top_k,
 			)
 
