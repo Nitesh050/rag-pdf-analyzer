@@ -10,7 +10,7 @@ def _insert_fake_modules():
         def __init__(self):
             pass
 
-        def retrieve(self, query, k=5):
+        def retrieve(self, query, k=5, filter=None):
             return [
                 SimpleNamespace(page_content=f"doc{i}", metadata={"document_id": str(i)})
                 for i in range(k)
@@ -59,8 +59,11 @@ def test_retrieval_manager_hybrid_and_rerank(monkeypatch):
 
     results = mgr.retrieve(query="x", top_k=3, use_hybrid=True, rerank=True)
 
-    # Hybrid returns doc0,doc1,doc2; reranker reverses
-    assert [r.page_content for r in results] == ["doc2", "doc1", "doc0"]
+    # Reranking overfetches beyond top_k (max(top_k * 3, 20) = 20 here) so
+    # the reranker has a real candidate pool to choose from, not just the
+    # top_k documents already selected by fusion. Hybrid returns doc0..doc19;
+    # reranker reverses and keeps the top 3: doc19, doc18, doc17.
+    assert [r.page_content for r in results] == ["doc19", "doc18", "doc17"]
 
 
 def test_retrieval_manager_semantic_only_no_rerank(monkeypatch):
