@@ -50,6 +50,7 @@ class HybridRetriever:
         self,
         query: str,
         k: int = 5,
+        filter: dict | None = None,
     ) -> list[Document]:
         if k <= 0:
             raise ValueError(f"k must be a positive integer, got {k}")
@@ -57,6 +58,7 @@ class HybridRetriever:
         return self.vector_store.similarity_search(
             query=query,
             k=k,
+            filter=filter,
         )
 
     # ---------------------------------------------------------
@@ -64,6 +66,7 @@ class HybridRetriever:
         self,
         query: str,
         k: int = 5,
+        filter: dict | None = None,
     ) -> list[Document]:
         if k <= 0:
             raise ValueError(f"k must be a positive integer, got {k}")
@@ -77,6 +80,7 @@ class HybridRetriever:
         return self.bm25.retrieve(
             query=query,
             k=k,
+            filter=filter,
         )
 
     # ---------------------------------------------------------
@@ -95,6 +99,7 @@ class HybridRetriever:
         query: str,
         k: int = 5,
         fetch_k: int | None = None,
+        filter: dict | None = None,
     ) -> list[Document]:
         """
         Retrieve top-k documents using hybrid search.
@@ -105,6 +110,8 @@ class HybridRetriever:
             fetch_k: Number of candidates to pull from each individual
                 retriever before fusion. Defaults to
                 max(k * overfetch_multiplier, min_fetch_k) if not provided.
+            filter: optional metadata filter (e.g. {"document_id": ...})
+                applied to both the semantic and keyword retrievers.
         """
         if k <= 0:
             raise ValueError(f"k must be a positive integer, got {k}")
@@ -114,6 +121,7 @@ class HybridRetriever:
         semantic_results = self.semantic_search(
             query=query,
             k=fetch_k,
+            filter=filter,
         )
 
         if not self._index_built:
@@ -125,6 +133,7 @@ class HybridRetriever:
         keyword_results = self.keyword_search(
             query=query,
             k=fetch_k,
+            filter=filter,
         )
 
         fused_results = self.fusion.fuse(

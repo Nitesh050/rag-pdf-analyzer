@@ -113,6 +113,27 @@ class VectorStore:
         )
 
     # ---------------------------------------------------
+    # CONTENT HASH FILTER
+    # ---------------------------------------------------
+
+    def get_by_content_hash(
+        self,
+        content_hash: str,
+    ) -> list[Document]:
+        """
+        Look up chunks previously stored for this exact file content,
+        used to detect duplicate uploads.
+        """
+
+        return self.similarity_search(
+            query="",
+            k=1,
+            filter={
+                "content_hash": content_hash,
+            },
+        )
+
+    # ---------------------------------------------------
     # PAGE FILTER
     # ---------------------------------------------------
 

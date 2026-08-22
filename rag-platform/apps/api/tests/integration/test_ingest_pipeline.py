@@ -1,6 +1,6 @@
-from ingestion.pdf_adapter import PDFAdapter
-from ingestion.chunker import DocumentChunker
-from retrieval.vector_store import VectorStore
+from src.ingestion.pdf_adapter import PDFAdapter
+from src.ingestion.chunking.chunker import DocumentChunker
+from src.retrieval.vector_store import VectorStore
 
 
 def test_ingest_pipeline():
