@@ -14,8 +14,8 @@ chromadb==1.5.9
 rank-bm25==0.2.2
 sentence-transformers==6.0.0
 
-# PDF ingestion
-pymupdf==1.28.2
+# PDF ingestion (layout-aware: tables as Markdown, headings/lists preserved)
+docling==2.121.0
 
 # Schemas / validation
 pydantic==2.12.5
