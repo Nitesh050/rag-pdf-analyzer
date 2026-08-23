@@ -3,10 +3,11 @@ from pathlib import Path
 
 from docling.exceptions import ConversionError
 from fastapi import APIRouter, File, HTTPException, UploadFile
+from requests.exceptions import RequestException
 
 from ..dependencies import get_retrieval_manager
 from ..ingestion.pipeline import IngestionPipeline
-from ..schemas.document import UploadResponse
+from ..schemas.document import IngestURLRequest, UploadResponse
 
 router = APIRouter()
 
@@ -40,6 +41,31 @@ async def upload_pdf(file: UploadFile = File(...)):
         raise HTTPException(
             status_code=400,
             detail="Invalid or corrupted PDF file.",
+        ) from exc
+
+    return UploadResponse(
+        message=result["message"],
+        document_id=result.get("document_id"),
+        chunks=result.get("chunks", 0),
+    )
+
+
+@router.post("/upload/url", response_model=UploadResponse)
+async def upload_url(payload: IngestURLRequest):
+
+    url = str(payload.url)
+    # No file bytes to hash for a URL, so hash the URL itself — this
+    # dedups repeated submissions of the same page the same way
+    # content_hash dedups repeated uploads of the same PDF.
+    content_hash = hashlib.sha256(url.encode()).hexdigest()
+
+    try:
+        result = pipeline.run_web(url, content_hash=content_hash)
+
+    except RequestException as exc:
+        raise HTTPException(
+            status_code=400,
+            detail="Could not fetch the given URL.",
         ) from exc
 
     return UploadResponse(
