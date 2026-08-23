@@ -17,6 +17,21 @@ export async function uploadPdf(file) {
   return response.json();
 }
 
+export async function uploadUrl(url) {
+  const response = await fetch(`${API_BASE_URL}/upload/url`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}));
+    throw new Error(error.detail || 'URL ingestion failed');
+  }
+
+  return response.json();
+}
+
 export async function chatWithPdf(question) {
   const response = await fetch(`${API_BASE_URL}/chat`, {
     method: 'POST',
