@@ -14,8 +14,13 @@ class HybridRetriever:
     3. Reciprocal Rank Fusion
     """
 
-    def __init__(self, overfetch_multiplier: int = 3, min_fetch_k: int = 10):
-        self.vector_store = VectorStore()
+    def __init__(
+        self,
+        vector_store: VectorStore | None = None,
+        overfetch_multiplier: int = 3,
+        min_fetch_k: int = 10,
+    ):
+        self.vector_store = vector_store or VectorStore()
         self.bm25 = BM25Retriever()
         self.fusion = ReciprocalRankFusion()
 
