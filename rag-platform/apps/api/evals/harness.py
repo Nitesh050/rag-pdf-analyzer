@@ -68,7 +68,9 @@ class CachedPDFAdapter(PDFAdapter):
         super().__init__(ocr=ocr)
         self.ocr = ocr
 
-    def load(self, pdf_path: str | Path) -> list[Document]:
+    def _convert(self, pdf_path: str | Path) -> list[Document]:
+        # Only the raw Docling output is cached; PDFAdapter.load still
+        # applies the current normalize_text() on top of it each run.
         pdf_path = Path(pdf_path)
         file_hash = hashlib.sha256(pdf_path.read_bytes()).hexdigest()
         key = hashlib.sha256(
@@ -82,7 +84,7 @@ class CachedPDFAdapter(PDFAdapter):
         else:
             pages = [
                 {"page_content": d.page_content, "metadata": d.metadata}
-                for d in super().load(pdf_path)
+                for d in super()._convert(pdf_path)
             ]
             cache_file.parent.mkdir(parents=True, exist_ok=True)
             cache_file.write_text(json.dumps(pages))

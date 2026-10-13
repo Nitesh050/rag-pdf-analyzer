@@ -4,6 +4,11 @@ from .bm25 import BM25Retriever
 from .fusion import ReciprocalRankFusion
 from .vector_store import VectorStore
 
+# Weight of BM25 relative to semantic results in fusion. With stemming and
+# stopword removal, weights between 0.5 and 1.0 scored the same on the eval
+# set (evals/run_retrieval.py --keyword-weight), so both count equally.
+KEYWORD_WEIGHT = 1.0
+
 
 class HybridRetriever:
     """
@@ -19,6 +24,7 @@ class HybridRetriever:
         vector_store: VectorStore | None = None,
         overfetch_multiplier: int = 3,
         min_fetch_k: int = 10,
+        keyword_weight: float = KEYWORD_WEIGHT,
     ):
         self.vector_store = vector_store or VectorStore()
         self.bm25 = BM25Retriever()
@@ -28,6 +34,9 @@ class HybridRetriever:
         # RRF needs a wider candidate pool than the final top_k to work well.
         self.overfetch_multiplier = overfetch_multiplier
         self.min_fetch_k = min_fetch_k
+
+        # Relative weight of BM25 vs semantic results in fusion.
+        self.keyword_weight = keyword_weight
 
         self._index_built = False
 
@@ -147,5 +156,6 @@ class HybridRetriever:
                 keyword_results,
             ],
             top_k=k,  # truncate to the caller's desired k only at the end
+            weights=[1.0, self.keyword_weight],
         )
         return fused_results
