@@ -102,6 +102,7 @@ def main() -> None:
     parser.add_argument("--modes", nargs="+", choices=MODES, default=MODES)
     parser.add_argument("--scope", nargs="+", choices=["global", "doc"], default=["global", "doc"])
     parser.add_argument("--reranker", default=DEFAULT_RERANKER)
+    parser.add_argument("--keyword-weight", type=float, help="override BM25 weight in hybrid fusion")
     parser.add_argument("--name", default=datetime.now().strftime("%Y%m%d-%H%M%S"))
     parser.add_argument("--only", help="comma-separated question ids to run")
     args = parser.parse_args()
@@ -120,6 +121,8 @@ def main() -> None:
 
     reranker = args.reranker if "hybrid_rerank" in args.modes else None
     manager = build_index(chunks, reranker_model=reranker)
+    if args.keyword_weight is not None:
+        manager.hybrid.keyword_weight = args.keyword_weight
 
     results = {}
     for scope in args.scope:
@@ -135,6 +138,7 @@ def main() -> None:
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "config": {
             "reranker": reranker,
+            "keyword_weight": manager.hybrid.keyword_weight,
             "chunks": len(chunks),
             "chunks_per_doc": dict(chunk_counts),
             "questions": len(golden),
