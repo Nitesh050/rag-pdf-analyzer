@@ -10,13 +10,14 @@ const Dashboard = () => {
   const [sources, setSources] = useState([]);
   const [loading, setLoading] = useState(false);
   const [uploadedFile, setUploadedFile] = useState(null);
+  const [documentId, setDocumentId] = useState(null);
 
   async function handleSend(question) {
     setLoading(true);
     setMessages((prev) => [...prev, { role: 'user', content: question }]);
 
     try {
-      const result = await chatWithPdf(question);
+      const result = await chatWithPdf(question, documentId);
       setMessages((prev) => [
         ...prev,
         { role: 'assistant', content: result.answer, sources: result.sources || [] },
@@ -58,7 +59,12 @@ const Dashboard = () => {
           </div>
 
           <div className="w-full shrink-0 lg:w-[360px]">
-            <UploadCard onUploadSuccess={(name) => setUploadedFile(name)} />
+            <UploadCard
+              onUploadSuccess={(name, id) => {
+                setUploadedFile(name);
+                setDocumentId(id ?? null);
+              }}
+            />
           </div>
         </section>
       </main>
