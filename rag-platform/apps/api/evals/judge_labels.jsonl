@@ -1,0 +1,49 @@
+{"id": "nn-01", "answer_sha": "995598ca1c11d6cd", "label": "incorrect", "note": "refused although gold page 15 was Source 1", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-02", "answer_sha": "51efd5b3e02d5b5a", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-03", "answer_sha": "0b2b1b98eedf779d", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-04", "answer_sha": "cb73648988f9ec6d", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-05", "answer_sha": "fd89aeaf28deebdf", "label": "correct", "note": "fact right; cites 'Source 3, page 41' but Source 3 is page 46", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-06", "answer_sha": "905689fdb4ebb7b6", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-07", "answer_sha": "01d9f70e051efd9c", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-08", "answer_sha": "5bc27dad95b736e1", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-09", "answer_sha": "8ef175adaf8a2770", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-10", "answer_sha": "31af85c7933894c9", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-11", "answer_sha": "0ac4513503d65333", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-12", "answer_sha": "995598ca1c11d6cd", "label": "incorrect", "note": "refused; gold pages 100-101 not retrieved", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-13", "answer_sha": "fa584fdf7c161065", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-14", "answer_sha": "9a3512a74501c084", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-15", "answer_sha": "f92038aa617d5954", "label": "correct", "note": "omits normal-distribution detail", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-16", "answer_sha": "d277d7e721cdab34", "label": "correct", "note": "writes self.wh for self.wih", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-17", "answer_sha": "d4fac5d7e6eb9d17", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-18", "answer_sha": "169db0f0dafe73dd", "label": "partial", "note": "omits that the first value is the label; cites p144 not p146", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-19", "answer_sha": "795dd88066a79c14", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-20", "answer_sha": "ccf6e6edaac74e14", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-21", "answer_sha": "08e96715866ea3bb", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-22", "answer_sha": "83240ca76ad144e7", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-23", "answer_sha": "eb10f95c2b887fc5", "label": "partial", "note": "never says it is the inverse of the sigmoid or gives ln(y/(1-y))", "labelled_from": "gen-01-baseline", "grounded": false, "grounded_note": "says logit is used in back propagation to refine link weights; context describes back querying"}
+{"id": "nn-24", "answer_sha": "d08ed9bc32c4f8f4", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-25", "answer_sha": "7cdfad4a579c7664", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-26", "answer_sha": "1e096ca5b701cc3d", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-27", "answer_sha": "591be0b080fae366", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-28", "answer_sha": "87bbd135629fbf68", "label": "correct", "note": "omits 64-bit", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-29", "answer_sha": "afa87e751555d6f0", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "nn-30", "answer_sha": "995598ca1c11d6cd", "label": "incorrect", "note": "refused although gold page 162 was Sources 2 and 4", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "syl-01", "answer_sha": "3faf28fc00b0d46e", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "syl-02", "answer_sha": "12b8ea6d70d535fa", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "syl-03", "answer_sha": "16f7c1e9099c2561", "label": "partial", "note": "omits the Venn diagram advice", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "syl-04", "answer_sha": "4dc3fa06668fc92e", "label": "partial", "note": "lists only conclusion II", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "syl-05", "answer_sha": "d7bfc480a34ea803", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "syl-06", "answer_sha": "d2cc2ff788c458ef", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "syl-07", "answer_sha": "2421a9176d6dd9f6", "label": "correct", "note": "derived from the statements on p4; the diagram slide itself is not indexed", "labelled_from": "gen-01-baseline", "grounded": false, "grounded_note": "Venn diagram is inferred from the statements; the context never shows or describes it"}
+{"id": "syl-08", "answer_sha": "995598ca1c11d6cd", "label": "incorrect", "note": "refused; image-only slide p9 not indexed", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "syl-09", "answer_sha": "a85fe90bcaca32e6", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "os-01", "answer_sha": "52a385265bb0ad0a", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "os-02", "answer_sha": "d03bb10dab0cb542", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "os-03", "answer_sha": "995598ca1c11d6cd", "label": "incorrect", "note": "refused although gold pages 5 and 6 were in context", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "os-04", "answer_sha": "9250adaa7b5cea3c", "label": "partial", "note": "hedges that context is incomplete; wrongly says child sleeps 10s before exiting", "labelled_from": "gen-01-baseline", "grounded": false, "grounded_note": "claims the child sleeps 10s before exiting; that is the orphan program (p5), not the zombie one"}
+{"id": "os-05", "answer_sha": "60fe34d0510013d2", "label": "partial", "note": "omits Round Robin", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "os-06", "answer_sha": "995598ca1c11d6cd", "label": "incorrect", "note": "refused; gold page 10 not retrieved", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "os-07", "answer_sha": "5e3581ac29a6f1e6", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "os-08", "answer_sha": "81bde67ac7d500f5", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "os-09", "answer_sha": "336f5286c3b2ab7e", "label": "correct", "note": "", "labelled_from": "gen-01-baseline", "grounded": true}
+{"id": "os-10", "answer_sha": "6a5ec9fb791f58e9", "label": "correct", "note": "cites page 12 instead of 14", "labelled_from": "gen-01-baseline", "grounded": true}
