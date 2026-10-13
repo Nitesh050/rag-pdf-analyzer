@@ -1,0 +1,5316 @@
+{
+  "name": "04-merge-short-chunks",
+  "created_at": "2026-10-13T19:31:03+00:00",
+  "config": {
+    "reranker": null,
+    "keyword_weight": 1.0,
+    "chunks": 462,
+    "chunks_per_doc": {
+      "nn_book": 428,
+      "syllogism_slides": 12,
+      "os_assessment": 22
+    },
+    "questions": 49
+  },
+  "runs": {
+    "semantic/global": {
+      "overall": {
+        "mrr@10": 0.8153,
+        "hit@1": 0.7143,
+        "recall@1": 0.6293,
+        "hit@3": 0.9184,
+        "recall@3": 0.8469,
+        "hit@5": 0.9592,
+        "recall@5": 0.9082,
+        "hit@10": 0.9592,
+        "recall@10": 0.949,
+        "precision@5": 0.298
+      },
+      "latency_ms": {
+        "p50": 16.4,
+        "p95": 23.8
+      },
+      "by_type": {
+        "code": {
+          "n": 8,
+          "mrr@10": 0.6708,
+          "hit@1": 0.5,
+          "recall@1": 0.5,
+          "hit@3": 0.875,
+          "recall@3": 0.875,
+          "hit@5": 1.0,
+          "recall@5": 1.0,
+          "hit@10": 1.0,
+          "recall@10": 1.0,
+          "precision@5": 0.225
+        },
+        "factual": {
+          "n": 18,
+          "mrr@10": 0.9074,
+          "hit@1": 0.8333,
+          "recall@1": 0.8333,
+          "hit@3": 1.0,
+          "recall@3": 0.9722,
+          "hit@5": 1.0,
+          "recall@5": 1.0,
+          "hit@10": 1.0,
+          "recall@10": 1.0,
+          "precision@5": 0.3111
+        },
+        "image_only": {
+          "n": 2,
+          "mrr@10": 0.0,
+          "hit@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 0.0,
+          "recall@3": 0.0,
+          "hit@5": 0.0,
+          "recall@5": 0.0,
+          "hit@10": 0.0,
+          "recall@10": 0.0,
+          "precision@5": 0.0
+        },
+        "multi_page": {
+          "n": 7,
+          "mrr@10": 0.9286,
+          "hit@1": 0.8571,
+          "recall@1": 0.4286,
+          "hit@3": 1.0,
+          "recall@3": 0.6429,
+          "hit@5": 1.0,
+          "recall@5": 0.7143,
+          "hit@10": 1.0,
+          "recall@10": 0.9286,
+          "precision@5": 0.3714
+        },
+        "numeric": {
+          "n": 10,
+          "mrr@10": 0.775,
+          "hit@1": 0.6,
+          "recall@1": 0.5333,
+          "hit@3": 0.9,
+          "recall@3": 0.9,
+          "hit@5": 1.0,
+          "recall@5": 1.0,
+          "hit@10": 1.0,
+          "recall@10": 1.0,
+          "precision@5": 0.34
+        },
+        "paraphrase": {
+          "n": 4,
+          "mrr@10": 1.0,
+          "hit@1": 1.0,
+          "recall@1": 0.875,
+          "hit@3": 1.0,
+          "recall@3": 0.875,
+          "hit@5": 1.0,
+          "recall@5": 0.875,
+          "hit@10": 1.0,
+          "recall@10": 1.0,
+          "precision@5": 0.3
+        }
+      },
+      "by_doc": {
+        "nn_book": {
+          "n": 30,
+          "mrr@10": 0.8528,
+          "hit@1": 0.7333,
+          "recall@1": 0.6278,
+          "hit@3": 0.9667,
+          "recall@3": 0.8833,
+          "hit@5": 1.0,
+          "recall@5": 0.95,
+          "hit@10": 1.0,
+          "recall@10": 0.9833,
+          "precision@5": 0.3733
+        },
+        "os_assessment": {
+          "n": 10,
+          "mrr@10": 0.7367,
+          "hit@1": 0.6,
+          "recall@1": 0.5,
+          "hit@3": 0.9,
+          "recall@3": 0.8,
+          "hit@5": 1.0,
+          "recall@5": 0.9,
+          "hit@10": 1.0,
+          "recall@10": 1.0,
+          "precision@5": 0.2
+        },
+        "syllogism_slides": {
+          "n": 9,
+          "mrr@10": 0.7778,
+          "hit@1": 0.7778,
+          "recall@1": 0.7778,
+          "hit@3": 0.7778,
+          "recall@3": 0.7778,
+          "hit@5": 0.7778,
+          "recall@5": 0.7778,
+          "hit@10": 0.7778,
+          "recall@10": 0.7778,
+          "precision@5": 0.1556
+        }
+      },
+      "questions": [
+        {
+          "id": "nn-01",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "What value of the constant c brings the error down to 2.137 when converting 100 kilometres to miles?",
+          "gold_pages": [
+            15
+          ],
+          "retrieved": [
+            "nn_book:p15",
+            "nn_book:p14",
+            "nn_book:p27",
+            "nn_book:p17",
+            "nn_book:p16",
+            "nn_book:p103",
+            "nn_book:p13",
+            "nn_book:p18",
+            "nn_book:p20",
+            "nn_book:p13"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-02",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "In the kilometres to miles predictor, what was the first random guess for c and how large was the error?",
+          "gold_pages": [
+            14
+          ],
+          "retrieved": [
+            "nn_book:p15",
+            "nn_book:p14",
+            "nn_book:p19",
+            "nn_book:p27",
+            "nn_book:p13",
+            "nn_book:p25",
+            "nn_book:p27",
+            "nn_book:p18",
+            "nn_book:p13",
+            "nn_book:p18"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-03",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "What learning rate was first used to moderate the classifier updates, and what slope A did the dividing line end up with?",
+          "gold_pages": [
+            32,
+            33
+          ],
+          "retrieved": [
+            "nn_book:p32",
+            "nn_book:p34",
+            "nn_book:p164",
+            "nn_book:p167",
+            "nn_book:p30",
+            "nn_book:p98",
+            "nn_book:p26",
+            "nn_book:p23",
+            "nn_book:p32",
+            "nn_book:p166"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 0.5,
+            "hit@10": 1.0,
+            "recall@10": 0.5,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-04",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "Why can't a simple linear classifier learn the Boolean XOR function, and what is the fix?",
+          "gold_pages": [
+            39,
+            40
+          ],
+          "retrieved": [
+            "nn_book:p38",
+            "nn_book:p39",
+            "nn_book:p37",
+            "nn_book:p35",
+            "nn_book:p40",
+            "nn_book:p23",
+            "nn_book:p34",
+            "nn_book:p36",
+            "nn_book:p30",
+            "nn_book:p24"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-05",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "How many neurons does a nematode worm have?",
+          "gold_pages": [
+            42
+          ],
+          "retrieved": [
+            "nn_book:p42",
+            "nn_book:p46",
+            "nn_book:p42",
+            "nn_book:p47",
+            "nn_book:p41",
+            "nn_book:p141",
+            "nn_book:p46",
+            "nn_book:p51",
+            "nn_book:p4",
+            "nn_book:p46"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-06",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "Roughly how many neurons does a human brain have compared to a fruit fly?",
+          "gold_pages": [
+            42
+          ],
+          "retrieved": [
+            "nn_book:p42",
+            "nn_book:p4",
+            "nn_book:p41",
+            "nn_book:p41",
+            "nn_book:p50",
+            "nn_book:p51",
+            "nn_book:p188",
+            "nn_book:p42",
+            "nn_book:p46",
+            "nn_book:p4"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-07",
+          "doc": "nn_book",
+          "type": "paraphrase",
+          "question": "Why don't biological neurons pass on every weak signal they receive?",
+          "gold_pages": [
+            43
+          ],
+          "retrieved": [
+            "nn_book:p43",
+            "nn_book:p51",
+            "nn_book:p41",
+            "nn_book:p46",
+            "nn_book:p42",
+            "nn_book:p42",
+            "nn_book:p46",
+            "nn_book:p44",
+            "nn_book:p47",
+            "nn_book:p41"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-08",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What smoother alternative to the step function does the book use as an activation function?",
+          "gold_pages": [
+            44
+          ],
+          "retrieved": [
+            "nn_book:p43",
+            "nn_book:p44",
+            "nn_book:p115",
+            "nn_book:p135",
+            "nn_book:p87",
+            "nn_book:p62",
+            "nn_book:p117",
+            "nn_book:p107",
+            "nn_book:p140",
+            "nn_book:p70"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-09",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "If an output node is fed by two links with weights 3.0 and 1.0, how is its error split between them?",
+          "gold_pages": [
+            73
+          ],
+          "retrieved": [
+            "nn_book:p74",
+            "nn_book:p72",
+            "nn_book:p78",
+            "nn_book:p73",
+            "nn_book:p79",
+            "nn_book:p76",
+            "nn_book:p74",
+            "nn_book:p75",
+            "nn_book:p94",
+            "nn_book:p77"
+          ],
+          "scores": {
+            "mrr@10": 0.25,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 0.0,
+            "recall@3": 0.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-10",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "Why is the squared error preferred over the absolute error as the network's error function?",
+          "gold_pages": [
+            91
+          ],
+          "retrieved": [
+            "nn_book:p91",
+            "nn_book:p91",
+            "nn_book:p90",
+            "nn_book:p90",
+            "nn_book:p104",
+            "nn_book:p91",
+            "nn_book:p99",
+            "nn_book:p82",
+            "nn_book:p93",
+            "nn_book:p82"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-11",
+          "doc": "nn_book",
+          "type": "paraphrase",
+          "question": "What is the analogy of finding your way down a hillside in the dark with only a torch meant to explain?",
+          "gold_pages": [
+            85
+          ],
+          "retrieved": [
+            "nn_book:p85",
+            "nn_book:p85",
+            "nn_book:p198",
+            "nn_book:p201",
+            "nn_book:p86",
+            "nn_book:p87",
+            "syllogism_slides:p2",
+            "nn_book:p13",
+            "nn_book:p200",
+            "syllogism_slides:p3"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-12",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "In the weight update worked example, what is the error slope for w11 and its new value with a learning rate of 0.1?",
+          "gold_pages": [
+            100,
+            101
+          ],
+          "retrieved": [
+            "nn_book:p98",
+            "nn_book:p100",
+            "nn_book:p99",
+            "nn_book:p34",
+            "nn_book:p32",
+            "nn_book:p93",
+            "nn_book:p101",
+            "nn_book:p140",
+            "nn_book:p91",
+            "nn_book:p104"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 0.5,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-13",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What does it mean to saturate a neural network?",
+          "gold_pages": [
+            102
+          ],
+          "retrieved": [
+            "nn_book:p102",
+            "nn_book:p179",
+            "nn_book:p129",
+            "nn_book:p75",
+            "nn_book:p102",
+            "nn_book:p179",
+            "nn_book:p51",
+            "nn_book:p18",
+            "nn_book:p96",
+            "nn_book:p179"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-14",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "Why should the initial weights not all be set to the same constant value or to zero?",
+          "gold_pages": [
+            104
+          ],
+          "retrieved": [
+            "nn_book:p104",
+            "nn_book:p104",
+            "nn_book:p103",
+            "nn_book:p103",
+            "nn_book:p98",
+            "nn_book:p132",
+            "nn_book:p94",
+            "nn_book:p102",
+            "nn_book:p105",
+            "nn_book:p99"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-15",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What rule of thumb is given for the range of random initial weights?",
+          "gold_pages": [
+            103
+          ],
+          "retrieved": [
+            "nn_book:p103",
+            "nn_book:p133",
+            "nn_book:p103",
+            "nn_book:p52",
+            "nn_book:p103",
+            "nn_book:p103",
+            "nn_book:p132",
+            "nn_book:p132",
+            "nn_book:p105",
+            "nn_book:p164"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.6
+          }
+        },
+        {
+          "id": "nn-16",
+          "doc": "nn_book",
+          "type": "code",
+          "question": "Which numpy function and arguments are used to initialise the weights from a normal distribution in the Python code?",
+          "gold_pages": [
+            133
+          ],
+          "retrieved": [
+            "nn_book:p133",
+            "nn_book:p133",
+            "nn_book:p132",
+            "nn_book:p132",
+            "nn_book:p140",
+            "nn_book:p116",
+            "nn_book:p103",
+            "nn_book:p52",
+            "nn_book:p107",
+            "nn_book:p135"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-17",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "How many records are in the full MNIST training set and test set?",
+          "gold_pages": [
+            145
+          ],
+          "retrieved": [
+            "nn_book:p162",
+            "nn_book:p145",
+            "nn_book:p158",
+            "nn_book:p144",
+            "nn_book:p222",
+            "nn_book:p185",
+            "nn_book:p146",
+            "nn_book:p158",
+            "nn_book:p143",
+            "nn_book:p152"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-18",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What does each line of the MNIST CSV data contain?",
+          "gold_pages": [
+            146
+          ],
+          "retrieved": [
+            "nn_book:p144",
+            "nn_book:p145",
+            "nn_book:p146",
+            "nn_book:p146",
+            "nn_book:p162",
+            "nn_book:p147",
+            "nn_book:p176",
+            "nn_book:p219",
+            "nn_book:p144",
+            "nn_book:p154"
+          ],
+          "scores": {
+            "mrr@10": 0.3333333333333333,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-19",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "What performance score did the first 3-layer network get when trained on all 60,000 MNIST examples?",
+          "gold_pages": [
+            163
+          ],
+          "retrieved": [
+            "nn_book:p163",
+            "nn_book:p162",
+            "nn_book:p163",
+            "nn_book:p158",
+            "nn_book:p163",
+            "nn_book:p185",
+            "nn_book:p222",
+            "nn_book:p164",
+            "nn_book:p165",
+            "nn_book:p186"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.6
+          }
+        },
+        {
+          "id": "nn-20",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "What performance scores were obtained with learning rates of 0.6, 0.1, 0.01 and 0.2?",
+          "gold_pages": [
+            163,
+            164
+          ],
+          "retrieved": [
+            "nn_book:p164",
+            "nn_book:p164",
+            "nn_book:p163",
+            "nn_book:p165",
+            "nn_book:p163",
+            "nn_book:p185",
+            "nn_book:p32",
+            "nn_book:p162",
+            "nn_book:p167",
+            "nn_book:p103"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.8
+          }
+        },
+        {
+          "id": "nn-21",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What is an epoch in neural network training?",
+          "gold_pages": [
+            165
+          ],
+          "retrieved": [
+            "nn_book:p165",
+            "nn_book:p167",
+            "nn_book:p185",
+            "nn_book:p222",
+            "nn_book:p165",
+            "nn_book:p18",
+            "nn_book:p128",
+            "nn_book:p166",
+            "nn_book:p6",
+            "nn_book:p179"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-22",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "How did changing the number of hidden nodes affect accuracy?",
+          "gold_pages": [
+            168,
+            169
+          ],
+          "retrieved": [
+            "nn_book:p168",
+            "nn_book:p158",
+            "nn_book:p158",
+            "nn_book:p169",
+            "nn_book:p167",
+            "nn_book:p77",
+            "nn_book:p79",
+            "nn_book:p168",
+            "nn_book:p131",
+            "nn_book:p99"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-23",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What is the logit function and why is it needed for back querying the network?",
+          "gold_pages": [
+            180
+          ],
+          "retrieved": [
+            "nn_book:p180",
+            "nn_book:p133",
+            "nn_book:p180",
+            "nn_book:p138",
+            "nn_book:p179",
+            "nn_book:p158",
+            "nn_book:p134",
+            "nn_book:p73",
+            "nn_book:p138",
+            "nn_book:p162"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-24",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "By how many degrees were the training images rotated to create extra data, and what was the best accuracy achieved?",
+          "gold_pages": [
+            184,
+            186
+          ],
+          "retrieved": [
+            "nn_book:p186",
+            "nn_book:p186",
+            "nn_book:p184",
+            "nn_book:p185",
+            "nn_book:p185",
+            "nn_book:p101",
+            "nn_book:p165",
+            "nn_book:p158",
+            "nn_book:p184",
+            "nn_book:p222"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.6
+          }
+        },
+        {
+          "id": "nn-25",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "How much does a Raspberry Pi Zero cost?",
+          "gold_pages": [
+            107,
+            212,
+            223
+          ],
+          "retrieved": [
+            "nn_book:p223",
+            "nn_book:p212",
+            "nn_book:p107",
+            "nn_book:p212",
+            "nn_book:p213",
+            "nn_book:p217",
+            "nn_book:p215",
+            "nn_book:p8",
+            "nn_book:p222",
+            "nn_book:p165"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.3333333333333333,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.8
+          }
+        },
+        {
+          "id": "nn-26",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "How long did training take on the Raspberry Pi Zero, and with which settings?",
+          "gold_pages": [
+            222
+          ],
+          "retrieved": [
+            "nn_book:p222",
+            "nn_book:p223",
+            "nn_book:p163",
+            "nn_book:p162",
+            "nn_book:p185",
+            "nn_book:p107",
+            "nn_book:p221",
+            "nn_book:p158",
+            "nn_book:p186",
+            "nn_book:p219"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-27",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What is the chain rule in calculus?",
+          "gold_pages": [
+            209
+          ],
+          "retrieved": [
+            "nn_book:p209",
+            "nn_book:p211",
+            "nn_book:p96",
+            "nn_book:p94",
+            "nn_book:p209",
+            "nn_book:p208",
+            "nn_book:p210",
+            "nn_book:p91",
+            "nn_book:p189",
+            "nn_book:p194"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-28",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "Which Python version does the author tell readers to download with Anaconda?",
+          "gold_pages": [
+            108
+          ],
+          "retrieved": [
+            "nn_book:p108",
+            "nn_book:p107",
+            "nn_book:p107",
+            "nn_book:p213",
+            "nn_book:p212",
+            "nn_book:p7",
+            "nn_book:p216",
+            "nn_book:p215",
+            "nn_book:p162",
+            "nn_book:p219"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-29",
+          "doc": "nn_book",
+          "type": "paraphrase",
+          "question": "Why is it a bad idea to train a sigmoid network with target outputs of exactly 1.0?",
+          "gold_pages": [
+            102,
+            103
+          ],
+          "retrieved": [
+            "nn_book:p102",
+            "nn_book:p105",
+            "nn_book:p101",
+            "nn_book:p102",
+            "nn_book:p91",
+            "nn_book:p104",
+            "nn_book:p68",
+            "nn_book:p103",
+            "nn_book:p84",
+            "nn_book:p164"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 0.5,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-30",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "What score did the network get on the 10-record test set after training on only 100 records?",
+          "gold_pages": [
+            162
+          ],
+          "retrieved": [
+            "nn_book:p158",
+            "nn_book:p162",
+            "nn_book:p162",
+            "nn_book:p163",
+            "nn_book:p186",
+            "nn_book:p158",
+            "nn_book:p186",
+            "nn_book:p105",
+            "nn_book:p145",
+            "nn_book:p138"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "syl-01",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "What is a syllogism?",
+          "gold_pages": [
+            2
+          ],
+          "retrieved": [
+            "syllogism_slides:p2",
+            "syllogism_slides:p3",
+            "nn_book:p135",
+            "nn_book:p45",
+            "nn_book:p56",
+            "nn_book:p57",
+            "nn_book:p115",
+            "nn_book:p143",
+            "nn_book:p45",
+            "nn_book:p112"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-02",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "What are the parts of the basic structure of a syllogism?",
+          "gold_pages": [
+            2
+          ],
+          "retrieved": [
+            "syllogism_slides:p2",
+            "syllogism_slides:p3",
+            "nn_book:p115",
+            "nn_book:p143",
+            "nn_book:p56",
+            "nn_book:p1",
+            "nn_book:p115",
+            "nn_book:p7",
+            "nn_book:p96",
+            "nn_book:p107"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-03",
+          "doc": "syllogism_slides",
+          "type": "paraphrase",
+          "question": "What advice is given for approaching syllogism problems?",
+          "gold_pages": [
+            3
+          ],
+          "retrieved": [
+            "syllogism_slides:p3",
+            "syllogism_slides:p2",
+            "nn_book:p7",
+            "nn_book:p111",
+            "nn_book:p56",
+            "nn_book:p79",
+            "nn_book:p33",
+            "nn_book:p82",
+            "nn_book:p6",
+            "nn_book:p115"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-04",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "What are the conclusions in the question about Gadgets, Mobile, Laptop and IPod?",
+          "gold_pages": [
+            4
+          ],
+          "retrieved": [
+            "syllogism_slides:p4",
+            "syllogism_slides:p20",
+            "nn_book:p11",
+            "syllogism_slides:p18",
+            "syllogism_slides:p10",
+            "nn_book:p3",
+            "nn_book:p50",
+            "nn_book:p188",
+            "nn_book:p107",
+            "syllogism_slides:p16"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-05",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "Which question uses the statements 'All Rum is Whisky' and 'No whisky is beer', and what are its conclusions?",
+          "gold_pages": [
+            14
+          ],
+          "retrieved": [
+            "syllogism_slides:p14",
+            "syllogism_slides:p12",
+            "syllogism_slides:p10",
+            "syllogism_slides:p16",
+            "syllogism_slides:p18",
+            "syllogism_slides:p22",
+            "syllogism_slides:p20",
+            "syllogism_slides:p6",
+            "syllogism_slides:p8",
+            "syllogism_slides:p4"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-06",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "What are the statements in the question about doors, dogs and cats?",
+          "gold_pages": [
+            22
+          ],
+          "retrieved": [
+            "syllogism_slides:p22",
+            "syllogism_slides:p6",
+            "syllogism_slides:p12",
+            "syllogism_slides:p20",
+            "syllogism_slides:p16",
+            "syllogism_slides:p14",
+            "syllogism_slides:p4",
+            "syllogism_slides:p10",
+            "syllogism_slides:p18",
+            "syllogism_slides:p8"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-07",
+          "doc": "syllogism_slides",
+          "type": "image_only",
+          "question": "Describe the least possible Venn diagram for the Gadgets, Mobile, Laptop and IPods question.",
+          "gold_pages": [
+            5
+          ],
+          "retrieved": [
+            "syllogism_slides:p4",
+            "syllogism_slides:p3",
+            "syllogism_slides:p20",
+            "nn_book:p75",
+            "nn_book:p107",
+            "nn_book:p179",
+            "nn_book:p188",
+            "nn_book:p182",
+            "nn_book:p7",
+            "nn_book:p35"
+          ],
+          "scores": {
+            "mrr@10": 0.0,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 0.0,
+            "recall@3": 0.0,
+            "hit@5": 0.0,
+            "recall@5": 0.0,
+            "hit@10": 0.0,
+            "recall@10": 0.0,
+            "precision@5": 0.0
+          }
+        },
+        {
+          "id": "syl-08",
+          "doc": "syllogism_slides",
+          "type": "image_only",
+          "question": "What does the Venn diagram for the Sundays, Mondays, Tuesdays and Fridays question show?",
+          "gold_pages": [
+            9
+          ],
+          "retrieved": [
+            "syllogism_slides:p3",
+            "syllogism_slides:p8",
+            "nn_book:p133",
+            "syllogism_slides:p2",
+            "nn_book:p46",
+            "nn_book:p184",
+            "nn_book:p179",
+            "nn_book:p75",
+            "nn_book:p53",
+            "nn_book:p181"
+          ],
+          "scores": {
+            "mrr@10": 0.0,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 0.0,
+            "recall@3": 0.0,
+            "hit@5": 0.0,
+            "recall@5": 0.0,
+            "hit@10": 0.0,
+            "recall@10": 0.0,
+            "precision@5": 0.0
+          }
+        },
+        {
+          "id": "syl-09",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "Which question involves pencils, pens, colours and erasers?",
+          "gold_pages": [
+            10
+          ],
+          "retrieved": [
+            "syllogism_slides:p10",
+            "syllogism_slides:p3",
+            "nn_book:p175",
+            "nn_book:p144",
+            "syllogism_slides:p18",
+            "syllogism_slides:p14",
+            "nn_book:p107",
+            "nn_book:p6",
+            "syllogism_slides:p12",
+            "nn_book:p188"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-01",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "Which command shows disk usage in a human-readable format?",
+          "gold_pages": [
+            4
+          ],
+          "retrieved": [
+            "os_assessment:p4",
+            "nn_book:p222",
+            "nn_book:p215",
+            "os_assessment:p1",
+            "nn_book:p146",
+            "nn_book:p10",
+            "nn_book:p217",
+            "nn_book:p158",
+            "nn_book:p219",
+            "os_assessment:p2"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-02",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "Which shell command is listed for searching for text inside a file?",
+          "gold_pages": [
+            3
+          ],
+          "retrieved": [
+            "os_assessment:p3",
+            "os_assessment:p1",
+            "nn_book:p147",
+            "nn_book:p145",
+            "nn_book:p144",
+            "nn_book:p115",
+            "os_assessment:p4",
+            "os_assessment:p2",
+            "nn_book:p143",
+            "nn_book:p215"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-03",
+          "doc": "os_assessment",
+          "type": "multi_page",
+          "question": "How does the fork() program create an orphan process?",
+          "gold_pages": [
+            5,
+            6
+          ],
+          "retrieved": [
+            "os_assessment:p5",
+            "os_assessment:p7",
+            "nn_book:p126",
+            "os_assessment:p14",
+            "os_assessment:p8",
+            "nn_book:p135",
+            "os_assessment:p6",
+            "nn_book:p123",
+            "nn_book:p108",
+            "os_assessment:p9"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 0.5,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-04",
+          "doc": "os_assessment",
+          "type": "multi_page",
+          "question": "How does the zombie process program work?",
+          "gold_pages": [
+            7,
+            8
+          ],
+          "retrieved": [
+            "os_assessment:p7",
+            "os_assessment:p5",
+            "os_assessment:p14",
+            "nn_book:p42",
+            "os_assessment:p21",
+            "os_assessment:p9",
+            "nn_book:p158",
+            "os_assessment:p8",
+            "os_assessment:p2",
+            "nn_book:p222"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 0.5,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-05",
+          "doc": "os_assessment",
+          "type": "factual",
+          "question": "Which CPU scheduling algorithms are implemented in the assessment?",
+          "gold_pages": [
+            9
+          ],
+          "retrieved": [
+            "os_assessment:p9",
+            "os_assessment:p21",
+            "nn_book:p222",
+            "os_assessment:p19",
+            "os_assessment:p10",
+            "os_assessment:p16",
+            "nn_book:p107",
+            "nn_book:p11",
+            "os_assessment:p22",
+            "nn_book:p162"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-06",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "How does the FCFS program order the processes before scheduling them?",
+          "gold_pages": [
+            10
+          ],
+          "retrieved": [
+            "os_assessment:p9",
+            "os_assessment:p5",
+            "os_assessment:p14",
+            "os_assessment:p21",
+            "os_assessment:p10",
+            "os_assessment:p7",
+            "os_assessment:p13",
+            "os_assessment:p20",
+            "os_assessment:p8",
+            "os_assessment:p17"
+          ],
+          "scores": {
+            "mrr@10": 0.2,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 0.0,
+            "recall@3": 0.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-07",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "In the FCFS program, how are turnaround time and waiting time computed?",
+          "gold_pages": [
+            11
+          ],
+          "retrieved": [
+            "os_assessment:p9",
+            "os_assessment:p15",
+            "os_assessment:p11",
+            "os_assessment:p22",
+            "os_assessment:p18",
+            "os_assessment:p10",
+            "os_assessment:p13",
+            "os_assessment:p17",
+            "nn_book:p190",
+            "os_assessment:p20"
+          ],
+          "scores": {
+            "mrr@10": 0.3333333333333333,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-08",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "In the Round Robin program, what happens when a process's remaining time is larger than the time quantum?",
+          "gold_pages": [
+            17
+          ],
+          "retrieved": [
+            "os_assessment:p16",
+            "os_assessment:p17",
+            "nn_book:p196",
+            "os_assessment:p14",
+            "nn_book:p201",
+            "os_assessment:p9",
+            "os_assessment:p10",
+            "nn_book:p165",
+            "nn_book:p195",
+            "os_assessment:p21"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-09",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "How does the priority scheduling program pick the next process to run?",
+          "gold_pages": [
+            21
+          ],
+          "retrieved": [
+            "os_assessment:p21",
+            "os_assessment:p9",
+            "os_assessment:p10",
+            "os_assessment:p19",
+            "os_assessment:p14",
+            "os_assessment:p5",
+            "os_assessment:p20",
+            "os_assessment:p17",
+            "os_assessment:p7",
+            "os_assessment:p13"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-10",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "What does the SJF program do when no process has arrived yet?",
+          "gold_pages": [
+            14
+          ],
+          "retrieved": [
+            "os_assessment:p12",
+            "os_assessment:p9",
+            "os_assessment:p14",
+            "os_assessment:p5",
+            "os_assessment:p17",
+            "os_assessment:p22",
+            "os_assessment:p21",
+            "os_assessment:p15",
+            "os_assessment:p7",
+            "os_assessment:p13"
+          ],
+          "scores": {
+            "mrr@10": 0.3333333333333333,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        }
+      ]
+    },
+    "bm25/global": {
+      "overall": {
+        "mrr@10": 0.7857,
+        "hit@1": 0.6735,
+        "recall@1": 0.5986,
+        "hit@3": 0.9184,
+        "recall@3": 0.8605,
+        "hit@5": 0.9184,
+        "recall@5": 0.8776,
+        "hit@10": 0.9184,
+        "recall@10": 0.898,
+        "precision@5": 0.2592
+      },
+      "latency_ms": {
+        "p50": 0.5,
+        "p95": 1.2
+      },
+      "by_type": {
+        "code": {
+          "n": 8,
+          "mrr@10": 0.625,
+          "hit@1": 0.375,
+          "recall@1": 0.375,
+          "hit@3": 0.875,
+          "recall@3": 0.875,
+          "hit@5": 0.875,
+          "recall@5": 0.875,
+          "hit@10": 0.875,
+          "recall@10": 0.875,
+          "precision@5": 0.2
+        },
+        "factual": {
+          "n": 18,
+          "mrr@10": 0.9074,
+          "hit@1": 0.8333,
+          "recall@1": 0.8056,
+          "hit@3": 1.0,
+          "recall@3": 0.9722,
+          "hit@5": 1.0,
+          "recall@5": 1.0,
+          "hit@10": 1.0,
+          "recall@10": 1.0,
+          "precision@5": 0.3056
+        },
+        "image_only": {
+          "n": 2,
+          "mrr@10": 0.0,
+          "hit@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 0.0,
+          "recall@3": 0.0,
+          "hit@5": 0.0,
+          "recall@5": 0.0,
+          "hit@10": 0.0,
+          "recall@10": 0.0,
+          "precision@5": 0.0
+        },
+        "multi_page": {
+          "n": 7,
+          "mrr@10": 0.7857,
+          "hit@1": 0.7143,
+          "recall@1": 0.3571,
+          "hit@3": 0.8571,
+          "recall@3": 0.6429,
+          "hit@5": 0.8571,
+          "recall@5": 0.6429,
+          "hit@10": 0.8571,
+          "recall@10": 0.7857,
+          "precision@5": 0.2857
+        },
+        "numeric": {
+          "n": 10,
+          "mrr@10": 0.8167,
+          "hit@1": 0.7,
+          "recall@1": 0.6333,
+          "hit@3": 1.0,
+          "recall@3": 0.9667,
+          "hit@5": 1.0,
+          "recall@5": 1.0,
+          "hit@10": 1.0,
+          "recall@10": 1.0,
+          "precision@5": 0.28
+        },
+        "paraphrase": {
+          "n": 4,
+          "mrr@10": 0.875,
+          "hit@1": 0.75,
+          "recall@1": 0.75,
+          "hit@3": 1.0,
+          "recall@3": 0.875,
+          "hit@5": 1.0,
+          "recall@5": 0.875,
+          "hit@10": 1.0,
+          "recall@10": 0.875,
+          "precision@5": 0.2
+        }
+      },
+      "by_doc": {
+        "nn_book": {
+          "n": 30,
+          "mrr@10": 0.85,
+          "hit@1": 0.7667,
+          "recall@1": 0.6611,
+          "hit@3": 0.9667,
+          "recall@3": 0.9056,
+          "hit@5": 0.9667,
+          "recall@5": 0.9333,
+          "hit@10": 0.9667,
+          "recall@10": 0.95,
+          "precision@5": 0.3067
+        },
+        "os_assessment": {
+          "n": 10,
+          "mrr@10": 0.65,
+          "hit@1": 0.4,
+          "recall@1": 0.35,
+          "hit@3": 0.9,
+          "recall@3": 0.8,
+          "hit@5": 0.9,
+          "recall@5": 0.8,
+          "hit@10": 0.9,
+          "recall@10": 0.85,
+          "precision@5": 0.18
+        },
+        "syllogism_slides": {
+          "n": 9,
+          "mrr@10": 0.7222,
+          "hit@1": 0.6667,
+          "recall@1": 0.6667,
+          "hit@3": 0.7778,
+          "recall@3": 0.7778,
+          "hit@5": 0.7778,
+          "recall@5": 0.7778,
+          "hit@10": 0.7778,
+          "recall@10": 0.7778,
+          "precision@5": 0.1889
+        }
+      },
+      "questions": [
+        {
+          "id": "nn-01",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "What value of the constant c brings the error down to 2.137 when converting 100 kilometres to miles?",
+          "gold_pages": [
+            15
+          ],
+          "retrieved": [
+            "nn_book:p15",
+            "nn_book:p14",
+            "nn_book:p13",
+            "nn_book:p25",
+            "nn_book:p17",
+            "nn_book:p18",
+            "nn_book:p18",
+            "nn_book:p20",
+            "nn_book:p32",
+            "nn_book:p13"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-02",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "In the kilometres to miles predictor, what was the first random guess for c and how large was the error?",
+          "gold_pages": [
+            14
+          ],
+          "retrieved": [
+            "nn_book:p14",
+            "nn_book:p15",
+            "nn_book:p25",
+            "nn_book:p19",
+            "nn_book:p27",
+            "nn_book:p13",
+            "nn_book:p32",
+            "nn_book:p27",
+            "nn_book:p103",
+            "nn_book:p13"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-03",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "What learning rate was first used to moderate the classifier updates, and what slope A did the dividing line end up with?",
+          "gold_pages": [
+            32,
+            33
+          ],
+          "retrieved": [
+            "nn_book:p33",
+            "nn_book:p34",
+            "nn_book:p23",
+            "nn_book:p31",
+            "nn_book:p20",
+            "nn_book:p32",
+            "nn_book:p98",
+            "nn_book:p37",
+            "nn_book:p26",
+            "nn_book:p39"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 0.5,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-04",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "Why can't a simple linear classifier learn the Boolean XOR function, and what is the fix?",
+          "gold_pages": [
+            39,
+            40
+          ],
+          "retrieved": [
+            "nn_book:p39",
+            "nn_book:p37",
+            "nn_book:p38",
+            "nn_book:p40",
+            "nn_book:p36",
+            "nn_book:p39",
+            "nn_book:p35",
+            "nn_book:p23",
+            "nn_book:p34",
+            "nn_book:p83"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-05",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "How many neurons does a nematode worm have?",
+          "gold_pages": [
+            42
+          ],
+          "retrieved": [
+            "nn_book:p42",
+            "nn_book:p47",
+            "nn_book:p46",
+            "nn_book:p41",
+            "nn_book:p83",
+            "nn_book:p46",
+            "nn_book:p46",
+            "nn_book:p44",
+            "nn_book:p43",
+            "nn_book:p40"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-06",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "Roughly how many neurons does a human brain have compared to a fruit fly?",
+          "gold_pages": [
+            42
+          ],
+          "retrieved": [
+            "nn_book:p42",
+            "nn_book:p4",
+            "nn_book:p4",
+            "nn_book:p51",
+            "nn_book:p41",
+            "nn_book:p41",
+            "nn_book:p40",
+            "nn_book:p47",
+            "nn_book:p46",
+            "nn_book:p160"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-07",
+          "doc": "nn_book",
+          "type": "paraphrase",
+          "question": "Why don't biological neurons pass on every weak signal they receive?",
+          "gold_pages": [
+            43
+          ],
+          "retrieved": [
+            "nn_book:p43",
+            "nn_book:p41",
+            "nn_book:p51",
+            "nn_book:p46",
+            "nn_book:p50",
+            "nn_book:p47",
+            "nn_book:p104",
+            "nn_book:p109",
+            "nn_book:p65",
+            "nn_book:p44"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-08",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What smoother alternative to the step function does the book use as an activation function?",
+          "gold_pages": [
+            44
+          ],
+          "retrieved": [
+            "nn_book:p44",
+            "nn_book:p99",
+            "nn_book:p43",
+            "nn_book:p103",
+            "nn_book:p117",
+            "nn_book:p135",
+            "nn_book:p180",
+            "nn_book:p102",
+            "nn_book:p35",
+            "nn_book:p135"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-09",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "If an output node is fed by two links with weights 3.0 and 1.0, how is its error split between them?",
+          "gold_pages": [
+            73
+          ],
+          "retrieved": [
+            "nn_book:p73",
+            "nn_book:p78",
+            "nn_book:p79",
+            "nn_book:p72",
+            "nn_book:p74",
+            "nn_book:p77",
+            "nn_book:p73",
+            "nn_book:p76",
+            "nn_book:p65",
+            "nn_book:p131"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-10",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "Why is the squared error preferred over the absolute error as the network's error function?",
+          "gold_pages": [
+            91
+          ],
+          "retrieved": [
+            "nn_book:p91",
+            "nn_book:p93",
+            "nn_book:p138",
+            "nn_book:p90",
+            "nn_book:p99",
+            "nn_book:p92",
+            "nn_book:p71",
+            "nn_book:p78",
+            "nn_book:p73",
+            "nn_book:p74"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-11",
+          "doc": "nn_book",
+          "type": "paraphrase",
+          "question": "What is the analogy of finding your way down a hillside in the dark with only a torch meant to explain?",
+          "gold_pages": [
+            85
+          ],
+          "retrieved": [
+            "nn_book:p85",
+            "nn_book:p6",
+            "nn_book:p110",
+            "nn_book:p181",
+            "nn_book:p182",
+            "nn_book:p64",
+            "nn_book:p147",
+            "nn_book:p93",
+            "nn_book:p192",
+            "nn_book:p60"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-12",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "In the weight update worked example, what is the error slope for w11 and its new value with a learning rate of 0.1?",
+          "gold_pages": [
+            100,
+            101
+          ],
+          "retrieved": [
+            "nn_book:p34",
+            "nn_book:p30",
+            "nn_book:p98",
+            "nn_book:p32",
+            "nn_book:p1",
+            "nn_book:p97",
+            "nn_book:p31",
+            "nn_book:p33",
+            "nn_book:p30",
+            "nn_book:p30"
+          ],
+          "scores": {
+            "mrr@10": 0.0,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 0.0,
+            "recall@3": 0.0,
+            "hit@5": 0.0,
+            "recall@5": 0.0,
+            "hit@10": 0.0,
+            "recall@10": 0.0,
+            "precision@5": 0.0
+          }
+        },
+        {
+          "id": "nn-13",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What does it mean to saturate a neural network?",
+          "gold_pages": [
+            102
+          ],
+          "retrieved": [
+            "nn_book:p102",
+            "nn_book:p154",
+            "nn_book:p105",
+            "nn_book:p103",
+            "nn_book:p102",
+            "nn_book:p103",
+            "nn_book:p181",
+            "nn_book:p176",
+            "nn_book:p89",
+            "nn_book:p7"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-14",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "Why should the initial weights not all be set to the same constant value or to zero?",
+          "gold_pages": [
+            104
+          ],
+          "retrieved": [
+            "nn_book:p104",
+            "nn_book:p104",
+            "nn_book:p132",
+            "nn_book:p105",
+            "nn_book:p103",
+            "nn_book:p164",
+            "nn_book:p102",
+            "nn_book:p102",
+            "nn_book:p118",
+            "nn_book:p119"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-15",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What rule of thumb is given for the range of random initial weights?",
+          "gold_pages": [
+            103
+          ],
+          "retrieved": [
+            "nn_book:p103",
+            "nn_book:p103",
+            "nn_book:p103",
+            "nn_book:p105",
+            "nn_book:p164",
+            "nn_book:p132",
+            "nn_book:p133",
+            "nn_book:p52",
+            "nn_book:p132",
+            "nn_book:p101"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.6
+          }
+        },
+        {
+          "id": "nn-16",
+          "doc": "nn_book",
+          "type": "code",
+          "question": "Which numpy function and arguments are used to initialise the weights from a normal distribution in the Python code?",
+          "gold_pages": [
+            133
+          ],
+          "retrieved": [
+            "nn_book:p133",
+            "nn_book:p103",
+            "nn_book:p133",
+            "nn_book:p132",
+            "nn_book:p103",
+            "nn_book:p118",
+            "nn_book:p140",
+            "nn_book:p139",
+            "nn_book:p134",
+            "nn_book:p103"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-17",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "How many records are in the full MNIST training set and test set?",
+          "gold_pages": [
+            145
+          ],
+          "retrieved": [
+            "nn_book:p162",
+            "nn_book:p146",
+            "nn_book:p145",
+            "nn_book:p158",
+            "nn_book:p160",
+            "nn_book:p219",
+            "nn_book:p163",
+            "nn_book:p222",
+            "nn_book:p177",
+            "nn_book:p144"
+          ],
+          "scores": {
+            "mrr@10": 0.3333333333333333,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-18",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What does each line of the MNIST CSV data contain?",
+          "gold_pages": [
+            146
+          ],
+          "retrieved": [
+            "nn_book:p145",
+            "nn_book:p146",
+            "nn_book:p144",
+            "nn_book:p219",
+            "nn_book:p162",
+            "nn_book:p147",
+            "nn_book:p147",
+            "nn_book:p176",
+            "nn_book:p145",
+            "nn_book:p146"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-19",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "What performance score did the first 3-layer network get when trained on all 60,000 MNIST examples?",
+          "gold_pages": [
+            163
+          ],
+          "retrieved": [
+            "nn_book:p163",
+            "nn_book:p145",
+            "nn_book:p162",
+            "nn_book:p163",
+            "nn_book:p160",
+            "nn_book:p163",
+            "nn_book:p162",
+            "nn_book:p84",
+            "nn_book:p186",
+            "nn_book:p186"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-20",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "What performance scores were obtained with learning rates of 0.6, 0.1, 0.01 and 0.2?",
+          "gold_pages": [
+            163,
+            164
+          ],
+          "retrieved": [
+            "nn_book:p163",
+            "nn_book:p164",
+            "nn_book:p166",
+            "nn_book:p185",
+            "nn_book:p165",
+            "nn_book:p164",
+            "nn_book:p162",
+            "nn_book:p154",
+            "nn_book:p163",
+            "nn_book:p90"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-21",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What is an epoch in neural network training?",
+          "gold_pages": [
+            165
+          ],
+          "retrieved": [
+            "nn_book:p165",
+            "nn_book:p165",
+            "nn_book:p186",
+            "nn_book:p167",
+            "nn_book:p166",
+            "nn_book:p186",
+            "nn_book:p222",
+            "nn_book:p185",
+            "nn_book:p168",
+            "nn_book:p133"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-22",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "How did changing the number of hidden nodes affect accuracy?",
+          "gold_pages": [
+            168,
+            169
+          ],
+          "retrieved": [
+            "nn_book:p169",
+            "nn_book:p168",
+            "nn_book:p167",
+            "nn_book:p192",
+            "nn_book:p211",
+            "nn_book:p158",
+            "nn_book:p28",
+            "nn_book:p186",
+            "nn_book:p99",
+            "nn_book:p168"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-23",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What is the logit function and why is it needed for back querying the network?",
+          "gold_pages": [
+            180
+          ],
+          "retrieved": [
+            "nn_book:p180",
+            "nn_book:p180",
+            "nn_book:p179",
+            "nn_book:p182",
+            "nn_book:p133",
+            "nn_book:p138",
+            "nn_book:p152",
+            "nn_book:p135",
+            "nn_book:p184",
+            "nn_book:p138"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-24",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "By how many degrees were the training images rotated to create extra data, and what was the best accuracy achieved?",
+          "gold_pages": [
+            184,
+            186
+          ],
+          "retrieved": [
+            "nn_book:p186",
+            "nn_book:p184",
+            "nn_book:p185",
+            "nn_book:p186",
+            "nn_book:p10",
+            "nn_book:p160",
+            "nn_book:p177",
+            "nn_book:p185",
+            "nn_book:p163",
+            "nn_book:p2"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.6
+          }
+        },
+        {
+          "id": "nn-25",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "How much does a Raspberry Pi Zero cost?",
+          "gold_pages": [
+            107,
+            212,
+            223
+          ],
+          "retrieved": [
+            "nn_book:p107",
+            "nn_book:p212",
+            "nn_book:p222",
+            "nn_book:p223",
+            "nn_book:p217",
+            "nn_book:p8",
+            "nn_book:p213",
+            "nn_book:p212",
+            "nn_book:p2",
+            "nn_book:p216"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.3333333333333333,
+            "hit@3": 1.0,
+            "recall@3": 0.6666666666666666,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.6
+          }
+        },
+        {
+          "id": "nn-26",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "How long did training take on the Raspberry Pi Zero, and with which settings?",
+          "gold_pages": [
+            222
+          ],
+          "retrieved": [
+            "nn_book:p223",
+            "nn_book:p222",
+            "nn_book:p107",
+            "nn_book:p8",
+            "nn_book:p212",
+            "nn_book:p212",
+            "nn_book:p2",
+            "nn_book:p217",
+            "nn_book:p213",
+            "nn_book:p219"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-27",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What is the chain rule in calculus?",
+          "gold_pages": [
+            209
+          ],
+          "retrieved": [
+            "nn_book:p211",
+            "nn_book:p94",
+            "nn_book:p209",
+            "nn_book:p209",
+            "nn_book:p210",
+            "nn_book:p208",
+            "nn_book:p96",
+            "nn_book:p211",
+            "syllogism_slides:p6",
+            "nn_book:p2"
+          ],
+          "scores": {
+            "mrr@10": 0.3333333333333333,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-28",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "Which Python version does the author tell readers to download with Anaconda?",
+          "gold_pages": [
+            108
+          ],
+          "retrieved": [
+            "nn_book:p108",
+            "nn_book:p219",
+            "nn_book:p115",
+            "nn_book:p215",
+            "nn_book:p1",
+            "nn_book:p185",
+            "nn_book:p147",
+            "nn_book:p148",
+            "nn_book:p216",
+            "nn_book:p148"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-29",
+          "doc": "nn_book",
+          "type": "paraphrase",
+          "question": "Why is it a bad idea to train a sigmoid network with target outputs of exactly 1.0?",
+          "gold_pages": [
+            102,
+            103
+          ],
+          "retrieved": [
+            "nn_book:p139",
+            "nn_book:p102",
+            "nn_book:p153",
+            "nn_book:p90",
+            "nn_book:p91",
+            "nn_book:p52",
+            "nn_book:p105",
+            "nn_book:p77",
+            "nn_book:p165",
+            "nn_book:p152"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 0.5,
+            "hit@10": 1.0,
+            "recall@10": 0.5,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-30",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "What score did the network get on the 10-record test set after training on only 100 records?",
+          "gold_pages": [
+            162
+          ],
+          "retrieved": [
+            "nn_book:p158",
+            "nn_book:p163",
+            "nn_book:p162",
+            "nn_book:p162",
+            "nn_book:p160",
+            "nn_book:p146",
+            "nn_book:p145",
+            "nn_book:p185",
+            "nn_book:p161",
+            "nn_book:p186"
+          ],
+          "scores": {
+            "mrr@10": 0.3333333333333333,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "syl-01",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "What is a syllogism?",
+          "gold_pages": [
+            2
+          ],
+          "retrieved": [
+            "syllogism_slides:p3",
+            "syllogism_slides:p2"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.5
+          }
+        },
+        {
+          "id": "syl-02",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "What are the parts of the basic structure of a syllogism?",
+          "gold_pages": [
+            2
+          ],
+          "retrieved": [
+            "syllogism_slides:p2",
+            "syllogism_slides:p3",
+            "nn_book:p175",
+            "nn_book:p116",
+            "nn_book:p41",
+            "nn_book:p194",
+            "nn_book:p138",
+            "nn_book:p113",
+            "nn_book:p122",
+            "nn_book:p96"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-03",
+          "doc": "syllogism_slides",
+          "type": "paraphrase",
+          "question": "What advice is given for approaching syllogism problems?",
+          "gold_pages": [
+            3
+          ],
+          "retrieved": [
+            "syllogism_slides:p3",
+            "syllogism_slides:p2",
+            "nn_book:p158",
+            "nn_book:p18",
+            "nn_book:p33",
+            "nn_book:p84",
+            "nn_book:p188",
+            "nn_book:p5",
+            "nn_book:p79",
+            "nn_book:p209"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-04",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "What are the conclusions in the question about Gadgets, Mobile, Laptop and IPod?",
+          "gold_pages": [
+            4
+          ],
+          "retrieved": [
+            "syllogism_slides:p4",
+            "syllogism_slides:p20",
+            "syllogism_slides:p22",
+            "syllogism_slides:p6",
+            "syllogism_slides:p8",
+            "syllogism_slides:p12",
+            "syllogism_slides:p16",
+            "syllogism_slides:p10",
+            "syllogism_slides:p14",
+            "syllogism_slides:p18"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-05",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "Which question uses the statements 'All Rum is Whisky' and 'No whisky is beer', and what are its conclusions?",
+          "gold_pages": [
+            14
+          ],
+          "retrieved": [
+            "syllogism_slides:p14",
+            "syllogism_slides:p22",
+            "syllogism_slides:p20",
+            "syllogism_slides:p4",
+            "syllogism_slides:p6",
+            "syllogism_slides:p8",
+            "syllogism_slides:p12",
+            "syllogism_slides:p16",
+            "syllogism_slides:p10",
+            "syllogism_slides:p18"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-06",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "What are the statements in the question about doors, dogs and cats?",
+          "gold_pages": [
+            22
+          ],
+          "retrieved": [
+            "syllogism_slides:p22",
+            "syllogism_slides:p4",
+            "syllogism_slides:p6",
+            "syllogism_slides:p8",
+            "syllogism_slides:p12",
+            "syllogism_slides:p16",
+            "syllogism_slides:p10",
+            "syllogism_slides:p14",
+            "syllogism_slides:p18",
+            "syllogism_slides:p20"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-07",
+          "doc": "syllogism_slides",
+          "type": "image_only",
+          "question": "Describe the least possible Venn diagram for the Gadgets, Mobile, Laptop and IPods question.",
+          "gold_pages": [
+            5
+          ],
+          "retrieved": [
+            "syllogism_slides:p4",
+            "syllogism_slides:p3",
+            "syllogism_slides:p20",
+            "nn_book:p38",
+            "nn_book:p12",
+            "nn_book:p179",
+            "nn_book:p152",
+            "nn_book:p102",
+            "nn_book:p222",
+            "nn_book:p221"
+          ],
+          "scores": {
+            "mrr@10": 0.0,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 0.0,
+            "recall@3": 0.0,
+            "hit@5": 0.0,
+            "recall@5": 0.0,
+            "hit@10": 0.0,
+            "recall@10": 0.0,
+            "precision@5": 0.0
+          }
+        },
+        {
+          "id": "syl-08",
+          "doc": "syllogism_slides",
+          "type": "image_only",
+          "question": "What does the Venn diagram for the Sundays, Mondays, Tuesdays and Fridays question show?",
+          "gold_pages": [
+            9
+          ],
+          "retrieved": [
+            "syllogism_slides:p8",
+            "syllogism_slides:p3",
+            "nn_book:p179",
+            "nn_book:p52",
+            "nn_book:p70",
+            "nn_book:p73",
+            "nn_book:p75",
+            "nn_book:p65",
+            "nn_book:p110",
+            "nn_book:p46"
+          ],
+          "scores": {
+            "mrr@10": 0.0,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 0.0,
+            "recall@3": 0.0,
+            "hit@5": 0.0,
+            "recall@5": 0.0,
+            "hit@10": 0.0,
+            "recall@10": 0.0,
+            "precision@5": 0.0
+          }
+        },
+        {
+          "id": "syl-09",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "Which question involves pencils, pens, colours and erasers?",
+          "gold_pages": [
+            10
+          ],
+          "retrieved": [
+            "syllogism_slides:p10",
+            "nn_book:p181",
+            "nn_book:p182",
+            "nn_book:p96",
+            "nn_book:p138",
+            "nn_book:p120",
+            "syllogism_slides:p3",
+            "nn_book:p121",
+            "nn_book:p148",
+            "nn_book:p141"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-01",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "Which command shows disk usage in a human-readable format?",
+          "gold_pages": [
+            4
+          ],
+          "retrieved": [
+            "os_assessment:p4",
+            "nn_book:p219",
+            "nn_book:p217",
+            "nn_book:p144",
+            "nn_book:p216",
+            "nn_book:p215",
+            "nn_book:p214",
+            "nn_book:p175",
+            "nn_book:p114",
+            "os_assessment:p1"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-02",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "Which shell command is listed for searching for text inside a file?",
+          "gold_pages": [
+            3
+          ],
+          "retrieved": [
+            "os_assessment:p1",
+            "os_assessment:p3",
+            "nn_book:p149",
+            "nn_book:p215",
+            "nn_book:p144",
+            "nn_book:p161",
+            "nn_book:p147",
+            "nn_book:p219",
+            "nn_book:p214",
+            "nn_book:p145"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-03",
+          "doc": "os_assessment",
+          "type": "multi_page",
+          "question": "How does the fork() program create an orphan process?",
+          "gold_pages": [
+            5,
+            6
+          ],
+          "retrieved": [
+            "os_assessment:p5",
+            "os_assessment:p7",
+            "nn_book:p177",
+            "nn_book:p7",
+            "nn_book:p132",
+            "nn_book:p116",
+            "nn_book:p148",
+            "os_assessment:p21",
+            "os_assessment:p6",
+            "nn_book:p222"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 0.5,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-04",
+          "doc": "os_assessment",
+          "type": "multi_page",
+          "question": "How does the zombie process program work?",
+          "gold_pages": [
+            7,
+            8
+          ],
+          "retrieved": [
+            "os_assessment:p5",
+            "os_assessment:p7",
+            "nn_book:p7",
+            "nn_book:p116",
+            "nn_book:p177",
+            "nn_book:p107",
+            "nn_book:p42",
+            "os_assessment:p21",
+            "nn_book:p7",
+            "os_assessment:p6"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 0.5,
+            "hit@10": 1.0,
+            "recall@10": 0.5,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-05",
+          "doc": "os_assessment",
+          "type": "factual",
+          "question": "Which CPU scheduling algorithms are implemented in the assessment?",
+          "gold_pages": [
+            9
+          ],
+          "retrieved": [
+            "os_assessment:p9",
+            "os_assessment:p1",
+            "os_assessment:p18",
+            "nn_book:p144",
+            "nn_book:p7",
+            "nn_book:p99",
+            "nn_book:p6",
+            "nn_book:p11",
+            "nn_book:p62",
+            "nn_book:p27"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-06",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "How does the FCFS program order the processes before scheduling them?",
+          "gold_pages": [
+            10
+          ],
+          "retrieved": [
+            "os_assessment:p9",
+            "nn_book:p7",
+            "nn_book:p179",
+            "os_assessment:p5",
+            "nn_book:p116",
+            "os_assessment:p21",
+            "nn_book:p121",
+            "nn_book:p113",
+            "os_assessment:p6",
+            "os_assessment:p14"
+          ],
+          "scores": {
+            "mrr@10": 0.0,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 0.0,
+            "recall@3": 0.0,
+            "hit@5": 0.0,
+            "recall@5": 0.0,
+            "hit@10": 0.0,
+            "recall@10": 0.0,
+            "precision@5": 0.0
+          }
+        },
+        {
+          "id": "os-07",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "In the FCFS program, how are turnaround time and waiting time computed?",
+          "gold_pages": [
+            11
+          ],
+          "retrieved": [
+            "os_assessment:p15",
+            "os_assessment:p11",
+            "os_assessment:p18",
+            "os_assessment:p22",
+            "os_assessment:p9",
+            "nn_book:p109",
+            "nn_book:p117",
+            "nn_book:p222",
+            "nn_book:p6",
+            "nn_book:p113"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-08",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "In the Round Robin program, what happens when a process's remaining time is larger than the time quantum?",
+          "gold_pages": [
+            17
+          ],
+          "retrieved": [
+            "os_assessment:p16",
+            "os_assessment:p17",
+            "os_assessment:p9",
+            "nn_book:p196",
+            "os_assessment:p21",
+            "nn_book:p166",
+            "os_assessment:p14",
+            "nn_book:p117",
+            "nn_book:p192",
+            "os_assessment:p13"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-09",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "How does the priority scheduling program pick the next process to run?",
+          "gold_pages": [
+            21
+          ],
+          "retrieved": [
+            "os_assessment:p9",
+            "os_assessment:p21",
+            "os_assessment:p20",
+            "nn_book:p7",
+            "nn_book:p112",
+            "os_assessment:p19",
+            "os_assessment:p3",
+            "nn_book:p41",
+            "nn_book:p22",
+            "nn_book:p164"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-10",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "What does the SJF program do when no process has arrived yet?",
+          "gold_pages": [
+            14
+          ],
+          "retrieved": [
+            "os_assessment:p14",
+            "os_assessment:p9",
+            "os_assessment:p21",
+            "os_assessment:p13",
+            "os_assessment:p12",
+            "os_assessment:p20",
+            "nn_book:p6",
+            "nn_book:p7",
+            "os_assessment:p16",
+            "nn_book:p66"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        }
+      ]
+    },
+    "hybrid/global": {
+      "overall": {
+        "mrr@10": 0.8401,
+        "hit@1": 0.7551,
+        "recall@1": 0.6701,
+        "hit@3": 0.9184,
+        "recall@3": 0.8673,
+        "hit@5": 0.9184,
+        "recall@5": 0.898,
+        "hit@10": 0.9388,
+        "recall@10": 0.9286,
+        "precision@5": 0.2776
+      },
+      "latency_ms": {
+        "p50": 16.8,
+        "p95": 26.5
+      },
+      "by_type": {
+        "code": {
+          "n": 8,
+          "mrr@10": 0.75,
+          "hit@1": 0.625,
+          "recall@1": 0.625,
+          "hit@3": 0.875,
+          "recall@3": 0.875,
+          "hit@5": 0.875,
+          "recall@5": 0.875,
+          "hit@10": 0.875,
+          "recall@10": 0.875,
+          "precision@5": 0.2
+        },
+        "factual": {
+          "n": 18,
+          "mrr@10": 0.9444,
+          "hit@1": 0.8889,
+          "recall@1": 0.8611,
+          "hit@3": 1.0,
+          "recall@3": 0.9722,
+          "hit@5": 1.0,
+          "recall@5": 1.0,
+          "hit@10": 1.0,
+          "recall@10": 1.0,
+          "precision@5": 0.3
+        },
+        "image_only": {
+          "n": 2,
+          "mrr@10": 0.0,
+          "hit@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 0.0,
+          "recall@3": 0.0,
+          "hit@5": 0.0,
+          "recall@5": 0.0,
+          "hit@10": 0.0,
+          "recall@10": 0.0,
+          "precision@5": 0.0
+        },
+        "multi_page": {
+          "n": 7,
+          "mrr@10": 0.8095,
+          "hit@1": 0.7143,
+          "recall@1": 0.3571,
+          "hit@3": 0.8571,
+          "recall@3": 0.6429,
+          "hit@5": 0.8571,
+          "recall@5": 0.7857,
+          "hit@10": 1.0,
+          "recall@10": 1.0,
+          "precision@5": 0.3714
+        },
+        "numeric": {
+          "n": 10,
+          "mrr@10": 0.85,
+          "hit@1": 0.7,
+          "recall@1": 0.6333,
+          "hit@3": 1.0,
+          "recall@3": 1.0,
+          "hit@5": 1.0,
+          "recall@5": 1.0,
+          "hit@10": 1.0,
+          "recall@10": 1.0,
+          "precision@5": 0.3
+        },
+        "paraphrase": {
+          "n": 4,
+          "mrr@10": 1.0,
+          "hit@1": 1.0,
+          "recall@1": 0.875,
+          "hit@3": 1.0,
+          "recall@3": 0.875,
+          "hit@5": 1.0,
+          "recall@5": 0.875,
+          "hit@10": 1.0,
+          "recall@10": 0.875,
+          "precision@5": 0.25
+        }
+      },
+      "by_doc": {
+        "nn_book": {
+          "n": 30,
+          "mrr@10": 0.8722,
+          "hit@1": 0.7667,
+          "recall@1": 0.6611,
+          "hit@3": 0.9667,
+          "recall@3": 0.9167,
+          "hit@5": 0.9667,
+          "recall@5": 0.95,
+          "hit@10": 1.0,
+          "recall@10": 0.9833,
+          "precision@5": 0.34
+        },
+        "os_assessment": {
+          "n": 10,
+          "mrr@10": 0.8,
+          "hit@1": 0.7,
+          "recall@1": 0.6,
+          "hit@3": 0.9,
+          "recall@3": 0.8,
+          "hit@5": 0.9,
+          "recall@5": 0.85,
+          "hit@10": 0.9,
+          "recall@10": 0.9,
+          "precision@5": 0.2
+        },
+        "syllogism_slides": {
+          "n": 9,
+          "mrr@10": 0.7778,
+          "hit@1": 0.7778,
+          "recall@1": 0.7778,
+          "hit@3": 0.7778,
+          "recall@3": 0.7778,
+          "hit@5": 0.7778,
+          "recall@5": 0.7778,
+          "hit@10": 0.7778,
+          "recall@10": 0.7778,
+          "precision@5": 0.1556
+        }
+      },
+      "questions": [
+        {
+          "id": "nn-01",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "What value of the constant c brings the error down to 2.137 when converting 100 kilometres to miles?",
+          "gold_pages": [
+            15
+          ],
+          "retrieved": [
+            "nn_book:p15",
+            "nn_book:p14",
+            "nn_book:p17",
+            "nn_book:p13",
+            "nn_book:p27",
+            "nn_book:p18",
+            "nn_book:p25",
+            "nn_book:p13",
+            "nn_book:p20",
+            "nn_book:p151"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-02",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "In the kilometres to miles predictor, what was the first random guess for c and how large was the error?",
+          "gold_pages": [
+            14
+          ],
+          "retrieved": [
+            "nn_book:p15",
+            "nn_book:p14",
+            "nn_book:p19",
+            "nn_book:p25",
+            "nn_book:p27",
+            "nn_book:p27",
+            "nn_book:p13",
+            "nn_book:p13",
+            "nn_book:p18",
+            "nn_book:p20"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-03",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "What learning rate was first used to moderate the classifier updates, and what slope A did the dividing line end up with?",
+          "gold_pages": [
+            32,
+            33
+          ],
+          "retrieved": [
+            "nn_book:p34",
+            "nn_book:p32",
+            "nn_book:p23",
+            "nn_book:p33",
+            "nn_book:p98",
+            "nn_book:p30",
+            "nn_book:p26",
+            "nn_book:p31",
+            "nn_book:p32",
+            "nn_book:p164"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-04",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "Why can't a simple linear classifier learn the Boolean XOR function, and what is the fix?",
+          "gold_pages": [
+            39,
+            40
+          ],
+          "retrieved": [
+            "nn_book:p39",
+            "nn_book:p38",
+            "nn_book:p37",
+            "nn_book:p40",
+            "nn_book:p35",
+            "nn_book:p36",
+            "nn_book:p23",
+            "nn_book:p34",
+            "nn_book:p39",
+            "nn_book:p19"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-05",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "How many neurons does a nematode worm have?",
+          "gold_pages": [
+            42
+          ],
+          "retrieved": [
+            "nn_book:p42",
+            "nn_book:p47",
+            "nn_book:p46",
+            "nn_book:p41",
+            "nn_book:p46",
+            "nn_book:p42",
+            "nn_book:p46",
+            "nn_book:p51",
+            "nn_book:p4",
+            "nn_book:p43"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-06",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "Roughly how many neurons does a human brain have compared to a fruit fly?",
+          "gold_pages": [
+            42
+          ],
+          "retrieved": [
+            "nn_book:p42",
+            "nn_book:p4",
+            "nn_book:p41",
+            "nn_book:p41",
+            "nn_book:p51",
+            "nn_book:p4",
+            "nn_book:p188",
+            "nn_book:p46",
+            "nn_book:p47",
+            "nn_book:p40"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-07",
+          "doc": "nn_book",
+          "type": "paraphrase",
+          "question": "Why don't biological neurons pass on every weak signal they receive?",
+          "gold_pages": [
+            43
+          ],
+          "retrieved": [
+            "nn_book:p43",
+            "nn_book:p51",
+            "nn_book:p41",
+            "nn_book:p46",
+            "nn_book:p47",
+            "nn_book:p44",
+            "nn_book:p42",
+            "nn_book:p46",
+            "nn_book:p41",
+            "nn_book:p46"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-08",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What smoother alternative to the step function does the book use as an activation function?",
+          "gold_pages": [
+            44
+          ],
+          "retrieved": [
+            "nn_book:p44",
+            "nn_book:p43",
+            "nn_book:p117",
+            "nn_book:p135",
+            "nn_book:p87",
+            "nn_book:p103",
+            "nn_book:p62",
+            "nn_book:p180",
+            "nn_book:p70",
+            "nn_book:p135"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-09",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "If an output node is fed by two links with weights 3.0 and 1.0, how is its error split between them?",
+          "gold_pages": [
+            73
+          ],
+          "retrieved": [
+            "nn_book:p73",
+            "nn_book:p78",
+            "nn_book:p74",
+            "nn_book:p72",
+            "nn_book:p79",
+            "nn_book:p76",
+            "nn_book:p77",
+            "nn_book:p74",
+            "nn_book:p73",
+            "nn_book:p65"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-10",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "Why is the squared error preferred over the absolute error as the network's error function?",
+          "gold_pages": [
+            91
+          ],
+          "retrieved": [
+            "nn_book:p91",
+            "nn_book:p90",
+            "nn_book:p93",
+            "nn_book:p99",
+            "nn_book:p91",
+            "nn_book:p90",
+            "nn_book:p92",
+            "nn_book:p82",
+            "nn_book:p91",
+            "nn_book:p74"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-11",
+          "doc": "nn_book",
+          "type": "paraphrase",
+          "question": "What is the analogy of finding your way down a hillside in the dark with only a torch meant to explain?",
+          "gold_pages": [
+            85
+          ],
+          "retrieved": [
+            "nn_book:p85",
+            "nn_book:p181",
+            "nn_book:p49",
+            "nn_book:p85",
+            "nn_book:p6",
+            "nn_book:p198",
+            "nn_book:p110",
+            "nn_book:p201",
+            "nn_book:p86",
+            "nn_book:p182"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-12",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "In the weight update worked example, what is the error slope for w11 and its new value with a learning rate of 0.1?",
+          "gold_pages": [
+            100,
+            101
+          ],
+          "retrieved": [
+            "nn_book:p98",
+            "nn_book:p34",
+            "nn_book:p32",
+            "nn_book:p30",
+            "nn_book:p99",
+            "nn_book:p100",
+            "nn_book:p97",
+            "nn_book:p101",
+            "nn_book:p31",
+            "nn_book:p104"
+          ],
+          "scores": {
+            "mrr@10": 0.16666666666666666,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 0.0,
+            "recall@3": 0.0,
+            "hit@5": 0.0,
+            "recall@5": 0.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.0
+          }
+        },
+        {
+          "id": "nn-13",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What does it mean to saturate a neural network?",
+          "gold_pages": [
+            102
+          ],
+          "retrieved": [
+            "nn_book:p102",
+            "nn_book:p102",
+            "nn_book:p105",
+            "nn_book:p181",
+            "nn_book:p7",
+            "nn_book:p167",
+            "nn_book:p84",
+            "nn_book:p135",
+            "nn_book:p179",
+            "nn_book:p154"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-14",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "Why should the initial weights not all be set to the same constant value or to zero?",
+          "gold_pages": [
+            104
+          ],
+          "retrieved": [
+            "nn_book:p104",
+            "nn_book:p104",
+            "nn_book:p103",
+            "nn_book:p132",
+            "nn_book:p105",
+            "nn_book:p102",
+            "nn_book:p133",
+            "nn_book:p94",
+            "nn_book:p98",
+            "nn_book:p52"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-15",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What rule of thumb is given for the range of random initial weights?",
+          "gold_pages": [
+            103
+          ],
+          "retrieved": [
+            "nn_book:p103",
+            "nn_book:p103",
+            "nn_book:p103",
+            "nn_book:p133",
+            "nn_book:p52",
+            "nn_book:p105",
+            "nn_book:p132",
+            "nn_book:p164",
+            "nn_book:p103",
+            "nn_book:p132"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.6
+          }
+        },
+        {
+          "id": "nn-16",
+          "doc": "nn_book",
+          "type": "code",
+          "question": "Which numpy function and arguments are used to initialise the weights from a normal distribution in the Python code?",
+          "gold_pages": [
+            133
+          ],
+          "retrieved": [
+            "nn_book:p133",
+            "nn_book:p133",
+            "nn_book:p132",
+            "nn_book:p132",
+            "nn_book:p103",
+            "nn_book:p139",
+            "nn_book:p118",
+            "nn_book:p103",
+            "nn_book:p103",
+            "nn_book:p140"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-17",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "How many records are in the full MNIST training set and test set?",
+          "gold_pages": [
+            145
+          ],
+          "retrieved": [
+            "nn_book:p162",
+            "nn_book:p145",
+            "nn_book:p158",
+            "nn_book:p146",
+            "nn_book:p222",
+            "nn_book:p144",
+            "nn_book:p219",
+            "nn_book:p185",
+            "nn_book:p158",
+            "nn_book:p163"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-18",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What does each line of the MNIST CSV data contain?",
+          "gold_pages": [
+            146
+          ],
+          "retrieved": [
+            "nn_book:p144",
+            "nn_book:p146",
+            "nn_book:p162",
+            "nn_book:p145",
+            "nn_book:p145",
+            "nn_book:p219",
+            "nn_book:p147",
+            "nn_book:p146",
+            "nn_book:p176",
+            "nn_book:p144"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-19",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "What performance score did the first 3-layer network get when trained on all 60,000 MNIST examples?",
+          "gold_pages": [
+            163
+          ],
+          "retrieved": [
+            "nn_book:p163",
+            "nn_book:p162",
+            "nn_book:p163",
+            "nn_book:p163",
+            "nn_book:p164",
+            "nn_book:p186",
+            "nn_book:p145",
+            "nn_book:p143",
+            "nn_book:p165",
+            "nn_book:p138"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.6
+          }
+        },
+        {
+          "id": "nn-20",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "What performance scores were obtained with learning rates of 0.6, 0.1, 0.01 and 0.2?",
+          "gold_pages": [
+            163,
+            164
+          ],
+          "retrieved": [
+            "nn_book:p164",
+            "nn_book:p163",
+            "nn_book:p164",
+            "nn_book:p165",
+            "nn_book:p185",
+            "nn_book:p163",
+            "nn_book:p166",
+            "nn_book:p162",
+            "nn_book:p167",
+            "nn_book:p103"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.6
+          }
+        },
+        {
+          "id": "nn-21",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What is an epoch in neural network training?",
+          "gold_pages": [
+            165
+          ],
+          "retrieved": [
+            "nn_book:p165",
+            "nn_book:p167",
+            "nn_book:p165",
+            "nn_book:p185",
+            "nn_book:p222",
+            "nn_book:p166",
+            "nn_book:p186",
+            "nn_book:p128",
+            "nn_book:p179",
+            "nn_book:p145"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-22",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "How did changing the number of hidden nodes affect accuracy?",
+          "gold_pages": [
+            168,
+            169
+          ],
+          "retrieved": [
+            "nn_book:p168",
+            "nn_book:p169",
+            "nn_book:p158",
+            "nn_book:p167",
+            "nn_book:p158",
+            "nn_book:p168",
+            "nn_book:p99",
+            "nn_book:p65",
+            "nn_book:p77",
+            "nn_book:p131"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-23",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What is the logit function and why is it needed for back querying the network?",
+          "gold_pages": [
+            180
+          ],
+          "retrieved": [
+            "nn_book:p180",
+            "nn_book:p180",
+            "nn_book:p133",
+            "nn_book:p179",
+            "nn_book:p138",
+            "nn_book:p134",
+            "nn_book:p138",
+            "nn_book:p135",
+            "nn_book:p152",
+            "nn_book:p138"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-24",
+          "doc": "nn_book",
+          "type": "multi_page",
+          "question": "By how many degrees were the training images rotated to create extra data, and what was the best accuracy achieved?",
+          "gold_pages": [
+            184,
+            186
+          ],
+          "retrieved": [
+            "nn_book:p186",
+            "nn_book:p186",
+            "nn_book:p184",
+            "nn_book:p185",
+            "nn_book:p185",
+            "nn_book:p101",
+            "nn_book:p177",
+            "nn_book:p163",
+            "nn_book:p222",
+            "nn_book:p184"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.6
+          }
+        },
+        {
+          "id": "nn-25",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "How much does a Raspberry Pi Zero cost?",
+          "gold_pages": [
+            107,
+            212,
+            223
+          ],
+          "retrieved": [
+            "nn_book:p107",
+            "nn_book:p212",
+            "nn_book:p223",
+            "nn_book:p217",
+            "nn_book:p222",
+            "nn_book:p212",
+            "nn_book:p213",
+            "nn_book:p8",
+            "nn_book:p215",
+            "nn_book:p219"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.3333333333333333,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.6
+          }
+        },
+        {
+          "id": "nn-26",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "How long did training take on the Raspberry Pi Zero, and with which settings?",
+          "gold_pages": [
+            222
+          ],
+          "retrieved": [
+            "nn_book:p222",
+            "nn_book:p223",
+            "nn_book:p107",
+            "nn_book:p8",
+            "nn_book:p212",
+            "nn_book:p219",
+            "nn_book:p212",
+            "nn_book:p217",
+            "nn_book:p163",
+            "nn_book:p213"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-27",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "What is the chain rule in calculus?",
+          "gold_pages": [
+            209
+          ],
+          "retrieved": [
+            "nn_book:p211",
+            "nn_book:p209",
+            "nn_book:p94",
+            "nn_book:p209",
+            "nn_book:p96",
+            "nn_book:p210",
+            "nn_book:p208",
+            "nn_book:p91",
+            "nn_book:p189",
+            "nn_book:p207"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "nn-28",
+          "doc": "nn_book",
+          "type": "factual",
+          "question": "Which Python version does the author tell readers to download with Anaconda?",
+          "gold_pages": [
+            108
+          ],
+          "retrieved": [
+            "nn_book:p108",
+            "nn_book:p219",
+            "nn_book:p215",
+            "nn_book:p216",
+            "nn_book:p115",
+            "nn_book:p115",
+            "nn_book:p1",
+            "nn_book:p213",
+            "nn_book:p107",
+            "nn_book:p185"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-29",
+          "doc": "nn_book",
+          "type": "paraphrase",
+          "question": "Why is it a bad idea to train a sigmoid network with target outputs of exactly 1.0?",
+          "gold_pages": [
+            102,
+            103
+          ],
+          "retrieved": [
+            "nn_book:p102",
+            "nn_book:p105",
+            "nn_book:p91",
+            "nn_book:p101",
+            "nn_book:p52",
+            "nn_book:p104",
+            "nn_book:p165",
+            "nn_book:p90",
+            "nn_book:p68",
+            "nn_book:p164"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 0.5,
+            "hit@10": 1.0,
+            "recall@10": 0.5,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "nn-30",
+          "doc": "nn_book",
+          "type": "numeric",
+          "question": "What score did the network get on the 10-record test set after training on only 100 records?",
+          "gold_pages": [
+            162
+          ],
+          "retrieved": [
+            "nn_book:p158",
+            "nn_book:p162",
+            "nn_book:p163",
+            "nn_book:p162",
+            "nn_book:p145",
+            "nn_book:p186",
+            "nn_book:p186",
+            "nn_book:p158",
+            "nn_book:p161",
+            "nn_book:p222"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "syl-01",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "What is a syllogism?",
+          "gold_pages": [
+            2
+          ],
+          "retrieved": [
+            "syllogism_slides:p2",
+            "syllogism_slides:p3",
+            "nn_book:p135",
+            "nn_book:p45",
+            "nn_book:p56",
+            "nn_book:p57",
+            "nn_book:p115",
+            "nn_book:p143",
+            "nn_book:p45",
+            "nn_book:p112"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-02",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "What are the parts of the basic structure of a syllogism?",
+          "gold_pages": [
+            2
+          ],
+          "retrieved": [
+            "syllogism_slides:p2",
+            "syllogism_slides:p3",
+            "nn_book:p175",
+            "nn_book:p7",
+            "nn_book:p1",
+            "nn_book:p115",
+            "nn_book:p143",
+            "nn_book:p116",
+            "nn_book:p56",
+            "nn_book:p41"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-03",
+          "doc": "syllogism_slides",
+          "type": "paraphrase",
+          "question": "What advice is given for approaching syllogism problems?",
+          "gold_pages": [
+            3
+          ],
+          "retrieved": [
+            "syllogism_slides:p3",
+            "syllogism_slides:p2",
+            "nn_book:p33",
+            "nn_book:p158",
+            "nn_book:p188",
+            "nn_book:p60",
+            "nn_book:p7",
+            "nn_book:p111",
+            "nn_book:p18",
+            "nn_book:p56"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-04",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "What are the conclusions in the question about Gadgets, Mobile, Laptop and IPod?",
+          "gold_pages": [
+            4
+          ],
+          "retrieved": [
+            "syllogism_slides:p4",
+            "syllogism_slides:p20",
+            "syllogism_slides:p10",
+            "syllogism_slides:p18",
+            "syllogism_slides:p16",
+            "syllogism_slides:p8",
+            "syllogism_slides:p12",
+            "syllogism_slides:p6",
+            "syllogism_slides:p14",
+            "nn_book:p12"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-05",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "Which question uses the statements 'All Rum is Whisky' and 'No whisky is beer', and what are its conclusions?",
+          "gold_pages": [
+            14
+          ],
+          "retrieved": [
+            "syllogism_slides:p14",
+            "syllogism_slides:p22",
+            "syllogism_slides:p12",
+            "syllogism_slides:p20",
+            "syllogism_slides:p10",
+            "syllogism_slides:p16",
+            "syllogism_slides:p6",
+            "syllogism_slides:p4",
+            "syllogism_slides:p18",
+            "syllogism_slides:p8"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-06",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "What are the statements in the question about doors, dogs and cats?",
+          "gold_pages": [
+            22
+          ],
+          "retrieved": [
+            "syllogism_slides:p22",
+            "syllogism_slides:p6",
+            "syllogism_slides:p12",
+            "syllogism_slides:p4",
+            "syllogism_slides:p16",
+            "syllogism_slides:p20",
+            "syllogism_slides:p8",
+            "syllogism_slides:p14",
+            "syllogism_slides:p10",
+            "syllogism_slides:p18"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "syl-07",
+          "doc": "syllogism_slides",
+          "type": "image_only",
+          "question": "Describe the least possible Venn diagram for the Gadgets, Mobile, Laptop and IPods question.",
+          "gold_pages": [
+            5
+          ],
+          "retrieved": [
+            "syllogism_slides:p4",
+            "syllogism_slides:p3",
+            "syllogism_slides:p20",
+            "nn_book:p7",
+            "nn_book:p75",
+            "nn_book:p38",
+            "nn_book:p107",
+            "nn_book:p12",
+            "nn_book:p179",
+            "nn_book:p179"
+          ],
+          "scores": {
+            "mrr@10": 0.0,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 0.0,
+            "recall@3": 0.0,
+            "hit@5": 0.0,
+            "recall@5": 0.0,
+            "hit@10": 0.0,
+            "recall@10": 0.0,
+            "precision@5": 0.0
+          }
+        },
+        {
+          "id": "syl-08",
+          "doc": "syllogism_slides",
+          "type": "image_only",
+          "question": "What does the Venn diagram for the Sundays, Mondays, Tuesdays and Fridays question show?",
+          "gold_pages": [
+            9
+          ],
+          "retrieved": [
+            "syllogism_slides:p3",
+            "syllogism_slides:p8",
+            "nn_book:p179",
+            "nn_book:p46",
+            "nn_book:p75",
+            "nn_book:p73",
+            "nn_book:p181",
+            "nn_book:p49",
+            "nn_book:p61",
+            "nn_book:p133"
+          ],
+          "scores": {
+            "mrr@10": 0.0,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 0.0,
+            "recall@3": 0.0,
+            "hit@5": 0.0,
+            "recall@5": 0.0,
+            "hit@10": 0.0,
+            "recall@10": 0.0,
+            "precision@5": 0.0
+          }
+        },
+        {
+          "id": "syl-09",
+          "doc": "syllogism_slides",
+          "type": "factual",
+          "question": "Which question involves pencils, pens, colours and erasers?",
+          "gold_pages": [
+            10
+          ],
+          "retrieved": [
+            "syllogism_slides:p10",
+            "syllogism_slides:p3",
+            "nn_book:p181",
+            "nn_book:p175",
+            "nn_book:p182",
+            "nn_book:p120",
+            "syllogism_slides:p18",
+            "syllogism_slides:p14",
+            "syllogism_slides:p12",
+            "syllogism_slides:p16"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-01",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "Which command shows disk usage in a human-readable format?",
+          "gold_pages": [
+            4
+          ],
+          "retrieved": [
+            "os_assessment:p4",
+            "nn_book:p215",
+            "nn_book:p217",
+            "nn_book:p219",
+            "os_assessment:p1",
+            "nn_book:p175",
+            "nn_book:p10",
+            "nn_book:p11",
+            "nn_book:p144",
+            "nn_book:p146"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-02",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "Which shell command is listed for searching for text inside a file?",
+          "gold_pages": [
+            3
+          ],
+          "retrieved": [
+            "os_assessment:p3",
+            "os_assessment:p1",
+            "nn_book:p147",
+            "nn_book:p144",
+            "nn_book:p145",
+            "nn_book:p215",
+            "nn_book:p219",
+            "os_assessment:p2",
+            "nn_book:p146",
+            "os_assessment:p4"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-03",
+          "doc": "os_assessment",
+          "type": "multi_page",
+          "question": "How does the fork() program create an orphan process?",
+          "gold_pages": [
+            5,
+            6
+          ],
+          "retrieved": [
+            "os_assessment:p5",
+            "os_assessment:p7",
+            "os_assessment:p14",
+            "os_assessment:p6",
+            "os_assessment:p8",
+            "nn_book:p123",
+            "nn_book:p126",
+            "nn_book:p177",
+            "nn_book:p7",
+            "nn_book:p132"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.4
+          }
+        },
+        {
+          "id": "os-04",
+          "doc": "os_assessment",
+          "type": "multi_page",
+          "question": "How does the zombie process program work?",
+          "gold_pages": [
+            7,
+            8
+          ],
+          "retrieved": [
+            "os_assessment:p7",
+            "os_assessment:p5",
+            "nn_book:p42",
+            "os_assessment:p21",
+            "os_assessment:p14",
+            "nn_book:p107",
+            "os_assessment:p8",
+            "nn_book:p7",
+            "nn_book:p116",
+            "nn_book:p177"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 0.5,
+            "hit@3": 1.0,
+            "recall@3": 0.5,
+            "hit@5": 1.0,
+            "recall@5": 0.5,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-05",
+          "doc": "os_assessment",
+          "type": "factual",
+          "question": "Which CPU scheduling algorithms are implemented in the assessment?",
+          "gold_pages": [
+            9
+          ],
+          "retrieved": [
+            "os_assessment:p9",
+            "os_assessment:p18",
+            "nn_book:p144",
+            "os_assessment:p21",
+            "os_assessment:p1",
+            "nn_book:p222",
+            "os_assessment:p19",
+            "os_assessment:p10",
+            "nn_book:p7",
+            "os_assessment:p16"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-06",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "How does the FCFS program order the processes before scheduling them?",
+          "gold_pages": [
+            10
+          ],
+          "retrieved": [
+            "os_assessment:p9",
+            "os_assessment:p5",
+            "os_assessment:p21",
+            "os_assessment:p14",
+            "os_assessment:p7",
+            "os_assessment:p6",
+            "os_assessment:p13",
+            "nn_book:p113",
+            "os_assessment:p8",
+            "os_assessment:p3"
+          ],
+          "scores": {
+            "mrr@10": 0.0,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 0.0,
+            "recall@3": 0.0,
+            "hit@5": 0.0,
+            "recall@5": 0.0,
+            "hit@10": 0.0,
+            "recall@10": 0.0,
+            "precision@5": 0.0
+          }
+        },
+        {
+          "id": "os-07",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "In the FCFS program, how are turnaround time and waiting time computed?",
+          "gold_pages": [
+            11
+          ],
+          "retrieved": [
+            "os_assessment:p15",
+            "os_assessment:p11",
+            "os_assessment:p9",
+            "os_assessment:p18",
+            "os_assessment:p22",
+            "os_assessment:p10",
+            "os_assessment:p17",
+            "nn_book:p222",
+            "os_assessment:p14",
+            "os_assessment:p21"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-08",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "In the Round Robin program, what happens when a process's remaining time is larger than the time quantum?",
+          "gold_pages": [
+            17
+          ],
+          "retrieved": [
+            "os_assessment:p16",
+            "os_assessment:p17",
+            "nn_book:p196",
+            "os_assessment:p9",
+            "os_assessment:p14",
+            "os_assessment:p21",
+            "nn_book:p166",
+            "os_assessment:p13",
+            "nn_book:p195",
+            "nn_book:p153"
+          ],
+          "scores": {
+            "mrr@10": 0.5,
+            "hit@1": 0.0,
+            "recall@1": 0.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-09",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "How does the priority scheduling program pick the next process to run?",
+          "gold_pages": [
+            21
+          ],
+          "retrieved": [
+            "os_assessment:p21",
+            "os_assessment:p9",
+            "os_assessment:p20",
+            "os_assessment:p19",
+            "nn_book:p112",
+            "os_assessment:p5",
+            "os_assessment:p3",
+            "os_assessment:p14",
+            "os_assessment:p22",
+            "os_assessment:p7"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        },
+        {
+          "id": "os-10",
+          "doc": "os_assessment",
+          "type": "code",
+          "question": "What does the SJF program do when no process has arrived yet?",
+          "gold_pages": [
+            14
+          ],
+          "retrieved": [
+            "os_assessment:p14",
+            "os_assessment:p9",
+            "os_assessment:p12",
+            "os_assessment:p21",
+            "os_assessment:p13",
+            "os_assessment:p5",
+            "os_assessment:p20",
+            "os_assessment:p16",
+            "os_assessment:p7",
+            "os_assessment:p10"
+          ],
+          "scores": {
+            "mrr@10": 1.0,
+            "hit@1": 1.0,
+            "recall@1": 1.0,
+            "hit@3": 1.0,
+            "recall@3": 1.0,
+            "hit@5": 1.0,
+            "recall@5": 1.0,
+            "hit@10": 1.0,
+            "recall@10": 1.0,
+            "precision@5": 0.2
+          }
+        }
+      ]
+    }
+  }
+}
