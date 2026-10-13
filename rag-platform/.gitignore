@@ -26,3 +26,7 @@ apps/api/uploads/
 # Node
 node_modules/
 dist/
+
+# Eval corpus PDFs (pinned by sha256 in corpus.json) and caches
+apps/api/evals/corpus/
+apps/api/evals/.cache/

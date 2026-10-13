@@ -1,0 +1,20 @@
+{
+  "_comment": "PDFs live in evals/corpus/ (gitignored). sha256 pins the exact file each golden question was written against.",
+  "documents": {
+    "nn_book": {
+      "file": "nn_book.pdf",
+      "description": "Make Your Own Neural Network (Tariq Rashid, 2016) - 223-page book, prose + math + figures",
+      "sha256": "97419ffaa0ce76faa40b541a91fa39f692001af9b3977b4464344e823715f002"
+    },
+    "syllogism_slides": {
+      "file": "syllogism_slides.pdf",
+      "description": "24-page slide deck on syllogisms (exported from PowerPoint)",
+      "sha256": "abdeee1e4619fff5925a2a7e078e0d8b2ad76dbbf2c630a45ee4e9d392a3ff98"
+    },
+    "os_assessment": {
+      "file": "os_assessment.pdf",
+      "description": "23-page operating systems assessment",
+      "sha256": "75632cb032f4037ce8cec8890f83a02c2ad095e2094ed6fe96b505e6b8f2e81c"
+    }
+  }
+}
