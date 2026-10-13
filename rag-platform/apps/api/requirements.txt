@@ -12,6 +12,7 @@ langchain-chroma==1.1.0
 # Vector store + hybrid retrieval
 chromadb==1.5.9
 rank-bm25==0.2.2
+snowballstemmer==3.0.1
 sentence-transformers==6.0.0
 
 # PDF ingestion (layout-aware: tables as Markdown, headings/lists preserved)

@@ -27,13 +27,102 @@ class ChunkValidator:
 
         valid_chunks = []
 
-        for chunk in chunks:
+        for chunk in self._merge_short_chunks(chunks):
 
             if self._is_valid(chunk):
 
                 valid_chunks.append(chunk)
 
         return valid_chunks
+
+    def _merge_short_chunks(
+        self,
+        chunks: list[Document],
+    ) -> list[Document]:
+        """
+        Attach short chunks to a neighbour on the same page instead of
+        letting validation drop them. The splitter often cuts a heading
+        ("## Preparing Data") off from the text it introduces; merged
+        forward, the heading stays with its section. Short chunks with no
+        same-page neighbour are left for _is_valid to reject.
+        """
+
+        merged: list[Document] = []
+        pending: Document | None = None
+
+        for chunk in chunks:
+
+            if pending is not None:
+
+                if self._same_page(pending, chunk):
+                    chunk = self._join(pending, chunk)
+                else:
+                    self._attach_to_previous(merged, pending)
+
+                pending = None
+
+            if self._is_short(chunk):
+                pending = chunk
+            else:
+                merged.append(chunk)
+
+        if pending is not None:
+            self._attach_to_previous(merged, pending)
+
+        return merged
+
+    def _attach_to_previous(
+        self,
+        merged: list[Document],
+        chunk: Document,
+    ) -> None:
+
+        if merged and self._same_page(merged[-1], chunk):
+            merged[-1] = self._join(merged[-1], chunk)
+        else:
+            merged.append(chunk)
+
+    @staticmethod
+    def _join(
+        first: Document,
+        second: Document,
+    ) -> Document:
+
+        head = first.page_content.strip()
+        tail = second.page_content.strip()
+
+        # Chunk overlap may already have copied the short text across.
+        if head in tail:
+            text = tail
+        elif tail in head:
+            text = head
+        else:
+            text = f"{head}\n\n{tail}"
+
+        return Document(page_content=text, metadata=first.metadata.copy())
+
+    @staticmethod
+    def _same_page(
+        first: Document,
+        second: Document,
+    ) -> bool:
+
+        return (
+            first.metadata.get("source") == second.metadata.get("source")
+            and first.metadata.get("page") == second.metadata.get("page")
+        )
+
+    def _is_short(
+        self,
+        chunk: Document,
+    ) -> bool:
+
+        text = chunk.page_content.strip()
+
+        return (
+            len(text) < self.min_characters
+            or len(text.split()) < self.min_words
+        )
 
     def _is_valid(
         self,

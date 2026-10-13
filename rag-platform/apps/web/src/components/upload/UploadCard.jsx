@@ -28,7 +28,7 @@ export default function UploadCard({ onUploadSuccess }) {
       try {
         const result = await uploadPdf(file);
         setStatus(result.message || 'Upload successful.');
-        onUploadSuccess?.(file.name);
+        onUploadSuccess?.(file.name, result.document_id);
       } catch (error) {
         setStatus(error.message);
       } finally {
@@ -50,7 +50,7 @@ export default function UploadCard({ onUploadSuccess }) {
     try {
       const result = await uploadUrl(trimmedUrl);
       setStatus(result.message || 'Page indexed successfully.');
-      onUploadSuccess?.(trimmedUrl);
+      onUploadSuccess?.(trimmedUrl, result.document_id);
     } catch (error) {
       setStatus(error.message);
     } finally {

@@ -32,11 +32,13 @@ export async function uploadUrl(url) {
   return response.json();
 }
 
-export async function chatWithPdf(question) {
+export async function chatWithPdf(question, documentId) {
   const response = await fetch(`${API_BASE_URL}/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ question }),
+    // Scope retrieval to the active document; without it the backend
+    // searches every uploaded document.
+    body: JSON.stringify({ question, document_id: documentId ?? null }),
   });
 
   if (!response.ok) {

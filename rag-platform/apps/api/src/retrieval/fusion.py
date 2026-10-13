@@ -22,7 +22,14 @@ class ReciprocalRankFusion:
         self,
         ranked_lists: list[list[Document]],
         top_k: int = 5,
+        weights: list[float] | None = None,
     ) -> list[Document]:
+        """
+        `weights` scales each list's contribution (default 1.0 each), so a
+        weaker retriever can add evidence without outvoting a stronger one.
+        """
+
+        weights = weights or [1.0] * len(ranked_lists)
 
         scores = {}
         documents = {}
@@ -31,7 +38,7 @@ class ReciprocalRankFusion:
         # Calculate RRF Score
         # --------------------------------------
 
-        for ranked_list in ranked_lists:
+        for ranked_list, weight in zip(ranked_lists, weights):
 
             for rank, document in enumerate(ranked_list):
 
@@ -46,7 +53,7 @@ class ReciprocalRankFusion:
 
                 scores[doc_id] = scores.get(doc_id, 0)
 
-                scores[doc_id] += 1 / (
+                scores[doc_id] += weight / (
                     self.k + rank + 1
                 )
 
