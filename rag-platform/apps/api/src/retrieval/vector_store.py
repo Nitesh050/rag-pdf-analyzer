@@ -12,6 +12,8 @@ class VectorStore:
     Handles storing and retrieving document embeddings using ChromaDB.
     """
 
+    EMBED_BATCH_SIZE = 64
+
     def __init__(
         self,
         persist_directory: str = "data/chroma_db",
@@ -38,9 +40,15 @@ class VectorStore:
     ) -> None:
         """
         Store document chunks inside ChromaDB.
+
+        Chunks are embedded in batches: sending a whole book (~450
+        chunks) to Ollama in one request crashes its runner.
         """
 
-        self.vector_store.add_documents(documents)
+        for start in range(0, len(documents), self.EMBED_BATCH_SIZE):
+            self.vector_store.add_documents(
+                documents[start:start + self.EMBED_BATCH_SIZE]
+            )
 
     # ---------------------------------------------------
     # SEARCH
