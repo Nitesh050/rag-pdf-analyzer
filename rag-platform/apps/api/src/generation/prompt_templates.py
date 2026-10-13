@@ -26,20 +26,32 @@ class PromptBuilder:
         return f"{label}\n{document.page_content}"
 
     @staticmethod
-    def _build_context(documents: list[Document], max_chars: int = 12000) -> str:
-        chunks = []
+    def select_documents(documents: list[Document], max_chars: int = 12000) -> list[Document]:
+        """
+        The leading documents that fit in the context budget, i.e. exactly
+        what the model sees as Source 1..N.
+        """
+        selected = []
         total_len = 0
 
         for i, doc in enumerate(documents):
-            formatted = PromptBuilder._format_chunk(i, doc)
+            formatted_len = len(PromptBuilder._format_chunk(i, doc))
             # Budget guard: stop adding chunks once we approach max_chars,
             # rather than truncating mid-chunk which can cut off citations.
-            if total_len + len(formatted) > max_chars and chunks:
+            if total_len + formatted_len > max_chars and selected:
                 break
-            chunks.append(formatted)
-            total_len += len(formatted)
+            selected.append(doc)
+            total_len += formatted_len
 
-        return "\n\n".join(chunks)
+        return selected
+
+    @staticmethod
+    def _build_context(documents: list[Document], max_chars: int = 12000) -> str:
+        selected = PromptBuilder.select_documents(documents, max_chars)
+
+        return "\n\n".join(
+            PromptBuilder._format_chunk(i, doc) for i, doc in enumerate(selected)
+        )
 
     @staticmethod
     def build(

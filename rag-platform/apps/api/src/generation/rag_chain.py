@@ -100,8 +100,10 @@ class RAGChain:
         if not documents:
 
             return {
-                "answer": "I couldn't find any relevant information.",
+                "intent": intent.value,
+                "answer": PromptBuilder.NO_ANSWER_PHRASE,
                 "sources": [],
+                "contexts": [],
             }
 
         # -------------------------------------------------
@@ -147,8 +149,13 @@ class RAGChain:
         # Step 7 : Return
         # -------------------------------------------------
 
+        # The chunks the model actually saw, in "Source N" order, so callers
+        # (e.g. evals) can check citations and groundedness against them.
+        contexts = PromptBuilder.select_documents(documents)
+
         return {
             "intent": intent.value,
             "answer": answer,
             "sources": sources,
+            "contexts": contexts,
         }
