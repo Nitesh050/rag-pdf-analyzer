@@ -7,7 +7,7 @@ def _insert_fake_modules():
     mod_hybrid = ModuleType("retrieval.hybrid_search")
 
     class FakeHybrid:
-        def __init__(self):
+        def __init__(self, vector_store=None):
             pass
 
         def retrieve(self, query, k=5, filter=None):

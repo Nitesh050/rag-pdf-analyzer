@@ -23,11 +23,15 @@ class RetrievalManager:
 		reranker_model: Optional[str] = None,
 		rerank_overfetch_multiplier: int = 3,
 		min_rerank_fetch_k: int = 20,
+		vector_store: Optional[VectorStore] = None,
 	):
 
-		self.vector_store = VectorStore()
+		# One VectorStore shared with the hybrid retriever, so both read
+		# the same Chroma collection (callers such as the eval harness can
+		# point it at an isolated directory).
+		self.vector_store = vector_store or VectorStore()
 
-		self.hybrid = HybridRetriever()
+		self.hybrid = HybridRetriever(vector_store=self.vector_store)
 
 		# Reranker is optional — only instantiate if requested
 		self.reranker: Optional[Reranker] = None
