@@ -87,8 +87,13 @@ NUMBER = re.compile(r"\d[\d,]*(?:\.\d+)?")
 
 
 def is_refusal(answer: str) -> bool:
-    text = answer.lower().replace("’", "'")
-    return any(marker in text for marker in REFUSAL_MARKERS)
+    """
+    True when the answer opens by saying the information isn't there.
+    Only the opening counts: a partial answer may legitimately end with
+    "the document does not cover ...".
+    """
+    opening = answer.strip().lower().replace("\u2019", "'")[:150]
+    return any(marker in opening for marker in REFUSAL_MARKERS)
 
 
 def parse_citations(answer: str) -> list[tuple[int, int | None]]:

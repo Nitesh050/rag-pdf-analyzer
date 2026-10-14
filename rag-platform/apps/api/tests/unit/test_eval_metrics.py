@@ -78,3 +78,9 @@ def test_grade_from_facts():
     assert grade_from_facts([{"present": True}, {"present": False}]) == "partial"
     assert grade_from_facts([{"present": False}]) == "incorrect"
     assert grade_from_facts([]) == "incorrect"
+
+
+def test_partial_answer_ending_with_gap_is_not_a_refusal():
+    answer = ("The first guess was 0.5 (Source 1, page 14). " * 4
+              + "The document does not contain information about later guesses.")
+    assert not is_refusal(answer)
