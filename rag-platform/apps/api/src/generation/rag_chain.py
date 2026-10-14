@@ -1,3 +1,4 @@
+from .citation_mapper import cited_documents
 from .ollama_client import OllamaClient
 from .prompt_templates import PromptBuilder
 
@@ -123,13 +124,25 @@ class RAGChain:
 
         # -------------------------------------------------
         # Step 6 : Build Sources
+        #
+        # Show the chunks the answer actually cites. A "not found" reply
+        # that cites nothing gets no sources, rather than listing pages
+        # that back no claim. Uncited answers fall back to every chunk
+        # the model saw.
         # -------------------------------------------------
+
+        # The chunks the model actually saw, in "Source N" order, so callers
+        # (e.g. evals) can check citations and groundedness against them.
+        contexts = PromptBuilder.select_documents(documents)
+
+        refused = answer.strip().replace("\u2019", "'").startswith(PromptBuilder.NO_ANSWER_PHRASE)
+        source_documents = cited_documents(answer, contexts) or ([] if refused else contexts)
 
         sources = []
 
         seen = set()
 
-        for doc in documents:
+        for doc in source_documents:
 
             source = {
                 "page": doc.metadata.get("page"),
@@ -148,10 +161,6 @@ class RAGChain:
         # -------------------------------------------------
         # Step 7 : Return
         # -------------------------------------------------
-
-        # The chunks the model actually saw, in "Source N" order, so callers
-        # (e.g. evals) can check citations and groundedness against them.
-        contexts = PromptBuilder.select_documents(documents)
 
         return {
             "intent": intent.value,
