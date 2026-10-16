@@ -1,6 +1,12 @@
+import os
 import sys
+import tempfile
 import warnings
 from pathlib import Path
+
+# Tests must never write into the app's real index (data/chroma_db).
+# Point every VectorStore at a throwaway directory before anything imports it.
+os.environ["CHROMA_DIR"] = tempfile.mkdtemp(prefix="rag-test-chroma-")
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"

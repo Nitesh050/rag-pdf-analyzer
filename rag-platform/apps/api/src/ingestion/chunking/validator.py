@@ -13,11 +13,17 @@ class ChunkValidator:
         self,
         min_characters: int = 100,
         min_words: int = 20,
+        keep_min_words: int = 5,
         max_special_ratio: float = 0.40,
     ):
 
+        # Below min_characters / min_words a chunk is "short" and gets merged
+        # into a same-page neighbour. A short chunk with no neighbour (e.g. a
+        # slide whose only text is one OCR'd sentence) is still kept if it
+        # has keep_min_words; titles like "QUESTION 3" are dropped.
         self.min_characters = min_characters
         self.min_words = min_words
+        self.keep_min_words = keep_min_words
         self.max_special_ratio = max_special_ratio
 
     def validate(
@@ -135,12 +141,8 @@ class ChunkValidator:
         if not text:
             return False
 
-        # Too short
-        if len(text) < self.min_characters:
-            return False
-
-        # Too few words
-        if len(text.split()) < self.min_words:
+        # Too few words to carry content
+        if len(text.split()) < self.keep_min_words:
             return False
 
         # Mostly special characters

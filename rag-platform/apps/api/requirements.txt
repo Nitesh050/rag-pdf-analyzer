@@ -17,6 +17,8 @@ sentence-transformers==6.0.0
 
 # PDF ingestion (layout-aware: tables as Markdown, headings/lists preserved)
 docling==2.121.0
+# OCR engine for Docling on macOS (Apple Vision); other platforms use RapidOCR
+ocrmac==1.0.1; sys_platform == "darwin"
 
 # Web ingestion
 requests==2.32.5
