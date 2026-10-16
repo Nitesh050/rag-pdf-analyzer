@@ -1,3 +1,4 @@
+import os
 import re
 from pathlib import Path
 
@@ -16,12 +17,17 @@ class PDFAdapter:
     of returning a flat text blob — a real step up from pypdf/PyMuPDF's
     plain-text extraction for documents with tabular or structured data.
 
-    OCR is disabled by default: it roughly doubles conversion time and
-    is a no-op for born-digital PDFs (the common case here), since it
-    only matters for scanned/image-only pages with no text layer.
+    OCR reads text inside images (scanned pages, slides exported as
+    pictures). It is on by default and configurable with PDF_OCR=false.
+    Docling picks the engine: Apple Vision (ocrmac) on macOS, RapidOCR
+    elsewhere.
     """
 
-    def __init__(self, ocr: bool = False):
+    def __init__(self, ocr: bool | None = None):
+        if ocr is None:
+            ocr = os.getenv("PDF_OCR", "true").lower() not in ("0", "false", "no")
+        self.ocr = ocr
+
         pipeline_options = PdfPipelineOptions(
             do_ocr=ocr,
             do_table_structure=True,

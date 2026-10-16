@@ -9,6 +9,11 @@ from .web_adapter import WebAdapter
 from ..dependencies import get_retrieval_manager
 from ..retrieval.retrieval_manager import RetrievalManager
 
+# Bump whenever adapter, normalisation or chunking output changes. Documents
+# indexed by an older version are re-processed on re-upload or by
+# `python -m src.ingestion.reindex`, instead of keeping stale chunks forever.
+INGESTION_VERSION = 2
+
 
 class IngestionPipeline:
     """
@@ -50,6 +55,7 @@ class IngestionPipeline:
 
         for chunk in chunks:
             chunk.metadata["filename"] = filename
+            chunk.metadata["ingestion_version"] = INGESTION_VERSION
             if content_hash:
                 chunk.metadata["content_hash"] = content_hash
 
@@ -82,10 +88,35 @@ class IngestionPipeline:
         # list_documents working the same way for both source types.
         for chunk in chunks:
             chunk.metadata["filename"] = url
+            chunk.metadata["ingestion_version"] = INGESTION_VERSION
             if content_hash:
                 chunk.metadata["content_hash"] = content_hash
 
         return chunks
+
+    def _existing_document(self, content_hash: str | None) -> tuple[str | None, bool]:
+        """
+        (document_id, is_current) for content that is already indexed.
+
+        Chunks from an older INGESTION_VERSION are deleted so the caller
+        re-ingests under the same document_id, keeping any client
+        references to it valid.
+        """
+        if not content_hash:
+            return None, False
+
+        existing = self.vector_store.get_by_content_hash(content_hash)
+        if not existing:
+            return None, False
+
+        metadata = existing[0].metadata
+        document_id = metadata.get("document_id")
+
+        if metadata.get("ingestion_version") == INGESTION_VERSION:
+            return document_id, True
+
+        self.vector_store.delete_by_document_id(document_id)
+        return document_id, False
 
     def run(self, pdf_path: str | Path, content_hash: str | None = None) -> dict:
         """
@@ -94,18 +125,17 @@ class IngestionPipeline:
 
         # Skip re-ingesting content that's already indexed (e.g. the same
         # file uploaded twice), rather than creating duplicate chunks.
-        if content_hash:
-            existing = self.vector_store.get_by_content_hash(content_hash)
+        document_id, current = self._existing_document(content_hash)
 
-            if existing:
-                return {
-                    "message": "Document already indexed.",
-                    "filename": Path(pdf_path).name,
-                    "document_id": existing[0].metadata.get("document_id"),
-                    "chunks": 0,
-                }
+        if current:
+            return {
+                "message": "Document already indexed.",
+                "filename": Path(pdf_path).name,
+                "document_id": document_id,
+                "chunks": 0,
+            }
 
-        document_id = str(uuid.uuid4())
+        document_id = document_id or str(uuid.uuid4())
         chunks = self.ingest_pdf(
             pdf_path,
             document_id=document_id,
@@ -139,18 +169,17 @@ class IngestionPipeline:
 
         # Skip re-ingesting a URL that's already indexed, rather than
         # creating duplicate chunks.
-        if content_hash:
-            existing = self.vector_store.get_by_content_hash(content_hash)
+        document_id, current = self._existing_document(content_hash)
 
-            if existing:
-                return {
-                    "message": "Page already indexed.",
-                    "filename": url,
-                    "document_id": existing[0].metadata.get("document_id"),
-                    "chunks": 0,
-                }
+        if current:
+            return {
+                "message": "Page already indexed.",
+                "filename": url,
+                "document_id": document_id,
+                "chunks": 0,
+            }
 
-        document_id = str(uuid.uuid4())
+        document_id = document_id or str(uuid.uuid4())
         chunks = self.ingest_web(
             url,
             document_id=document_id,

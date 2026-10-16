@@ -29,6 +29,14 @@ def test_short_chunk_is_not_merged_across_pages():
     assert [c.metadata["page"] for c in result] == [25]
 
 
+def test_short_chunk_alone_on_its_page_is_kept_if_it_has_content():
+    slide = "## QUESTION 1\n\nThe least possible Venn diagram for the given statements is as follows:"
+
+    result = ChunkValidator().validate([chunk(slide, page=5), chunk("## QUESTION 3", page=9)])
+
+    assert [c.metadata["page"] for c in result] == [5]
+
+
 def test_overlapping_short_text_is_not_duplicated():
     result = ChunkValidator().validate([chunk("## Prologue"), chunk("## Prologue\n\n" + BODY)])
 

@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from typing import Optional
 
@@ -16,9 +17,13 @@ class VectorStore:
 
     def __init__(
         self,
-        persist_directory: str = "data/chroma_db",
+        persist_directory: str | None = None,
         collection_name: str = "rag_documents",
     ):
+
+        # CHROMA_DIR lets deployments (and the test suite) choose where the
+        # index lives instead of always writing to ./data/chroma_db.
+        persist_directory = persist_directory or os.getenv("CHROMA_DIR", "data/chroma_db")
 
         Path(persist_directory).mkdir(parents=True, exist_ok=True)
 
@@ -217,6 +222,43 @@ class VectorStore:
                 "filename": filename,
             }
         )
+
+    def delete_by_document_id(
+        self,
+        document_id: str,
+    ) -> None:
+        """
+        Delete every chunk of one document.
+        """
+
+        self.vector_store.delete(
+            where={
+                "document_id": document_id,
+            }
+        )
+
+    # ---------------------------------------------------
+    # DOCUMENT RECORDS
+    # ---------------------------------------------------
+
+    def document_records(self) -> list[dict]:
+        """
+        One metadata dict per stored document (taken from its first chunk),
+        e.g. to find documents indexed by an older ingestion version.
+        """
+
+        data = self.vector_store.get(include=["metadatas"])
+
+        records = {}
+
+        for metadata in data["metadatas"]:
+
+            document_id = metadata.get("document_id")
+
+            if document_id and document_id not in records:
+                records[document_id] = metadata
+
+        return list(records.values())
 
     # ---------------------------------------------------
     # DELETE EVERYTHING

@@ -135,7 +135,7 @@ class RAGChain:
         # (e.g. evals) can check citations and groundedness against them.
         contexts = PromptBuilder.select_documents(documents)
 
-        refused = answer.strip().replace("\u2019", "'").startswith(PromptBuilder.NO_ANSWER_PHRASE)
+        refused = PromptBuilder.is_no_answer(answer)
         source_documents = cited_documents(answer, contexts) or ([] if refused else contexts)
 
         sources = []

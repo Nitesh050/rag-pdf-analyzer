@@ -64,9 +64,10 @@ class CachedPDFAdapter(PDFAdapter):
     re-run in seconds once the cache is warm.
     """
 
-    def __init__(self, ocr: bool = False):
+    def __init__(self, ocr: bool | None = None):
+        # None follows the app's default (PDF_OCR), so evals measure what
+        # production runs.
         super().__init__(ocr=ocr)
-        self.ocr = ocr
 
     def _convert(self, pdf_path: str | Path) -> list[Document]:
         # Only the raw Docling output is cached; PDFAdapter.load still
@@ -92,7 +93,7 @@ class CachedPDFAdapter(PDFAdapter):
         return [Document(**page) for page in pages]
 
 
-def chunk_corpus(corpus: dict[str, dict], ocr: bool = False) -> list[Document]:
+def chunk_corpus(corpus: dict[str, dict], ocr: bool | None = None) -> list[Document]:
     """
     Run each corpus PDF through the same adapter + chunker the app uses
     (mirrors IngestionPipeline.ingest_pdf), using the corpus key as
