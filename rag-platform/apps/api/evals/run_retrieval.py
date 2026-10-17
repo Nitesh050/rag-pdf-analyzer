@@ -108,7 +108,13 @@ def main() -> None:
     args = parser.parse_args()
 
     corpus = load_corpus()
-    golden = [q for q in load_golden() if q["gold_pages"]]  # unanswerables are for generation evals
+    # Unanswerable questions have no gold pages; page and summary questions
+    # are routed around search (direct page lookup, whole-document
+    # summaries), so both are measured by the generation eval instead.
+    golden = [
+        q for q in load_golden()
+        if q["gold_pages"] and q["type"] not in ("page", "summary")
+    ]
     if args.only:
         wanted = set(args.only.split(","))
         golden = [q for q in golden if q["id"] in wanted]

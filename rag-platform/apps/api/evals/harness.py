@@ -15,6 +15,11 @@ from pathlib import Path
 
 os.environ.setdefault("ANONYMIZED_TELEMETRY", "False")
 
+EVALS_CACHE = Path(__file__).resolve().parent / ".cache"
+# Section summaries for summary questions are cached here, not in the
+# app's data/summaries.
+os.environ["SUMMARY_DIR"] = str(EVALS_CACHE / "summaries")
+
 from langchain_core.documents import Document
 
 from src.ingestion.chunking.chunker import DocumentChunker

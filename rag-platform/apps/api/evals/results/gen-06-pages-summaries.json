@@ -1,0 +1,591 @@
+{
+  "name": "gen-06-pages-summaries",
+  "created_at": "2026-10-17T16:31:27+00:00",
+  "config": {
+    "model": "qwen2.5:7b",
+    "num_ctx": 8192,
+    "reranker": null,
+    "judge": "llama3:latest"
+  },
+  "summary": {
+    "judge_agreement": null,
+    "answerable": {
+      "n": 7,
+      "correctness": 0.8571,
+      "fully_correct": 0.8571,
+      "grounded": 1.0,
+      "false_refusal": 0.0,
+      "has_citation": 0.5714,
+      "citation_valid": 1.0,
+      "cites_gold": 0.75,
+      "number_recall": null
+    },
+    "unanswerable": {
+      "n": 0,
+      "refusal": null
+    },
+    "system": {
+      "latency_s_p50": 12.28,
+      "latency_s_p95": 545.09,
+      "max_prompt_tokens": 2840,
+      "prompts_truncated": 0,
+      "judge_errors": 0
+    },
+    "by_type": {
+      "page": {
+        "n": 4,
+        "correctness": 1.0,
+        "fully_correct": 1.0,
+        "grounded": 1.0,
+        "false_refusal": 0.0,
+        "has_citation": 0.75,
+        "citation_valid": 1.0,
+        "cites_gold": 0.75,
+        "number_recall": null
+      },
+      "summary": {
+        "n": 3,
+        "correctness": 0.6667,
+        "fully_correct": 0.6667,
+        "grounded": 1.0,
+        "false_refusal": 0.0,
+        "has_citation": 0.3333,
+        "citation_valid": 1.0,
+        "cites_gold": null,
+        "number_recall": null
+      }
+    },
+    "by_intent": {
+      "chapter": {
+        "n": 2,
+        "prompts_truncated": 0,
+        "correctness": 1.0
+      },
+      "explanation": {
+        "n": 1,
+        "prompts_truncated": 0,
+        "correctness": 1.0
+      },
+      "summary": {
+        "n": 4,
+        "prompts_truncated": 0,
+        "correctness": 0.75
+      }
+    }
+  },
+  "questions": [
+    {
+      "id": "pg-01",
+      "doc": "nn_book",
+      "type": "page",
+      "question": "What is on page 42?",
+      "gold_pages": [
+        42
+      ],
+      "reference": "It discusses how many neurons brains need: about 100 billion in a human brain, about 100,000 in a fruit fly and 302 in a nematode worm, and notes that a neuron takes an electrical input and produces another electrical signal.",
+      "intent": "chapter",
+      "answer": "On page 42, the document discusses the number of neurons required for performing complex tasks and compares this to the number of neurons in a human brain, a fruit fly, and a nematode worm. It mentions that a fruit fly with about 100,000 neurons can perform complex tasks, and a nematode worm with 302 neurons can do useful tasks. The document also notes that despite being much slower and having fewer computing elements, biological brains are capable of performing complex tasks, which is attributed to different ways of computation. Additionally, the document explains that a neuron takes an electric input and produces an electrical signal, similar to the processing done by classifying or predicting machines.",
+      "contexts": [
+        {
+          "source": 1,
+          "page": 42,
+          "text": "How many neurons do we need to perform interesting, more complex, tasks?\n\nWell, the very capable human brain has about 100 billion neurons! A fruit fly has about 100,000 neurons and is capable of flying, feeding, evading danger, finding food, and many more fairly complex tasks. This number, 100,000 neurons, is well within the realm of modern computers to try to replicate. A nematode worm has just 302 neurons, which is positively miniscule compared to today's digital computer resources! But that worm is able to do some fairly useful tasks that traditional computer programs of much larger size would struggle to do.\n\nSo what's the secret? Why are biological brains so capable given that they are much slower and consist of relatively few computing elements when compared to modern computers? The complete functioning of brains, consciousness for example, is still a mystery, but enough is known about neurons to suggest different ways of doing computation, that is, different ways to solve problems."
+        },
+        {
+          "source": 2,
+          "page": 42,
+          "text": "So let's look at how a neuron works. It takes an electric input, and pops out another electrical signal. This looks exactly like the classifying or predicting machines we looked at earlier, which took an input, did some processing, and popped out an output."
+        }
+      ],
+      "latency_s": 12.28,
+      "prompt_chars": 3191,
+      "prompt_tokens": 722,
+      "output_tokens": 145,
+      "prompt_truncated": false,
+      "judge": {
+        "correctness": "correct",
+        "correctness_score": 1.0,
+        "correctness_reason": "all key facts present",
+        "grounded": true,
+        "facts": [
+          {
+            "fact": "A human brain has about 100 billion neurons.",
+            "present": true
+          },
+          {
+            "fact": "A fruit fly has about 100,000 neurons.",
+            "present": true
+          },
+          {
+            "fact": "A nematode worm has 302 neurons.",
+            "present": true
+          },
+          {
+            "fact": "A neuron takes an electrical input and produces another electrical signal.",
+            "present": true
+          }
+        ],
+        "unsupported_claims": []
+      },
+      "checks": {
+        "refused": false,
+        "has_citation": 0.0,
+        "citation_valid": 0.0,
+        "cites_gold": 0.0
+      }
+    },
+    {
+      "id": "pg-02",
+      "doc": "os_assessment",
+      "type": "page",
+      "question": "What does page 4 contain?",
+      "gold_pages": [
+        4
+      ],
+      "reference": "Three shell commands: df -h (disk usage, human-readable), du -sh folder/ (size of a folder) and history (command history).",
+      "intent": "chapter",
+      "answer": "Page 4 of the document contains commands and their outputs related to disk usage and command history. Specifically, it includes:\n\n- The `df -h` command showing disk usage in a human-readable format.\n- The `du -sh folder/` command to show the size of a folder.\n- A portion of the command history, including commands such as creating and removing directories, creating and modifying text files, and checking disk usage.\n\n(Source 1 and Source 2, page 4)",
+      "contexts": [
+        {
+          "source": 1,
+          "page": 4,
+          "text": "- df -h - Show disk usage (human-readable)\n- du -sh folder/ - Show size of a folder\n- history - Show command history\n\n```\n1.7G RAG_PROBLEM_ _1 (base) niteshpandey@Niteshs-MacBook-Pro desktop %\n```"
+        },
+        {
+          "source": 2,
+          "page": 4,
+          "text": "```\nbaser niteshpandeyentteshs-MacbooK-Pro desktop % history 1007 touch nitesh.txt 1008 rm nitesh.txt 1009 mkdir demo 1010 rmdir demo 1011 cat file1.txt 1012 echo \"Hello, this is my first text file.\" \u203a file.txt 1013 cat file.txt 1014 grep file.txt 1015 grep \"this\" file.txt 1016 find .-file\"*.txt\" 1017 find \u00b7 -name \"*.txt\" 1018 chmod +x script.sh 1019 ps aux 1020 df -h 1021 cd desktop 1022 du -sh RAG_PROBLEM_1 (base) niteshpandey@Niteshs-MacBook-Pro desktop % [\n```"
+        }
+      ],
+      "latency_s": 5.35,
+      "prompt_chars": 2610,
+      "prompt_tokens": 720,
+      "output_tokens": 100,
+      "prompt_truncated": false,
+      "judge": {
+        "correctness": "correct",
+        "correctness_score": 1.0,
+        "correctness_reason": "all key facts present",
+        "grounded": true,
+        "facts": [
+          {
+            "fact": "Three shell commands: df -h, du -sh folder/, and history",
+            "present": true
+          },
+          {
+            "fact": "The df -h command shows disk usage in a human-readable format",
+            "present": true
+          },
+          {
+            "fact": "The du -sh folder/ command shows the size of a folder",
+            "present": true
+          },
+          {
+            "fact": "The command history includes commands such as creating and removing directories, creating and modifying text files, and checking disk usage",
+            "present": true
+          }
+        ],
+        "unsupported_claims": []
+      },
+      "checks": {
+        "refused": false,
+        "has_citation": 1.0,
+        "citation_valid": 1.0,
+        "cites_gold": 1.0
+      }
+    },
+    {
+      "id": "pg-03",
+      "doc": "syllogism_slides",
+      "type": "page",
+      "question": "Explain the content of page 2.",
+      "gold_pages": [
+        2
+      ],
+      "reference": "A syllogism is deductive reasoning with two premises and a conclusion; its structure is a major premise (general statement), a minor premise (specific statement) and a conclusion (what logically follows).",
+      "intent": "explanation",
+      "answer": "The content of page 2 explains the basic structure of a syllogism, which is a form of deductive reasoning. It consists of two premises and a conclusion. Specifically:\n\n- The major premise is a general statement.\n- The minor premise is a specific statement.\n- The conclusion logically follows from the two premises.\n\n(Source 1, page 2)",
+      "contexts": [
+        {
+          "source": 1,
+          "page": 2,
+          "text": "## SYLLOGISM\n\nA syllogism is a form of deductive reasoning consisting of two premises and a conclusion . If the premises are true and the structure is valid, the conclusion must also be true.\n\nBasic Structure\n\n- Major premise - a general statement\n- Minor premise - a specific statement\n- Conclusion - what logically follows"
+        }
+      ],
+      "latency_s": 4.07,
+      "prompt_chars": 2152,
+      "prompt_tokens": 487,
+      "output_tokens": 74,
+      "prompt_truncated": false,
+      "judge": {
+        "correctness": "correct",
+        "correctness_score": 1.0,
+        "correctness_reason": "all key facts present",
+        "grounded": true,
+        "facts": [
+          {
+            "fact": "A syllogism is deductive reasoning with two premises and a conclusion",
+            "present": true
+          },
+          {
+            "fact": "The structure is a major premise (general statement), a minor premise (specific statement) and a conclusion (what logically follows)",
+            "present": true
+          }
+        ],
+        "unsupported_claims": []
+      },
+      "checks": {
+        "refused": false,
+        "has_citation": 1.0,
+        "citation_valid": 1.0,
+        "cites_gold": 1.0
+      }
+    },
+    {
+      "id": "pg-04",
+      "doc": "nn_book",
+      "type": "page",
+      "question": "Summarize page 163.",
+      "gold_pages": [
+        163
+      ],
+      "reference": "The network trained on all 60,000 MNIST examples scores 0.9473, close to the 95.3% benchmark for the simplest neural network; training took about 2 minutes. Changing the learning rate to 0.6 gave 0.9047 and 0.1 gave 0.9523.",
+      "intent": "summary",
+      "answer": "- The document reports that a simple 3-layer neural network trained on 60,000 examples achieved an overall performance score of 0.9473, which is very good and almost 95% accurate (Source 1, page 163).\n- This score is compared to industry benchmarks, showing that the model's performance is better than some historic benchmarks and about the same as the simplest neural network approach (Source 1, page 163).\n- The training process, involving 784 input nodes, 100 hidden nodes, and error feedback, took approximately 2 minutes on the author's laptop, though this time may vary (Source 2, page 163).\n- The document suggests that achieving a 95% performance score with simple ideas and Python is commendable, but there is room for improvement (Source 3, page 163).\n- An experiment with different learning rates was conducted: doubling the learning rate to 0.6 led to a worse performance score of 0.9047, while reducing it to 0.1 improved the score to 0.9523, which is similar to a model with 1000 hidden nodes (Source 3, page 163).",
+      "contexts": [
+        {
+          "source": 1,
+          "page": 163,
+          "text": "The result of training our simple 3-layer neural network against the full 60,000 training examples, and then testing it against the 10,000 records, gives us an overall performance score of 0.9473 . That is very very good. Almost 95% accurate!\n\nIt is worth comparing this score of just under 95% accuracy against industry benchmarks recorded at http://yann.lecun.com/exdb/mnist/ . We can see that we're better than some of the historic benchmarks, we are about the same performance as the simplest neural network approach listen there, which has a performance of 95.3%.\n\nThat's not bad at all. We should be very pleased that our very first go at a simple neural network achieves the kind of performance that a professional neural network researcher achieved."
+        },
+        {
+          "source": 2,
+          "page": 163,
+          "text": "That's not bad at all. We should be very pleased that our very first go at a simple neural network achieves the kind of performance that a professional neural network researcher achieved.\n\nBy the way, it shouldn't surprise you that crunching through 60,000 training examples, each requiring a set of feedforward calculations from 784 input nodes, through 100 hidden nodes, and also doing an error feedback and weight update, all takes a while even for a fast modern home computer. My new laptop took about 2 minutes to get through the training loop. Yours may be quicker or slower."
+        },
+        {
+          "source": 3,
+          "page": 163,
+          "text": "## Some Improvements: Tweaking the Learning Rate\n\nA 95% performance score on the MNIST dataset with our first neural neural network, using only simple ideas and simple Python is not a bad at all, and if you wanted to stop here you would be entirely justified.\n\nBut let's see if we can make some easy improvements.\n\nThe first improvement we can try is to adjust the learning rate. We set it at 0.3 previously without really experimenting with different values.\n\nLet's try doubling it to 0.6 , to see if a boost will actually be helpful or harmful to the overall network learning. If we run the code we get a performance score of 0.9047 . That's worse than before. So it looks like the larger learning rate leads to some bouncing around and overshooting during the gradient descent.\n\nLet's try again with a learning rate of 0.1 . This time the performance is an improvement at 0.9523 . It's similar in performance to one listed on that website which has 1000 hidden nodes. We're doing well with much less!"
+        }
+      ],
+      "latency_s": 15.45,
+      "prompt_chars": 4395,
+      "prompt_tokens": 1034,
+      "output_tokens": 270,
+      "prompt_truncated": false,
+      "judge": {
+        "correctness": "correct",
+        "correctness_score": 1.0,
+        "correctness_reason": "all key facts present",
+        "grounded": true,
+        "facts": [
+          {
+            "fact": "The result of training our simple 3-layer neural network against the full 60,000 training examples, and then testing it against the 10,000 records, gives us an overall performance score of 0.9473.",
+            "present": true
+          },
+          {
+            "fact": "The training process, involving 784 input nodes, 100 hidden nodes, and error feedback, took approximately 2 minutes on the author's laptop, though this time may vary.",
+            "present": true
+          },
+          {
+            "fact": "An experiment with different learning rates was conducted: doubling the learning rate to 0.6 led to a worse performance score of 0.9047, while reducing it to 0.1 improved the score to 0.9523.",
+            "present": true
+          }
+        ],
+        "unsupported_claims": []
+      },
+      "checks": {
+        "refused": false,
+        "has_citation": 1.0,
+        "citation_valid": 1.0,
+        "cites_gold": 1.0
+      }
+    },
+    {
+      "id": "sum-01",
+      "doc": "nn_book",
+      "type": "summary",
+      "question": "Summarize this book.",
+      "gold_pages": [],
+      "reference": "A beginner's guide to neural networks. Part 1 explains how they work: simple predictors and classifiers, neurons and activation functions, feeding signals forward with matrix multiplication, backpropagating errors and updating weights with gradient descent. Part 2 builds a 3-layer neural network in Python and trains it on the MNIST handwritten digits, reaching about 95-98% accuracy. Part 3 tests your own handwriting, back-queries the network and adds rotated training images; appendices cover calculus and running the code on a Raspberry Pi.",
+      "intent": "summary",
+      "answer": "The book aims to explain neural networks to a general audience, requiring only basic school-level math and no prior programming or advanced math knowledge (Source 1, page 1). It is structured into three parts: explaining the mathematical concepts behind neural networks, learning Python to implement a neural network, and exploring further applications and insights (Source 1, page 1).\n\nThe first part introduces simple predicting machines and linear classifiers, gradually building up to more complex neural networks (Source 1, page 1). It emphasizes the use of free, open-source software tools and is designed to be accessible, even for beginners (Source 1, page 1).\n\nThe book covers the process of refining a model's parameters based on error, similar to how neural networks learn (Source 2, page 15). It uses linear functions to demonstrate parameter adjustment, such as converting kilometers to miles and classifying bugs (Source 2, page 15).\n\nThe limitations of simple linear classifiers are highlighted using the Boolean XOR function, leading to the introduction of neural networks (Source 3, page 32). The basic structure of a neuron, including its role in transmitting electrical signals and the concept of activation functions, is explained (Source 3, page 32). The sigmoid function is introduced as a common activation function, and the architecture of a neural network is described, showing layers of interconnected nodes with weights on the connections between nodes (Source 3, page 32).\n\nThe learning process in neural networks is attributed to adjusting the weights of connections between nodes, rather than changing the internal functions of individual nodes (Source 4, page 50). The book provides examples of neural network architectures, including a small neural network with 2 layers and 2 neurons per layer, and demonstrates the use of matrix multiplication to represent and calculate the signal flow through neural networks (Source 4, page 50).\n\nThe book explains the backpropagation of errors through multiple layers using matrix multiplication (Source 5, page 65). It covers the use of gradient descent to update weights in neural networks, with the error function for a neural network being the sum of squared differences between target and actual values (Source 6, page 80).\n\nThe importance of properly preparing input, output, and initial weight data is emphasized (Source 8, page 102). The book introduces Python and IPython for creating and testing neural networks, including basic Python syntax and concepts such as variables and loops (Source 8, page 102).\n\nThe section introduces the concept of classes and objects, using a Dog class as an example, and demonstrates adding methods to a Dog class (Source 10, page 124). It then transitions to creating a neural network class, defining its basic structure with `__init__`, `train`, and `query` methods (Source 10, page 124).\n\nThe book provides code to initialize weights using a normal distribution with standard deviation based on the number of nodes in the next layer (Source 11, page 133). The `query()` function calculates the network's output by passing input signals through the network and applying the sigmoid activation function, while the `train()` function calculates the output for a given training example and updates the weights based on the error between the calculated and target outputs (Source 11, page 133).",
+      "contexts": [
+        {
+          "source": 1,
+          "page": 1,
+          "text": "- The book aims to explain neural networks to a general audience, requiring only basic school-level math and no prior programming or advanced math knowledge.\n- Neural networks are inspired by biological brains and are seen as a promising approach to achieving human-like intelligence in machines.\n- The text contrasts tasks that are easy for traditional computers (like arithmetic) with those that are hard (like image recognition), suggesting that traditional computing methods are limited in handling complex, human-like tasks.\n- The guide is structured into three parts: explaining the mathematical concepts behind neural networks, learning Python to implement a neural network, and exploring further applications and insights.\n- The first part introduces simple predicting machines and linear classifiers, gradually building up to more complex neural networks.\n- The book emphasizes the use of free, open-source software tools and is designed to be accessible, even for beginners.\n- The author aims to convey the excitement and potential of artificial intelligence and encourage further exploration in the field."
+        },
+        {
+          "source": 2,
+          "page": 15,
+          "text": "- The process of refining a model's parameters based on error is similar to how neural networks learn.\n- Using a linear function to convert kilometers to miles, the value of the parameter \\( c \\) was adjusted iteratively to reduce the error.\n- The method of adjusting parameters based on error is called iterative refinement.\n- A linear function was used to classify bugs as either caterpillars or ladybirds based on their width and length.\n- Training data was used to teach the classifier, with each example informing the adjustment of the classifier's slope.\n- The slope of the classifier was adjusted by a fraction of the error to avoid overfitting to a single example and to smooth out noise in the data.\n- The learning rate, a moderating factor, was introduced to control the size of the adjustments made to the classifier's slope."
+        },
+        {
+          "source": 3,
+          "page": 32,
+          "text": "- The section demonstrates the limitations of a simple linear classifier using the Boolean XOR function, showing that a single straight line cannot separate the data.\n- It highlights that multiple linear classifiers can be used to solve problems that a single classifier cannot, hinting at the concept of neural networks.\n- The text explains the basic structure of a neuron, including its role in transmitting electrical signals and the concept of activation functions.\n- The sigmoid function is introduced as a common activation function, providing a smooth S-shaped curve for output.\n- The architecture of a neural network is described, showing layers of interconnected nodes, with weights on the connections between nodes.\n- The learning process in neural networks is attributed to adjusting the weights of connections between nodes, rather than changing the internal functions of individual nodes."
+        },
+        {
+          "source": 4,
+          "page": 50,
+          "text": "- Neural networks can connect nodes in various ways, but full connectivity is used for simplicity in encoding and to allow for some extra connections without significant harm.\n- Biological brains inspire artificial neural networks due to their efficiency and resilience.\n- A small neural network example with 2 layers and 2 neurons per layer is used to illustrate signal flow and weight calculations.\n- The sigmoid function is used as the activation function to transform combined inputs into outputs.\n- Random initial weights are refined during the learning process, with unneeded connections becoming zero or close to zero.\n- Matrix multiplication is introduced as a concise method to represent and calculate the signal flow through neural networks, reducing the complexity of manual calculations.\n- The matrix multiplication approach simplifies the representation of neural networks, making them easier to implement in programming languages.\n- A three-layer neural network example with matrix multiplication is provided, demonstrating how the outputs of one layer serve as inputs to the next.\n- The middle layer is called the hidden layer, a term that has stuck due to historical reasons rather than any specific functionality."
+        },
+        {
+          "source": 5,
+          "page": 65,
+          "text": "- Neural networks learn by refining their link weights, guided by the error between desired and actual outputs.\n- The error at output nodes is the difference between desired and actual outputs.\n- For internal nodes, errors are not obvious; one approach is to split output layer errors proportionally to connected link weights and recombine them.\n- Matrix multiplication can simplify error backpropagation calculations.\n- The combined moderated inputs into the middle hidden layer are 1.16, 0.42, and 0.62.\n- Applying the sigmoid activation function to these inputs results in outputs of 0.761, 0.604, and 0.689.\n- For a 3-layer neural network, errors are backpropagated from the output layer to the hidden layer, and then to the input layer.\n- Using matrix multiplication can streamline the process of backpropagating errors through multiple layers."
+        },
+        {
+          "source": 6,
+          "page": 80,
+          "text": "- Backpropagation of errors can be expressed using matrix multiplication, making it more concise and efficient for computers.\n- The matrix for hidden layer errors involves weighted contributions from output layer errors, but a simpler approach is used by ignoring normalization factors.\n- Gradient descent is employed to update weights in neural networks, as directly solving for optimal weights is impractical due to the complexity of the problem.\n- Gradient descent involves iteratively moving in the direction of steepest descent of the error function, adjusting step sizes based on the gradient.\n- For functions with many parameters, gradient descent may get stuck in local minima, necessitating multiple initializations to avoid poor solutions.\n- The error function for a neural network is derived from the difference between target and actual output values, which can be calculated in various ways (absolute difference, squared difference)."
+        },
+        {
+          "source": 7,
+          "page": 91,
+          "text": "- The error function for a neural network can be the sum of squared differences between target and actual values, which is preferred over absolute differences due to its smoothness and ease of gradient calculation.\n- Gradient descent is used to iteratively adjust weights to minimize the error function, with the direction of adjustment being the negative of the gradient.\n- The gradient of the error function with respect to a weight is calculated using the chain rule and involves the output of the connected nodes and the target values.\n- For weights between the input and hidden layers, the gradient expression is similar but uses the back-propagated error from the hidden nodes.\n- The weight update formula includes a learning rate to control the step size during gradient descent.\n- Proper data preparation, including rescaling inputs to a range like 0.0 to 1.0, can improve the training process by avoiding issues with very small or very large values.\n- Saturating activation functions due to large inputs can limit the learning ability, so it's important to keep inputs within a reasonable range."
+        },
+        {
+          "source": 8,
+          "page": 102,
+          "text": "- Neural network performance is heavily dependent on properly preparing input, output, and initial weight data.\n- Large weights can lead to saturation in activation functions, reducing the network's ability to learn.\n- Initial weights should be small and random, avoiding zero values to prevent symmetry issues and weight updates.\n- Input and output values should be scaled appropriately, with common ranges being 0.01 to 0.99 or -1.0 to 1.0.\n- Using Python and IPython can simplify the process of creating and testing neural networks.\n- IPython notebooks provide an interactive environment for organizing and running code, making it easier to experiment and debug.\n- Basic Python syntax and concepts, such as variables and loops, are introduced to facilitate the creation of simple programs.\n- Loops are used to automate repetitive tasks, such as printing the first ten squared numbers."
+        },
+        {
+          "source": 9,
+          "page": 113,
+          "text": "- The code snippet discusses Python's use of indentation to define the scope of loops and functions.\n- It explains how to print squares of numbers and introduces the concept of comments in Python code.\n- The section introduces functions in Python, emphasizing their importance and how to define and call them.\n- Arrays (or matrices) are introduced as tables of values, useful for representing data in neural networks.\n- The code demonstrates creating and manipulating arrays using the `numpy` library.\n- Plotting capabilities are introduced using `matplotlib`, showing how to visualize arrays.\n- The concept of objects in Python is explained, comparing them to functions and showing how to create and use them."
+        },
+        {
+          "source": 10,
+          "page": 124,
+          "text": "- The section introduces the concept of classes and objects, using a Dog class as an example.\n- It explains that classes define object templates, while objects are instances of these templates.\n- The benefits of using objects include organizing code and making complex problems more manageable.\n- The section demonstrates adding methods to a Dog class, such as `bark()`, `status()`, and `setTemperature()`.\n- It explains the `__init__()` method, which initializes object attributes.\n- The code example creates a `lassie` object and demonstrates using its methods.\n- The section then transitions to creating a neural network class, defining its basic structure with `__init__`, `train`, and `query` methods.\n- It emphasizes the importance of setting initial weights for the neural network, which are stored as matrices.\n- The section provides code to initialize these weight matrices with random values between -0.5 and 0.5.\n- An optional refinement for initializing weights more sophisticatedly is mentioned, using a normal distribution."
+        },
+        {
+          "source": 11,
+          "page": 133,
+          "text": "- The code initializes weights using a normal distribution with standard deviation based on the number of nodes in the next layer.\n- The `query()` function calculates the network's output by passing input signals through the network and applying the sigmoid activation function.\n- The `train()` function calculates the output for a given training example and updates the weights based on the error between the calculated and target outputs.\n- The `train()` function uses matrix operations for efficient weight updates, leveraging the numpy library.\n- The `activation_function` is defined using a lambda function and the `expit()` function from the scipy library.\n- The `query()` function is implemented with concise matrix operations, making it easy to handle a varying number of nodes.\n- The `train()` function calculates hidden and output errors, then updates weights using the learning rate and sigmoid function."
+        }
+      ],
+      "latency_s": 545.09,
+      "prompt_chars": 13605,
+      "prompt_tokens": 2840,
+      "output_tokens": 695,
+      "prompt_truncated": false,
+      "judge": {
+        "correctness": "correct",
+        "correctness_score": 1.0,
+        "correctness_reason": "all key facts present",
+        "grounded": true,
+        "facts": [
+          {
+            "fact": "The book aims to explain neural networks to a general audience, requiring only basic school-level math and no prior programming or advanced math knowledge.",
+            "present": true
+          },
+          {
+            "fact": "The book is structured into three parts: explaining the mathematical concepts behind neural networks, learning Python to implement a neural network, and exploring further applications and insights.",
+            "present": true
+          },
+          {
+            "fact": "The book covers the process of refining a model's parameters based on error, similar to how neural networks learn.",
+            "present": true
+          },
+          {
+            "fact": "The book explains the backpropagation of errors through multiple layers using matrix multiplication.",
+            "present": true
+          },
+          {
+            "fact": "The book introduces Python and IPython for creating and testing neural networks, including basic Python syntax and concepts such as variables and loops.",
+            "present": true
+          },
+          {
+            "fact": "The book provides code to initialize weights using a normal distribution with standard deviation based on the number of nodes in the next layer.",
+            "present": true
+          },
+          {
+            "fact": "The book explains the learning process in neural networks as adjusting the weights of connections between nodes.",
+            "present": true
+          },
+          {
+            "fact": "The book emphasizes the importance of properly preparing input, output, and initial weight data.",
+            "present": true
+          }
+        ],
+        "unsupported_claims": []
+      },
+      "checks": {
+        "refused": false,
+        "has_citation": 1.0,
+        "citation_valid": 1.0,
+        "cites_gold": null
+      }
+    },
+    {
+      "id": "sum-02",
+      "doc": "syllogism_slides",
+      "type": "summary",
+      "question": "Give me an overview of these slides.",
+      "gold_pages": [],
+      "reference": "Slides on syllogisms: the definition (two premises and a conclusion), the basic structure (major premise, minor premise, conclusion), solving tips (use Venn diagrams, use only the given data, watch words like few and some), then ten practice questions with statements, conclusions and answer options.",
+      "intent": "summary",
+      "answer": "These slides provide an overview of syllogisms, a form of deductive reasoning. They cover the basic structure of syllogisms, which includes a major premise, a minor premise, and a conclusion. The slides also emphasize the importance of using only the data provided in the question and highlight key words like \"few,\" \"at least,\" and \"some\" that are crucial for solving such problems.\n\nThe document includes several examples of syllogisms with given statements and conclusions, along with options for selecting the correct answer. Each example is followed by a Venn diagram to illustrate the least possible relationships between the given categories. The questions test the understanding of the relationships between different categories based on the provided statements.",
+      "contexts": [
+        {
+          "source": 1,
+          "page": 2,
+          "text": "## SYLLOGISM\n\nA syllogism is a form of deductive reasoning consisting of two premises and a conclusion . If the premises are true and the structure is valid, the conclusion must also be true.\n\nBasic Structure\n\n- Major premise - a general statement\n- Minor premise - a specific statement\n- Conclusion - what logically follows"
+        },
+        {
+          "source": 2,
+          "page": 3,
+          "text": "## SYLLOGISM\n\n- Venn diagrams are quite important when it comes to solving syllogism questions.\n- One must not create any data of his own. It is important to follow only that data which is mention there in the question.\n- Words like few, at least, some etc are the basics to solve such type of questions. Pay attention to these words.\n- The only data to be followed while solving a syllogism question is the data mentioned in the question itself."
+        },
+        {
+          "source": 3,
+          "page": 4,
+          "text": "## Statements:\n\nOnly a few Gadgets are Mobile.\n\nOnly a few Mobile are Laptop.\n\nAll Laptop are IPod.\n\n## Conclusions :\n\n- I. All Mobile can be Laptop.\n- II. Gadgets can be Mobile.\n\n## Options\n\n- 1.Only II follows\n2. None follows\n3. Either I or Il follows\n4. Both follows\n5. Only I follows\n\n## QUESTION 1"
+        },
+        {
+          "source": 4,
+          "page": 5,
+          "text": "## QUESTION 1\n\nThe least possible Venn diagram for the given statements is as follows:"
+        },
+        {
+          "source": 5,
+          "page": 6,
+          "text": "## Statements:\n\n.\n\nSome Keys are Lock\n\nOnly Lock is  Chain.\n\nNo Lock  is Iron.\n\n## Conclusions :\n\n- I. All Lock can be Keys.\n- II. Some Iron  can be Keys.\n\n## Options\n\n- 1.Only II follows\n2. None follows\n3. Either I or Il follows\n4. Both follows\n5. Only I follows\n\n## QUESTION 2"
+        },
+        {
+          "source": 6,
+          "page": 8,
+          "text": "## Statements: .\n\nOnly a few Sundays are Mondays\n\nSome Mondays are Tuesdays\n\nNo Tuesdays  are  Fridays.\n\n## Conclusions :\n\n- I. Some Sundays are not Mondays.\n- II. Some Sundays are not Fridays.\n\n## Options\n\n- 1.Only II follows\n2. None follows\n3. Either I or Il follows\n4. Both follows\n5. Only I follows\n\n## QUESTION 3"
+        },
+        {
+          "source": 7,
+          "page": 10,
+          "text": "## Statements: .\n\nSome Pencils are Pens Only Pens are colours Few Pencils are erasers\n\n## Conclusions :\n\n- I. Few colours may be pencils\n- II. Few erasers are pen\n\n## Options\n\n- 1.Only II follows\n2. None follows\n3. Either I or Il follows\n4. Both follows\n5. Only I follows\n\n## QUESTION 4"
+        },
+        {
+          "source": 8,
+          "page": 12,
+          "text": "## Statements:\n\n.\n\nOnly few bats are balls Few balls are stumps No stump is pitch.\n\n## Conclusions :\n\n- I. Some balls are not pitches\n- II. All bats are balls\n\n## Options\n\n- 1.Only II follows\n2. None follows\n3. Either I or Il follows\n4. Both follows\n5. Only I follows\n\n## QUESTION 5"
+        },
+        {
+          "source": 9,
+          "page": 14,
+          "text": "## Statements:\n\n.\n\nAll  Rum is Whisky No  whisky is beer Only beer is vodka.\n\n## Conclusions :\n\n- I. No Rum is beer\n- II. II. Some vodka may be whisky\n\n## Options\n\n- 1.Only II follows\n2. None follows\n3. Either I or Il follows\n4. Both follows\n5. Only I follows\n\n## QUESTION 6"
+        },
+        {
+          "source": 10,
+          "page": 16,
+          "text": "## Statements:\n\n.\n\nAll leaves are plants No  plant is seed\n\n.\n\n## Conclusions :\n\n- 1.All leaves may be seeds\n2. Some petals are plants\n\n## Options\n\n- 1.Only II follows\n2. None follows\n3. Either I or Il follows\n4. Both follows\n5. Only I follows\n\n## QUESTION 7"
+        },
+        {
+          "source": 11,
+          "page": 18,
+          "text": "## Statements:\n\n.\n\nAll bowls are glasses Each bowl is cup No box is bowl\n\n.\n\n## Conclusions :\n\n- 1.All leaves may be seeds\n2. Some petals are plants\n\n## Options\n\n- 1.Only II follows\n2. None follows\n3. Either I or Il follows\n4. Both follows\n5. Only I follows\n\n## QUESTION 8"
+        },
+        {
+          "source": 12,
+          "page": 20,
+          "text": "## Statements:\n\n.\n\nNo mobiles are laptops.\n\nOnly few laptops are computers.\n\nFew computers are keyboards.\n\nAll keyboards are phones.\n\n## Conclusions :\n\n- I.  Some laptops are not keyboards.\n- II. Each computers may be mobiles\n- III. Mostly phones are computers\n\n## Options\n\n1. Both conclusion I and conclusion II follow.\n2. Only conclusion III follows\n3. Neither conclusion I nor conclusion II follows\n4. Only conclusion II follows\n5. None of the above\n\n## QUESTION 9"
+        },
+        {
+          "source": 13,
+          "page": 22,
+          "text": "## Statements:\n\n.\n\nNo door is dog. All the dogs are cats.\n\n## Conclusions :\n\n- I.  No door is cat.\n- II.  No cat is door.\n- III. Some cats are dogs.\n- IV. All the cats are dogs.\n\n## Options .\n\n1. Only conclusion II and IV follows\n2. Only conclusion I and conclusion III follows\n3. Only conclusion III follows\n4. Only conclusion III and IV follows\n\n## QUESTION 10"
+        }
+      ],
+      "latency_s": 12.18,
+      "prompt_chars": 7347,
+      "prompt_tokens": 2007,
+      "output_tokens": 145,
+      "prompt_truncated": false,
+      "judge": {
+        "correctness": "correct",
+        "correctness_score": 1.0,
+        "correctness_reason": "all key facts present",
+        "grounded": true,
+        "facts": [
+          {
+            "fact": "A syllogism is a form of deductive reasoning consisting of two premises and a conclusion.",
+            "present": true
+          },
+          {
+            "fact": "The basic structure of a syllogism includes a major premise, a minor premise, and a conclusion.",
+            "present": true
+          },
+          {
+            "fact": "Venn diagrams are important for solving syllogism questions.",
+            "present": true
+          },
+          {
+            "fact": "One must only follow the data provided in the question.",
+            "present": true
+          },
+          {
+            "fact": "Key words like 'few', 'at least', and 'some' are crucial for solving syllogism questions.",
+            "present": true
+          }
+        ],
+        "unsupported_claims": []
+      },
+      "checks": {
+        "refused": false,
+        "has_citation": 0.0,
+        "citation_valid": 0.0,
+        "cites_gold": null
+      }
+    },
+    {
+      "id": "sum-03",
+      "doc": "os_assessment",
+      "type": "summary",
+      "question": "Summarize this document.",
+      "gold_pages": [],
+      "reference": "An operating systems assessment: Q1 lists shell commands (ls, pwd, cd, cp, grep, ps, df and others); Q2 uses fork() to create orphan and zombie processes; Q3 implements the CPU scheduling algorithms FCFS, SJF, Round Robin and Priority in C, computing completion, turnaround and waiting times.",
+      "intent": "summary",
+      "answer": "- The document describes the implementation of basic shell commands such as `ls -la`, `pwd`, `cd`, `cp`, `mv`, `rm`, `mkdir`, `rmdir`, and `cat`.\n- It also covers file operations including the creation, copying, moving, and deletion of files.\n- Directory management through the creation and removal of directories is demonstrated.\n- The use of `grep` for searching text in files is included.\n- CPU scheduling algorithms, specifically FCFS, SJF, Round Robin, and Priority, are implemented, with provided code and output for each algorithm.",
+      "contexts": [
+        {
+          "source": 1,
+          "page": 1,
+          "text": "- Implemented basic shell commands: `ls -la`, `pwd`, `cd`, `cp`, `mv`, `rm`, `mkdir`, `rmdir`, and `cat`.\n- Demonstrated file operations: created, copied, moved, and deleted files.\n- Created and removed directories.\n- Used `grep` to search for text in files.\n- Implemented CPU scheduling algorithms: FCFS, SJF, Round Robin, and Priority.\n- Provided code and output for each scheduling algorithm."
+        }
+      ],
+      "latency_s": 23.23,
+      "prompt_chars": 2218,
+      "prompt_tokens": 513,
+      "output_tokens": 121,
+      "prompt_truncated": false,
+      "judge": {
+        "correctness": "incorrect",
+        "correctness_score": 0.0,
+        "correctness_reason": "missing: ['An operating systems assessment: Q1 lists shell commands (ls, pwd, cd, cp, grep, ps, df and others);', 'Q2 uses fork() to create orphan and zombie processes;', 'Q3 implements the CPU scheduling algorithms FCFS, SJF, Round Robin and Priority in C, computing completion, turnaround and waiting times.']",
+        "grounded": true,
+        "facts": [
+          {
+            "fact": "An operating systems assessment: Q1 lists shell commands (ls, pwd, cd, cp, grep, ps, df and others);",
+            "present": false
+          },
+          {
+            "fact": "Q2 uses fork() to create orphan and zombie processes;",
+            "present": false
+          },
+          {
+            "fact": "Q3 implements the CPU scheduling algorithms FCFS, SJF, Round Robin and Priority in C, computing completion, turnaround and waiting times.",
+            "present": false
+          }
+        ],
+        "unsupported_claims": []
+      },
+      "checks": {
+        "refused": false,
+        "has_citation": 0.0,
+        "citation_valid": 0.0,
+        "cites_gold": null
+      }
+    }
+  ]
+}
