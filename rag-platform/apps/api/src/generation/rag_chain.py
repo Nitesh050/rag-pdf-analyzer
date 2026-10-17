@@ -1,5 +1,6 @@
 from .citation_mapper import cited_documents
 from .ollama_client import OllamaClient
+from .page_refs import parse_page_refs
 from .prompt_templates import PromptBuilder
 
 from .intent.router import IntentRouter
@@ -38,13 +39,26 @@ class RAGChain:
         # -------------------------------------------------
         # Step 2 : Retrieve Context
         #
-        # Every intent except SUMMARY goes through the RetrievalManager,
-        # which fuses semantic + BM25 results (RRF) and reranks them
-        # with a cross-encoder. SUMMARY needs the full document instead
-        # of a query-ranked subset, so it bypasses retrieval entirely.
+        # A question naming pages ("what is on page 42?", "summarize
+        # pages 10-12") gets exactly those pages, whatever its intent:
+        # similarity search for the words "page 42" finds nothing useful.
+        #
+        # Otherwise every intent except SUMMARY goes through the
+        # RetrievalManager (semantic + BM25 fused with RRF, optional
+        # reranking). SUMMARY needs the whole document, not a
+        # query-ranked subset.
         # -------------------------------------------------
 
-        if intent == Intent.QA:
+        pages = parse_page_refs(question)
+        page_documents = (
+            self.vector_store.get_pages(pages, document_id) if pages else []
+        )
+
+        if page_documents:
+
+            documents = page_documents
+
+        elif intent == Intent.QA:
 
             documents = self.retrieval_manager.retrieve(
                 query=question,
