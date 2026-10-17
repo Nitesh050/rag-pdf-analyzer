@@ -2,6 +2,7 @@ from .citation_mapper import cited_documents
 from .ollama_client import OllamaClient
 from .page_refs import parse_page_refs
 from .prompt_templates import PromptBuilder
+from .summarizer import DocumentSummarizer
 
 from .intent.router import IntentRouter
 from .intent.intent import Intent
@@ -22,6 +23,26 @@ class RAGChain:
         self.vector_store = self.retrieval_manager.vector_store
         self.llm = OllamaClient()
         self.router = IntentRouter()
+        self.summarizer = DocumentSummarizer(self.vector_store)
+
+    def _summary_context(self, document_id: str):
+        """
+        The whole document when it fits in the prompt; otherwise one
+        summary per section of it (cached, see DocumentSummarizer).
+        """
+        chunks = self.vector_store.get_document(document_id)
+
+        if len(PromptBuilder.select_documents(chunks)) == len(chunks):
+            return chunks
+
+        return self.summarizer.section_summaries(document_id, self.llm)
+
+    def prepare_summary(self, document_id: str) -> None:
+        """
+        Build and cache section summaries ahead of time (e.g. right after
+        upload) so the first summary question doesn't wait for them.
+        """
+        self._summary_context(document_id)
 
     def ask(self, question: str, k: int = 5, document_id: str | None = None) -> dict:
 
@@ -77,12 +98,16 @@ class RAGChain:
 
         elif intent == Intent.SUMMARY:
 
-            # Entire document will be used. Scoped to document_id when
-            # given, otherwise falls back to the whole corpus.
             if document_id:
-                documents = self.vector_store.get_document(document_id)
+                documents = self._summary_context(document_id)
             else:
-                documents = self.vector_store.get_all_documents()
+                # No single document to summarise: use the passages most
+                # relevant to the request across everything uploaded.
+                documents = self.retrieval_manager.retrieve(
+                    query=question,
+                    top_k=15,
+                    filters=filters,
+                )
 
         elif intent == Intent.COMPARISON:
 

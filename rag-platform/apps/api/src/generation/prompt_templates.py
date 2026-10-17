@@ -29,9 +29,16 @@ class PromptBuilder:
         metadata = document.metadata or {}
         source = metadata.get("source", metadata.get("filename", "unknown document"))
         page = metadata.get("page", metadata.get("page_number"))
+        page_end = metadata.get("page_end")
 
         label = f"[Source {index + 1}: {source}"
-        label += f", page {page}]" if page is not None else "]"
+        if page is not None and page_end not in (None, page):
+            # Section summaries cover a page range.
+            label += f", pages {page}-{page_end}]"
+        elif page is not None:
+            label += f", page {page}]"
+        else:
+            label += "]"
 
         return f"{label}\n{document.page_content}"
 
