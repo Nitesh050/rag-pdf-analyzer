@@ -114,16 +114,10 @@ class VectorStore:
         document_id: str,
     ) -> list[Document]:
         """
-        Retrieve one uploaded document.
+        Every chunk of one uploaded document, in reading order.
         """
 
-        return self.similarity_search(
-            query="",
-            k=1000,
-            filter={
-                "document_id": document_id,
-            },
-        )
+        return self._get_ordered({"document_id": document_id})
 
     # ---------------------------------------------------
     # CONTENT HASH FILTER
@@ -150,17 +144,49 @@ class VectorStore:
     # PAGE FILTER
     # ---------------------------------------------------
 
-    def get_page(
+    def get_pages(
         self,
-        page: int,
+        pages: list[int],
+        document_id: str | None = None,
     ) -> list[Document]:
+        """
+        The chunks on the given pages, in reading order, optionally limited
+        to one document. Used to answer "what is on page 42?" directly
+        rather than by similarity search.
+        """
 
-        return self.similarity_search(
-            query="",
-            k=100,
-            filter={
-                "page": page,
-            },
+        where = {"page": {"$in": list(pages)}}
+
+        if document_id:
+            where = {"$and": [where, {"document_id": document_id}]}
+
+        return self._get_ordered(where)
+
+    def _get_ordered(
+        self,
+        where: dict,
+    ) -> list[Document]:
+        """
+        Chunks matching a metadata filter, sorted by page then position.
+        A plain metadata lookup: no embedding call, no similarity ranking.
+        """
+
+        data = self.vector_store.get(
+            where=where,
+            include=["documents", "metadatas"],
+        )
+
+        documents = [
+            Document(page_content=text, metadata=metadata)
+            for text, metadata in zip(data["documents"], data["metadatas"])
+        ]
+
+        return sorted(
+            documents,
+            key=lambda d: (
+                d.metadata.get("page") or 0,
+                d.metadata.get("chunk_index") or 0,
+            ),
         )
 
     # ---------------------------------------------------
