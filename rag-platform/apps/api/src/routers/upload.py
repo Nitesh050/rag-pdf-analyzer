@@ -2,10 +2,10 @@ import hashlib
 from pathlib import Path
 
 from docling.exceptions import ConversionError
-from fastapi import APIRouter, File, HTTPException, UploadFile
+from fastapi import APIRouter, BackgroundTasks, File, HTTPException, UploadFile
 from requests.exceptions import RequestException
 
-from ..dependencies import get_retrieval_manager
+from ..dependencies import get_rag_chain, get_retrieval_manager
 from ..ingestion.pipeline import IngestionPipeline
 from ..schemas.document import IngestURLRequest, UploadResponse
 
@@ -15,7 +15,7 @@ pipeline = IngestionPipeline(retrieval_manager=get_retrieval_manager())
 
 
 @router.post("/upload", response_model=UploadResponse)
-async def upload_pdf(file: UploadFile = File(...)):
+async def upload_pdf(background_tasks: BackgroundTasks, file: UploadFile = File(...)):
 
     upload_dir = Path("uploads")
     upload_dir.mkdir(exist_ok=True)
@@ -43,6 +43,8 @@ async def upload_pdf(file: UploadFile = File(...)):
             detail="Invalid or corrupted PDF file.",
         ) from exc
 
+    _schedule_summary(background_tasks, result)
+
     return UploadResponse(
         message=result["message"],
         document_id=result.get("document_id"),
@@ -51,7 +53,7 @@ async def upload_pdf(file: UploadFile = File(...)):
 
 
 @router.post("/upload/url", response_model=UploadResponse)
-async def upload_url(payload: IngestURLRequest):
+async def upload_url(payload: IngestURLRequest, background_tasks: BackgroundTasks):
 
     url = str(payload.url)
     # No file bytes to hash for a URL, so hash the URL itself — this
@@ -68,8 +70,19 @@ async def upload_url(payload: IngestURLRequest):
             detail="Could not fetch the given URL.",
         ) from exc
 
+    _schedule_summary(background_tasks, result)
+
     return UploadResponse(
         message=result["message"],
         document_id=result.get("document_id"),
         chunks=result.get("chunks", 0),
     )
+
+
+def _schedule_summary(background_tasks: BackgroundTasks, result: dict) -> None:
+    """
+    Precompute section summaries after the response is sent, so the first
+    "summarize this" question on a long document is answered quickly.
+    """
+    if result.get("document_id") and result.get("chunks"):
+        background_tasks.add_task(get_rag_chain().prepare_summary, result["document_id"])
