@@ -20,3 +20,16 @@ def get_retrieval_manager() -> RetrievalManager:
     in memory per instance rather than in Chroma.
     """
     return RetrievalManager(reranker_model=RERANKER_MODEL)
+
+
+
+@lru_cache
+def get_rag_chain():
+    """
+    Process-wide RAGChain, shared by chat and upload (which precomputes
+    document summaries in the background).
+    """
+    # Imported here: rag_chain itself imports get_retrieval_manager.
+    from .generation.rag_chain import RAGChain
+
+    return RAGChain(retrieval_manager=get_retrieval_manager())
