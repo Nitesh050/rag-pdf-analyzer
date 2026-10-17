@@ -118,10 +118,13 @@ def score(records: list[dict], judge: Judge | None) -> None:
         refused = is_refusal(answer)
         checks = {"refused": refused}
 
-        if record["gold_pages"]:
+        if record["type"] != "unanswerable":
             gold = {(record["doc"], p) for p in record["gold_pages"]}
             context_pages = [(record["doc"], c["page"]) for c in record["contexts"]]
             checks.update(citation_scores(parse_citations(answer), context_pages, gold))
+            if not gold:
+                # Summaries have no single right page to cite.
+                checks["cites_gold"] = None
             # Only numeric questions hinge on exact figures; elsewhere
             # incidental numbers in the reference make this noise.
             if record["type"] == "numeric":
@@ -144,8 +147,8 @@ def _as_document(context: dict, doc: str):
 
 
 def summarize(records: list[dict]) -> dict:
-    answerable = [r for r in records if r["gold_pages"]]
-    unanswerable = [r for r in records if not r["gold_pages"]]
+    answerable = [r for r in records if r["type"] != "unanswerable"]
+    unanswerable = [r for r in records if r["type"] == "unanswerable"]
     judged = [r for r in answerable if "correctness_score" in r.get("judge", {})]
 
     def avg(values):
@@ -163,7 +166,7 @@ def summarize(records: list[dict]) -> dict:
             "false_refusal": avg(float(r["checks"]["refused"]) for r in rows),
             "has_citation": avg(r["checks"]["has_citation"] for r in rows),
             "citation_valid": avg(r["checks"]["citation_valid"] for r in cited),
-            "cites_gold": avg(r["checks"]["cites_gold"] for r in rows),
+            "cites_gold": avg(r["checks"].get("cites_gold") for r in rows),
             "number_recall": avg(r["checks"].get("number_recall") for r in rows),
         }
 
