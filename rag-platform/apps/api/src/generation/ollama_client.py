@@ -19,6 +19,10 @@ class OllamaClient:
             num_ctx=num_ctx,
         )
 
+    @property
+    def model_name(self) -> str:
+        return self.llm.model
+
     def generate(self, prompt: str) -> str:
 
         response = self.llm.invoke(prompt)

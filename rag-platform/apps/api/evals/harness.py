@@ -112,6 +112,11 @@ def chunk_corpus(corpus: dict[str, dict], ocr: bool | None = None) -> list[Docum
         doc_chunks = chunker.split(adapter.load(entry["path"]), document_id=doc_key)
         for chunk in doc_chunks:
             chunk.metadata["filename"] = entry["file"]
+            # Match the app's relative "uploads/<file>" label. The absolute
+            # corpus path is ~75 chars longer per chunk, which can push a
+            # document over the prompt budget and onto a different path
+            # (section summaries) than production takes.
+            chunk.metadata["source"] = f"uploads/{entry['file']}"
         chunks.extend(doc_chunks)
 
     return chunks

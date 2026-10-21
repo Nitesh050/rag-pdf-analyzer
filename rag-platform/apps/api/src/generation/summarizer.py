@@ -80,8 +80,12 @@ class DocumentSummarizer:
             return []
 
         metadata = chunks[0].metadata
-        # Same content and same chunking => same summaries.
-        cache_key = f"{metadata.get('content_hash')}|{metadata.get('ingestion_version')}|{self.VERSION}"
+        # Summaries depend on the document, its chunking and the model
+        # that wrote them; a change to any of these rebuilds them.
+        cache_key = (
+            f"{metadata.get('content_hash')}|{metadata.get('ingestion_version')}"
+            f"|{self.VERSION}|{getattr(llm, 'model_name', '')}"
+        )
         cache_file = self.cache_dir / f"{document_id}.json"
 
         with _lock_for(document_id):

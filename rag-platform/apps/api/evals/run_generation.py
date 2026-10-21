@@ -57,6 +57,10 @@ class RecordingClient:
         self.num_ctx = client.llm.num_ctx or DEFAULT_NUM_CTX
         self.last: dict = {}
 
+    @property
+    def model_name(self) -> str:
+        return self.client.model_name
+
     def generate(self, prompt: str) -> str:
         response = self.client.llm.invoke(prompt)
         meta = response.response_metadata or {}
