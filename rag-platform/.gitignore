@@ -30,3 +30,6 @@ dist/
 # Eval corpus PDFs (pinned by sha256 in corpus.json) and caches
 apps/api/evals/corpus/
 apps/api/evals/.cache/
+
+# Eval run outputs stay local
+apps/api/evals/results/
