@@ -9,6 +9,10 @@ langchain-text-splitters==1.1.2
 langchain-ollama==1.1.0
 langchain-chroma==1.1.0
 
+# Database (PostgreSQL + pgvector)
+sqlalchemy==2.0.43
+psycopg[binary]==3.2.10
+
 # Vector store + hybrid retrieval
 chromadb==1.5.9
 rank-bm25==0.2.2

@@ -2,11 +2,16 @@ import hashlib
 from pathlib import Path
 
 from docling.exceptions import ConversionError
-from fastapi import APIRouter, BackgroundTasks, File, HTTPException, UploadFile
+from fastapi import APIRouter, BackgroundTasks, Depends, File, HTTPException, UploadFile
 from requests.exceptions import RequestException
+from sqlalchemy.orm import Session
 
+from ..core.security import get_current_user
+from ..db.documents import record_document
+from ..db.session import get_db
 from ..dependencies import get_rag_chain, get_retrieval_manager
-from ..ingestion.pipeline import IngestionPipeline
+from ..ingestion.pipeline import INGESTION_VERSION, IngestionPipeline
+from ..models.user import User
 from ..schemas.document import IngestURLRequest, UploadResponse
 
 router = APIRouter()
@@ -15,7 +20,12 @@ pipeline = IngestionPipeline(retrieval_manager=get_retrieval_manager())
 
 
 @router.post("/upload", response_model=UploadResponse)
-async def upload_pdf(background_tasks: BackgroundTasks, file: UploadFile = File(...)):
+async def upload_pdf(
+    background_tasks: BackgroundTasks,
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
 
     upload_dir = Path("uploads")
     upload_dir.mkdir(exist_ok=True)
@@ -43,6 +53,17 @@ async def upload_pdf(background_tasks: BackgroundTasks, file: UploadFile = File(
             detail="Invalid or corrupted PDF file.",
         ) from exc
 
+    if result.get("document_id"):
+        record_document(
+            db, user,
+            document_id=result["document_id"],
+            content_hash=content_hash,
+            chunk_count=result.get("chunks", 0),
+            ingestion_version=INGESTION_VERSION,
+            filename=filename,
+            storage_path=pdf_path,
+        )
+
     _schedule_summary(background_tasks, result)
 
     return UploadResponse(
@@ -53,7 +74,12 @@ async def upload_pdf(background_tasks: BackgroundTasks, file: UploadFile = File(
 
 
 @router.post("/upload/url", response_model=UploadResponse)
-async def upload_url(payload: IngestURLRequest, background_tasks: BackgroundTasks):
+async def upload_url(
+    payload: IngestURLRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
 
     url = str(payload.url)
     # No file bytes to hash for a URL, so hash the URL itself — this
@@ -69,6 +95,16 @@ async def upload_url(payload: IngestURLRequest, background_tasks: BackgroundTask
             status_code=400,
             detail="Could not fetch the given URL.",
         ) from exc
+
+    if result.get("document_id"):
+        record_document(
+            db, user,
+            document_id=result["document_id"],
+            content_hash=content_hash,
+            chunk_count=result.get("chunks", 0),
+            ingestion_version=INGESTION_VERSION,
+            source_url=url,
+        )
 
     _schedule_summary(background_tasks, result)
 
