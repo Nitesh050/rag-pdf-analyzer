@@ -4,7 +4,7 @@ Chat with your own documents, fully local. Upload a PDF (or index a web page), a
 
 ```
 React (Vite) ──► FastAPI ──► Ollama
-                   │           qwen2.5:7b        answers
+                   │           qwen2.5:14b       answers
                    │           nomic-embed-text  embeddings
                    │
      ┌─────────────┴──────────────┐
@@ -32,11 +32,11 @@ React (Vite) ──► FastAPI ──► Ollama
 - **Node.js 22** for the frontend
 - **Ollama** with these models:
   ```
-  ollama pull qwen2.5:7b          # answers
+  ollama pull qwen2.5:14b         # answers (or qwen2.5:7b, see LLM_MODEL)
   ollama pull nomic-embed-text    # embeddings
   ollama pull llama3              # only for the generation eval's judge
   ```
-- About 8 GB of free RAM for the 7B model
+- About 12 GB of free RAM for the 14B model (about 6 GB with `LLM_MODEL=qwen2.5:7b`)
 
 ## Getting started
 
@@ -61,6 +61,7 @@ The first upload downloads Docling's layout models, so it is slower than later o
 
 | Variable | Default | Purpose |
 |---|---|---|
+| `LLM_MODEL` | `qwen2.5:14b` | Ollama model that writes answers and summaries. `qwen2.5:7b` is ~40% faster but less accurate |
 | `CHROMA_DIR` | `data/chroma_db` | Where the vector index is stored |
 | `SUMMARY_DIR` | `data/summaries` | Where per-section document summaries are cached |
 | `PDF_OCR` | `true` | Set to `false` to skip OCR (faster uploads, but text inside images is lost) |
@@ -121,14 +122,18 @@ Changes to retrieval, chunking or the prompt are measured, not guessed. `apps/ap
 .venv/bin/python -m evals.run_generation --name <run>   # is the answer right, cited, and honest?
 ```
 
-Current results with `qwen2.5:7b`:
+Current results:
 
-| | |
-|---|---|
-| Right page in top 5 (hybrid search) | 0.939 |
-| Answer correctness (LLM judge) | 0.911 |
-| Unanswerable questions answered "not found" | 6 / 8 |
-| Citations pointing to the right source | 100% |
+| | qwen2.5:14b (default) | qwen2.5:7b |
+|---|---|---|
+| Right page in top 5 (hybrid search) | 0.939 | 0.939 |
+| Answer correctness (LLM judge) | 0.955 | 0.911 |
+| Answerable questions wrongly refused | 2 / 56 | 4 / 56 |
+| Unanswerable questions answered "not found" | 6 / 8 | 6 / 8 |
+| Citations pointing to the right source | 100% | 100% |
+| Answer latency (median) | ~13 s | ~8 s |
+
+A third eval, `python -m evals.run_routing`, checks that each question takes the right path (summary, comparison, page lookup...); it needs no models and runs instantly.
 
 The judge is checked against human grades (92% agreement). See [`apps/api/evals/README.md`](apps/api/evals/README.md) for how the evals work, the judge calibration and run-to-run noise. The eval PDFs and run results are kept out of git.
 
@@ -147,4 +152,4 @@ Not built yet:
 Known limitations:
 - Diagrams: OCR reads the text in an image but not the drawing itself, so questions about a diagram's layout can be answered wrongly.
 - Building summaries of a long book takes several minutes once per document (done in the background after upload).
-- With the 7B model, answers take about 8 s. `qwen2.5:14b` scored higher in the evals (0.955 correctness) but takes about 13 s.
+- Answers take about 13 s with the default 14B model and there is no streaming yet, so the UI waits for the full answer. Set `LLM_MODEL=qwen2.5:7b` for ~8 s answers at slightly lower accuracy.

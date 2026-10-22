@@ -6,8 +6,20 @@ Run from `apps/api` with the venv and Ollama running.
 |---|---|---|
 | Retrieval | `.venv/bin/python -m evals.run_retrieval --name <run>` | Does the right page reach the LLM (hit@k, MRR, precision) |
 | Generation | `.venv/bin/python -m evals.run_generation --name <run>` | Is the answer correct, cited, and does it refuse when it should |
+| Routing | `.venv/bin/python -m evals.run_routing` | Does each question get the right type (qa, summary, comparison...) and page refs; instant, no LLM |
 
 Results go to `results/<run>.json`. The corpus PDFs live in `corpus/` (gitignored) and are pinned by sha256 in `corpus.json`.
+
+## Routing
+
+`routing.jsonl` labels 74 questions with the route they should take, including traps for substring matching ("authorized", "TVs", "expedition", "how many pages"). Tune the detector on the `dev` split only and check `test` afterwards. `tests/unit/test_intent_routing.py` fails if any labelled question misroutes.
+
+| Detector | Dev | Test | Trap questions |
+|---|---|---|---|
+| Substring keywords (before) | 52% | 35% | 0% |
+| Whole-word patterns with priority order | 100% | 100% | 100% |
+
+The test split was written by the same person as the rules, so treat 100% as an upper bound; add real user questions that misroute to the file as they come up.
 
 ## Judge
 

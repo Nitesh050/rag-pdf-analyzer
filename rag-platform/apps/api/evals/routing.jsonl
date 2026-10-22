@@ -1,0 +1,77 @@
+// Question-type routing eval. "intent" is the expected route (null = page question, intent not scored);
+// "accept" lists other routes that are also fine; "pages" are the page numbers the question names.
+// "trap" marks questions built to catch substring matching. dev = used while tuning; test = held out.
+{"id": "r-qa-01", "split": "dev", "question": "How many neurons does a nematode worm have?", "intent": "qa", "pages": []}
+{"id": "r-qa-02", "split": "dev", "question": "What value of c did the book settle on for converting kilometres to miles?", "intent": "qa", "pages": []}
+{"id": "r-qa-03", "split": "dev", "question": "Which command shows disk usage in human-readable form?", "intent": "qa", "pages": []}
+{"id": "r-qa-04", "split": "dev", "question": "What accuracy did the network reach with 200 hidden nodes?", "intent": "qa", "pages": []}
+{"id": "r-qa-05", "split": "dev", "question": "What details are given about the MNIST test set?", "intent": "qa", "pages": [], "trap": "detail"}
+{"id": "r-qa-06", "split": "dev", "question": "Which users are authorized to delete files?", "intent": "qa", "pages": [], "trap": "author"}
+{"id": "r-qa-07", "split": "dev", "question": "How many TVs did the survey count?", "intent": "qa", "pages": [], "trap": "vs"}
+{"id": "r-qa-08", "split": "dev", "question": "Where did the expedition end?", "intent": "qa", "pages": [], "trap": "edition"}
+{"id": "r-qa-09", "split": "dev", "question": "Who is entitled to a refund?", "intent": "qa", "pages": [], "trap": "title"}
+{"id": "r-qa-10", "split": "dev", "question": "What does the summary table on the results slide show?", "intent": "qa", "pages": [], "trap": "summary"}
+{"id": "r-qa-11", "split": "dev", "question": "Which web page does the author link to for the dataset?", "intent": "qa", "pages": [], "trap": "page/author"}
+{"id": "r-qa-12", "split": "dev", "question": "What learning rate gave the best score?", "intent": "qa", "pages": []}
+{"id": "r-qa-13", "split": "dev", "question": "Is the time quantum fixed in the Round Robin program?", "intent": "qa", "pages": []}
+{"id": "r-sum-01", "split": "dev", "question": "Summarize this document.", "intent": "summary", "pages": []}
+{"id": "r-sum-02", "split": "dev", "question": "Give me an overview of the paper.", "intent": "summary", "pages": []}
+{"id": "r-sum-03", "split": "dev", "question": "What's the gist of this book?", "intent": "summary", "pages": []}
+{"id": "r-sum-04", "split": "dev", "question": "Can you summarise the slides?", "intent": "summary", "pages": []}
+{"id": "r-sum-05", "split": "dev", "question": "TL;DR of this PDF please", "intent": "summary", "pages": []}
+{"id": "r-sum-06", "split": "dev", "question": "What is this document about?", "intent": "summary", "pages": []}
+{"id": "r-sum-07", "split": "dev", "question": "Briefly, what are the main points of the report?", "intent": "summary", "pages": []}
+{"id": "r-exp-01", "split": "dev", "question": "Explain how backpropagation works.", "intent": "explanation", "pages": []}
+{"id": "r-exp-02", "split": "dev", "question": "Teach me gradient descent step by step.", "intent": "explanation", "pages": []}
+{"id": "r-exp-03", "split": "dev", "question": "Describe the CoWiC-MAC mechanism in detail.", "intent": "explanation", "pages": []}
+{"id": "r-exp-04", "split": "dev", "question": "Why does the sigmoid function saturate? Explain in depth.", "intent": "explanation", "pages": []}
+{"id": "r-exp-05", "split": "dev", "question": "How does the zombie process program work?", "intent": "explanation", "accept": ["qa"], "pages": []}
+{"id": "r-exp-06", "split": "dev", "question": "Walk me through the weight update worked example.", "intent": "explanation", "pages": []}
+{"id": "r-exp-07", "split": "dev", "question": "Can you elaborate on how the network is trained?", "intent": "explanation", "pages": []}
+{"id": "r-cmp-01", "split": "dev", "question": "Compare FCFS and SJF scheduling.", "intent": "comparison", "pages": []}
+{"id": "r-cmp-02", "split": "dev", "question": "What is the difference between an orphan and a zombie process?", "intent": "comparison", "pages": []}
+{"id": "r-cmp-03", "split": "dev", "question": "Sigmoid vs step function: which is better?", "intent": "comparison", "pages": []}
+{"id": "r-cmp-04", "split": "dev", "question": "Explain the difference between FCFS and Round Robin.", "intent": "comparison", "pages": [], "trap": "explain+difference"}
+{"id": "r-cmp-05", "split": "dev", "question": "How does SJF differ from Priority scheduling?", "intent": "comparison", "pages": []}
+{"id": "r-cmp-06", "split": "dev", "question": "Which is faster, the laptop or the Raspberry Pi?", "intent": "comparison", "pages": []}
+{"id": "r-cmp-07", "split": "dev", "question": "Summarize the differences between Wi-Fi and Zigbee.", "intent": "comparison", "pages": [], "trap": "summarize+differences"}
+{"id": "r-chp-01", "split": "dev", "question": "What does chapter 2 cover?", "intent": "chapter", "pages": []}
+{"id": "r-chp-02", "split": "dev", "question": "What is in the section on preparing data?", "intent": "chapter", "pages": []}
+{"id": "r-chp-03", "split": "dev", "question": "Give me an overview of part 2 of the book.", "intent": "chapter", "pages": [], "trap": "overview of a part"}
+{"id": "r-chp-04", "split": "dev", "question": "What does section 6 conclude?", "intent": "chapter", "pages": []}
+{"id": "r-chp-05", "split": "dev", "question": "Which topics does the appendix cover?", "intent": "chapter", "pages": []}
+{"id": "r-meta-01", "split": "dev", "question": "Who is the author of this book?", "intent": "metadata", "pages": []}
+{"id": "r-meta-02", "split": "dev", "question": "What is the title of the paper?", "intent": "metadata", "pages": []}
+{"id": "r-meta-03", "split": "dev", "question": "Who published this book?", "intent": "metadata", "pages": []}
+{"id": "r-meta-04", "split": "dev", "question": "Which edition is this?", "intent": "metadata", "pages": []}
+{"id": "r-meta-05", "split": "dev", "question": "How many pages does the document have?", "intent": "metadata", "pages": [], "trap": "page"}
+{"id": "r-meta-06", "split": "dev", "question": "When was this document written?", "intent": "metadata", "pages": []}
+{"id": "r-pg-01", "split": "dev", "question": "What is on page 42?", "intent": null, "pages": [42]}
+{"id": "r-pg-02", "split": "dev", "question": "Summarize pages 10-12", "intent": null, "pages": [10, 11, 12]}
+{"id": "r-pg-03", "split": "dev", "question": "Explain the diagram on p. 5", "intent": null, "pages": [5]}
+{"id": "r-pg-04", "split": "dev", "question": "Compare page 3 and page 7", "intent": null, "pages": [3, 7]}
+{"id": "r-pg-05", "split": "dev", "question": "What does the web page say about pricing?", "intent": "qa", "pages": [], "trap": "page"}
+{"id": "r-pg-06", "split": "dev", "question": "Show me pages 100 to 105", "intent": null, "pages": [100, 101, 102, 103, 104, 105]}
+{"id": "r-pg-07", "split": "dev", "question": "What's on pg 7?", "intent": null, "pages": [7]}
+{"id": "t-qa-01", "split": "test", "question": "What was the error after the first guess?", "intent": "qa", "pages": []}
+{"id": "t-qa-02", "split": "test", "question": "Which detailed steps are listed for installing IPython?", "intent": "qa", "pages": [], "trap": "detail"}
+{"id": "t-qa-03", "split": "test", "question": "Which CVs were shortlisted?", "intent": "qa", "pages": [], "trap": "vs"}
+{"id": "t-qa-04", "split": "test", "question": "What did the authority approve?", "intent": "qa", "pages": [], "trap": "author"}
+{"id": "t-qa-05", "split": "test", "question": "Which pages of the history book were scanned?", "intent": "qa", "pages": [], "trap": "page"}
+{"id": "t-sum-01", "split": "test", "question": "Give me a summary of this document", "intent": "summary", "pages": []}
+{"id": "t-sum-02", "split": "test", "question": "Overview please", "intent": "summary", "pages": []}
+{"id": "t-sum-03", "split": "test", "question": "What are the key takeaways of this paper?", "intent": "summary", "pages": []}
+{"id": "t-exp-01", "split": "test", "question": "Explain the chain rule", "intent": "explanation", "pages": []}
+{"id": "t-exp-02", "split": "test", "question": "Help me understand how BM25 ranks documents", "intent": "explanation", "pages": []}
+{"id": "t-exp-03", "split": "test", "question": "Describe how the Priority scheduler picks a process", "intent": "explanation", "pages": []}
+{"id": "t-cmp-01", "split": "test", "question": "Contrast the orphan and zombie programs", "intent": "comparison", "pages": []}
+{"id": "t-cmp-02", "split": "test", "question": "Is SJF better than FCFS?", "intent": "comparison", "pages": []}
+{"id": "t-cmp-03", "split": "test", "question": "difference between Wi-Fi and Zigbee", "intent": "comparison", "pages": []}
+{"id": "t-chp-01", "split": "test", "question": "What does chapter 3 say about handwriting?", "intent": "chapter", "pages": []}
+{"id": "t-chp-02", "split": "test", "question": "Summarize section 2", "intent": "chapter", "pages": [], "trap": "summarize a section"}
+{"id": "t-meta-01", "split": "test", "question": "Who wrote this paper?", "intent": "metadata", "pages": []}
+{"id": "t-meta-02", "split": "test", "question": "What's the name of this book?", "intent": "metadata", "pages": []}
+{"id": "t-meta-03", "split": "test", "question": "When was it published?", "intent": "metadata", "pages": []}
+{"id": "t-pg-01", "split": "test", "question": "Tell me about page 15", "intent": null, "pages": [15]}
+{"id": "t-pg-02", "split": "test", "question": "Explain pages 3 and 4", "intent": null, "pages": [3, 4]}
+{"id": "t-pg-03", "split": "test", "question": "page-wise breakdown please", "intent": "summary", "accept": ["qa"], "pages": []}

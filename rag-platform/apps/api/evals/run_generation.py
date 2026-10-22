@@ -293,7 +293,7 @@ def print_summary(summary: dict) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--name", default=datetime.now().strftime("gen-%Y%m%d-%H%M%S"))
-    parser.add_argument("--model", default="qwen2.5:7b", help="answer model")
+    parser.add_argument("--model", help="answer model (default: the app's, LLM_MODEL or qwen2.5:14b)")
     parser.add_argument("--num-ctx", type=int, help="override the answer model's context window")
     parser.add_argument("--reranker", help="cross-encoder model, off by default like production")
     parser.add_argument("--judge-model", default="llama3:latest")
@@ -315,7 +315,7 @@ def main() -> None:
         print(f"Generating {len(golden)} answers with {args.model}")
         records, num_ctx = generate(golden, args)
         config = {
-            "model": args.model,
+            "model": args.model or OllamaClient().model_name,
             "num_ctx": num_ctx,
             "reranker": args.reranker,
         }
