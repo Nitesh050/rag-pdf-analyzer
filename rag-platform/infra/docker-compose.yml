@@ -1,0 +1,61 @@
+# Local stack: frontend + API + Postgres. Ollama is not in here; it keeps
+# running natively on the Mac (Metal GPU) and the API reaches it through
+# host.docker.internal.
+#
+#   docker compose -f infra/docker-compose.yml up --build
+#
+# Frontend: http://localhost:8080   API: http://localhost:8000   DB: localhost:5432
+
+services:
+  db:
+    image: pgvector/pgvector:pg16  # plain postgres lacks the vector extension
+    environment:
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: rag
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Runs only when pgdata is empty (first start); later schema
+      # changes need a migration or a fresh volume.
+      - ../apps/api/src/db/schema:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d rag"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  api:
+    build: ../apps/api
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:dev@db:5432/rag
+      OLLAMA_HOST: http://host.docker.internal:11434
+    ports:
+      - "8000:8000"
+    volumes:
+      # Bind-mounted so the existing Chroma index, summaries and uploaded
+      # PDFs are shared with a non-Docker run of the API.
+      - ../apps/api/data:/app/data
+      - ../apps/api/uploads:/app/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ../apps/web
+      args:
+        # Baked into the JS bundle; it is the address the *browser* uses.
+        VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+    # Same volume the hand-started rag-db container uses, so existing data carries over.
+    name: rag-pgdata
