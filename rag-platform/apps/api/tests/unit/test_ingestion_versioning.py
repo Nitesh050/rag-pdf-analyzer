@@ -8,12 +8,15 @@ class FakeVectorStore:
         self.chunk = Document(page_content="x", metadata={
             "document_id": "doc-1",
             "content_hash": "abc",
+            "owner_id": "user-1",
             "ingestion_version": stored_version,
         })
         self.deleted = []
 
-    def get_by_content_hash(self, content_hash):
-        return [self.chunk] if content_hash == "abc" else []
+    def get_by_content_hash(self, content_hash, owner_id=None):
+        meta = self.chunk.metadata
+        same_owner = owner_id is None or meta["owner_id"] == owner_id
+        return [self.chunk] if content_hash == meta["content_hash"] and same_owner else []
 
     def delete_by_document_id(self, document_id):
         self.deleted.append(document_id)
@@ -44,3 +47,11 @@ def test_unknown_content_is_new():
 
     assert pipeline_with(store)._existing_document("other") == (None, False)
     assert pipeline_with(store)._existing_document(None) == (None, False)
+
+
+def test_same_content_from_another_owner_is_new():
+    store = FakeVectorStore(INGESTION_VERSION)
+
+    assert pipeline_with(store)._existing_document("abc", "user-1") == ("doc-1", True)
+    assert pipeline_with(store)._existing_document("abc", "user-2") == (None, False)
+    assert store.deleted == []

@@ -10,7 +10,7 @@ from fastapi.testclient import TestClient
 from langchain_core.documents import Document as Chunk
 from sqlalchemy import select
 
-from src.core.security import get_local_user
+from src.core.security import get_current_user, get_local_user
 from src.db.session import get_db
 from src.models.conversation import Conversation, Message
 from src.models.document import Document
@@ -34,11 +34,13 @@ class FakeRAG:
     def __init__(self, document_id):
         self.llm = FakeLLM()
         self.asked = []
+        self.owner_ids = []
         self.document_id = document_id
         self.answer = "A nematode worm has 302 neurons (Source 1, page 42)."
 
-    def ask(self, question, document_id=None):
+    def ask(self, question, document_id=None, owner_id=None):
         self.asked.append((question, document_id))
+        self.owner_ids.append(owner_id)
         contexts = [
             Chunk(page_content="neurons", metadata={"document_id": self.document_id, "page": 42}),
             Chunk(page_content="other", metadata={"document_id": self.document_id, "page": 43}),
@@ -65,6 +67,8 @@ def setup(db, monkeypatch):
     rag = FakeRAG(str(book.id))
     monkeypatch.setattr(chat_router, "get_rag_chain", lambda: rag)
     app.dependency_overrides[get_db] = lambda: db
+    # Login itself is tested in test_auth.py; here every request is the owner.
+    app.dependency_overrides[get_current_user] = lambda: owner
     yield TestClient(app), rag, book, db
     app.dependency_overrides.clear()
 

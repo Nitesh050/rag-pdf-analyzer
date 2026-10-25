@@ -27,8 +27,9 @@ async def upload_pdf(
     user: User = Depends(get_current_user),
 ):
 
-    upload_dir = Path("uploads")
-    upload_dir.mkdir(exist_ok=True)
+    # One folder per user, so two users' "report.pdf" don't overwrite each other.
+    upload_dir = Path("uploads") / str(user.id)
+    upload_dir.mkdir(parents=True, exist_ok=True)
 
     # Strip any directory components from the client-supplied filename
     # (e.g. "../../etc/passwd") so it can't escape upload_dir.
@@ -45,7 +46,7 @@ async def upload_pdf(
         f.write(content)
 
     try:
-        result = pipeline.run(pdf_path, content_hash=content_hash)
+        result = pipeline.run(pdf_path, content_hash=content_hash, owner_id=str(user.id))
 
     except ConversionError as exc:
         raise HTTPException(
@@ -88,7 +89,7 @@ async def upload_url(
     content_hash = hashlib.sha256(url.encode()).hexdigest()
 
     try:
-        result = pipeline.run_web(url, content_hash=content_hash)
+        result = pipeline.run_web(url, content_hash=content_hash, owner_id=str(user.id))
 
     except RequestException as exc:
         raise HTTPException(

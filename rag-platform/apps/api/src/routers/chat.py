@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from src.core.security import get_current_user
 from src.db.conversations import get_conversation, history, list_conversations, save_turn, start_conversation
+from src.db.documents import parse_document_id
 from src.db.session import get_db
 from src.dependencies import get_rag_chain
 from src.generation.followup import rewrite_followup
@@ -29,6 +30,14 @@ def chat(
     db: Session = Depends(get_db),
     user: User = Depends(get_current_user),
 ):
+    # Someone else's document gets the same 404 as a missing one, so ids
+    # can't be probed.
+    if request.document_id:
+        document_key = parse_document_id(request.document_id)
+        document = db.get(Document, document_key) if document_key else None
+        if document is None or document.owner_id != user.id or document.deleted_at is not None:
+            raise HTTPException(status_code=404, detail="Document not found.")
+
     if request.conversation_id:
         conversation = get_conversation(db, user, request.conversation_id)
         if conversation is None:
@@ -45,7 +54,7 @@ def chat(
     started = time.perf_counter()
 
     standalone = rewrite_followup(request.question, history(conversation), rag.llm)
-    result = rag.ask(standalone, document_id=document_id)
+    result = rag.ask(standalone, document_id=document_id, owner_id=str(user.id))
 
     save_turn(
         db, conversation,

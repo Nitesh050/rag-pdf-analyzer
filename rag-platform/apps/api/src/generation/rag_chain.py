@@ -44,7 +44,13 @@ class RAGChain:
         """
         self._summary_context(document_id)
 
-    def ask(self, question: str, k: int = 5, document_id: str | None = None) -> dict:
+    def ask(
+        self,
+        question: str,
+        k: int = 5,
+        document_id: str | None = None,
+        owner_id: str | None = None,
+    ) -> dict:
 
         # -------------------------------------------------
         # Step 1 : Detect User Intent
@@ -54,8 +60,15 @@ class RAGChain:
 
         # When a document_id is given, every retrieval path below is
         # scoped to that document only, so chat never mixes chunks from
-        # other uploads sitting in the same shared vector store.
-        filters = {"document_id": document_id} if document_id else None
+        # other uploads sitting in the same shared vector store. Without
+        # one, owner_id keeps the search to that user's documents. The
+        # caller checks the document belongs to the owner.
+        if document_id:
+            filters = {"document_id": document_id}
+        elif owner_id:
+            filters = {"owner_id": owner_id}
+        else:
+            filters = None
 
         # -------------------------------------------------
         # Step 2 : Retrieve Context
@@ -72,7 +85,7 @@ class RAGChain:
 
         pages = parse_page_refs(question)
         page_documents = (
-            self.vector_store.get_pages(pages, document_id) if pages else []
+            self.vector_store.get_pages(pages, document_id, owner_id) if pages else []
         )
 
         if page_documents:

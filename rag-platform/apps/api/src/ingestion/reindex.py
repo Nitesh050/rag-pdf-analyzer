@@ -5,7 +5,7 @@ Re-process documents indexed by an older ingestion pipeline.
     .venv/bin/python -m src.ingestion.reindex           # re-index stale documents
     .venv/bin/python -m src.ingestion.reindex --dry-run # only list them
 
-PDFs are re-read from uploads/<filename>; web pages are re-fetched from
+PDFs are re-read from uploads/<owner_id>/<filename>; web pages are re-fetched from
 their URL. Each keeps its document_id. Restart the API afterwards so its
 in-memory keyword index picks up the new chunks.
 """
@@ -32,6 +32,9 @@ def main() -> None:
     for record in stale:
         filename = record.get("filename") or ""
         content_hash = record.get("content_hash")
+        owner_id = record.get("owner_id")
+        # Uploads made before accounts existed sit directly in uploads/.
+        pdf_path = UPLOAD_DIR / owner_id / filename if owner_id else UPLOAD_DIR / filename
         label = f"{filename or record.get('source')} (version {record.get('ingestion_version')})"
 
         if not content_hash:
@@ -40,12 +43,12 @@ def main() -> None:
 
         if filename.startswith(("http://", "https://")):
             source = filename
-            rerun = lambda: pipeline.run_web(source, content_hash=content_hash)
-        elif (UPLOAD_DIR / filename).exists():
-            source = UPLOAD_DIR / filename
-            rerun = lambda: pipeline.run(source, content_hash=content_hash)
+            rerun = lambda: pipeline.run_web(source, content_hash=content_hash, owner_id=owner_id)
+        elif pdf_path.exists():
+            source = pdf_path
+            rerun = lambda: pipeline.run(source, content_hash=content_hash, owner_id=owner_id)
         else:
-            print(f"  skip  {label}: source file not found in {UPLOAD_DIR}/")
+            print(f"  skip  {label}: source file not found at {pdf_path}")
             continue
 
         if args.dry_run:

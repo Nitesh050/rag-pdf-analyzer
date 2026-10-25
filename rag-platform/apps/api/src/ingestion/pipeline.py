@@ -33,6 +33,7 @@ class IngestionPipeline:
         pdf_path: str | Path,
         document_id: str | None = None,
         content_hash: str | None = None,
+        owner_id: str | None = None,
     ) -> list[Document]:
         """
         Load a PDF and split it into chunks.
@@ -58,6 +59,8 @@ class IngestionPipeline:
             chunk.metadata["ingestion_version"] = INGESTION_VERSION
             if content_hash:
                 chunk.metadata["content_hash"] = content_hash
+            if owner_id:
+                chunk.metadata["owner_id"] = owner_id
 
         return chunks
 
@@ -66,6 +69,7 @@ class IngestionPipeline:
         url: str,
         document_id: str | None = None,
         content_hash: str | None = None,
+        owner_id: str | None = None,
     ) -> list[Document]:
         """
         Load a web page and split it into chunks.
@@ -91,12 +95,16 @@ class IngestionPipeline:
             chunk.metadata["ingestion_version"] = INGESTION_VERSION
             if content_hash:
                 chunk.metadata["content_hash"] = content_hash
+            if owner_id:
+                chunk.metadata["owner_id"] = owner_id
 
         return chunks
 
-    def _existing_document(self, content_hash: str | None) -> tuple[str | None, bool]:
+    def _existing_document(self, content_hash: str | None, owner_id: str | None = None) -> tuple[str | None, bool]:
         """
-        (document_id, is_current) for content that is already indexed.
+        (document_id, is_current) for content that is already indexed,
+        by this owner when owner_id is given: two users uploading the same
+        file each get their own document.
 
         Chunks from an older INGESTION_VERSION are deleted so the caller
         re-ingests under the same document_id, keeping any client
@@ -105,7 +113,7 @@ class IngestionPipeline:
         if not content_hash:
             return None, False
 
-        existing = self.vector_store.get_by_content_hash(content_hash)
+        existing = self.vector_store.get_by_content_hash(content_hash, owner_id)
         if not existing:
             return None, False
 
@@ -118,14 +126,14 @@ class IngestionPipeline:
         self.vector_store.delete_by_document_id(document_id)
         return document_id, False
 
-    def run(self, pdf_path: str | Path, content_hash: str | None = None) -> dict:
+    def run(self, pdf_path: str | Path, content_hash: str | None = None, owner_id: str | None = None) -> dict:
         """
         Execute the complete ingestion pipeline.
         """
 
         # Skip re-ingesting content that's already indexed (e.g. the same
         # file uploaded twice), rather than creating duplicate chunks.
-        document_id, current = self._existing_document(content_hash)
+        document_id, current = self._existing_document(content_hash, owner_id)
 
         if current:
             return {
@@ -140,6 +148,7 @@ class IngestionPipeline:
             pdf_path,
             document_id=document_id,
             content_hash=content_hash,
+            owner_id=owner_id,
         )
 
         if not chunks:
@@ -162,14 +171,14 @@ class IngestionPipeline:
             "chunks": len(chunks),
         }
 
-    def run_web(self, url: str, content_hash: str | None = None) -> dict:
+    def run_web(self, url: str, content_hash: str | None = None, owner_id: str | None = None) -> dict:
         """
         Execute the complete ingestion pipeline for a web page.
         """
 
         # Skip re-ingesting a URL that's already indexed, rather than
         # creating duplicate chunks.
-        document_id, current = self._existing_document(content_hash)
+        document_id, current = self._existing_document(content_hash, owner_id)
 
         if current:
             return {
@@ -184,6 +193,7 @@ class IngestionPipeline:
             url,
             document_id=document_id,
             content_hash=content_hash,
+            owner_id=owner_id,
         )
 
         if not chunks:

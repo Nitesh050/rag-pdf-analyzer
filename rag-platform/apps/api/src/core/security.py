@@ -12,8 +12,9 @@ from sqlalchemy.orm import Session
 from ..db.session import get_db
 from ..models.user import User, UserSession
 
-# Until the API requires login, every request acts as this one user. Its
-# password hash can't match any password, so nobody can log in as it.
+# Owner for documents indexed before accounts existed (see
+# db/backfill_documents.py). Its password hash can't match any password,
+# so nobody can log in as it.
 LOCAL_USER_EMAIL = "local@localhost"
 UNUSABLE_PASSWORD = "!"
 
@@ -87,9 +88,8 @@ def get_local_user(db: Session) -> User:
         return db.scalar(select(User).where(User.email == LOCAL_USER_EMAIL))
 
 
-def get_current_user(db: Session = Depends(get_db)) -> User:
+def get_current_user(session: UserSession = Depends(get_current_session)) -> User:
     """
-    FastAPI dependency for "who is asking". Returns the local user for now;
-    switch to get_current_session(...).user to make the API require login.
+    FastAPI dependency for "who is asking": the logged-in user, or 401.
     """
-    return get_local_user(db)
+    return session.user

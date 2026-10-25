@@ -15,7 +15,7 @@ class FakeStore:
         self.chunks = chunks
         self.page_requests = []
 
-    def get_pages(self, pages, document_id=None):
+    def get_pages(self, pages, document_id=None, owner_id=None):
         self.page_requests.append(pages)
         return [c for c in self.chunks if c.metadata["page"] in pages]
 

@@ -126,18 +126,22 @@ class VectorStore:
     def get_by_content_hash(
         self,
         content_hash: str,
+        owner_id: str | None = None,
     ) -> list[Document]:
         """
-        Look up chunks previously stored for this exact file content,
-        used to detect duplicate uploads.
+        Look up chunks previously stored for this exact file content
+        (by this owner, when given), used to detect duplicate uploads.
         """
+
+        where = {"content_hash": content_hash}
+
+        if owner_id:
+            where = {"$and": [where, {"owner_id": owner_id}]}
 
         return self.similarity_search(
             query="",
             k=1,
-            filter={
-                "content_hash": content_hash,
-            },
+            filter=where,
         )
 
     # ---------------------------------------------------
@@ -148,17 +152,20 @@ class VectorStore:
         self,
         pages: list[int],
         document_id: str | None = None,
+        owner_id: str | None = None,
     ) -> list[Document]:
         """
         The chunks on the given pages, in reading order, optionally limited
-        to one document. Used to answer "what is on page 42?" directly
-        rather than by similarity search.
+        to one document or one owner's documents. Used to answer "what is
+        on page 42?" directly rather than by similarity search.
         """
 
         where = {"page": {"$in": list(pages)}}
 
         if document_id:
             where = {"$and": [where, {"document_id": document_id}]}
+        elif owner_id:
+            where = {"$and": [where, {"owner_id": owner_id}]}
 
         return self._get_ordered(where)
 
