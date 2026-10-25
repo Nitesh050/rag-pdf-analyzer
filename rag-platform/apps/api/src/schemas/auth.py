@@ -22,7 +22,24 @@ class SignupRequest(BaseModel):
         return password
 
 
+class LoginRequest(BaseModel):
+    # No format rules here: a wrong email or password just fails to log in.
+    email: str
+    password: str
+
+    @field_validator("email")
+    @classmethod
+    def strip_email(cls, email: str) -> str:
+        return email.strip()
+
+
 class UserResponse(BaseModel):
     id: str
     email: str
     display_name: str | None
+
+
+class LoginResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    user: UserResponse

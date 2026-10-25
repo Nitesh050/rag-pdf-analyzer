@@ -1,16 +1,26 @@
+import hashlib
+import secrets
+from datetime import timedelta
+
 import bcrypt
-from fastapi import Depends
+from fastapi import Depends, HTTPException
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from ..db.session import get_db
-from ..models.user import User
+from ..models.user import User, UserSession
 
-# Until login exists, every request acts as this one user. Its password hash
-# can't match any password, so nobody can log in as it.
+# Until the API requires login, every request acts as this one user. Its
+# password hash can't match any password, so nobody can log in as it.
 LOCAL_USER_EMAIL = "local@localhost"
 UNUSABLE_PASSWORD = "!"
+
+SESSION_LIFETIME = timedelta(days=7)
+
+# auto_error=False so a missing header gets our 401, not FastAPI's 403.
+bearer = HTTPBearer(auto_error=False)
 
 
 def hash_password(password: str) -> str:
@@ -25,6 +35,39 @@ def verify_password(password: str, password_hash: str) -> bool:
     except ValueError:
         # Not a bcrypt hash, e.g. UNUSABLE_PASSWORD.
         return False
+
+
+# Checked against when the email is unknown, so a login attempt takes as
+# long for a missing account as for a wrong password and doesn't reveal
+# which emails are registered.
+DUMMY_PASSWORD_HASH = hash_password(secrets.token_urlsafe(16))
+
+
+def new_session_token() -> str:
+    return secrets.token_urlsafe(32)
+
+
+def hash_token(token: str) -> str:
+    # A plain SHA-256 is enough here: unlike passwords, tokens are 256 random
+    # bits, so there is nothing to brute-force. bcrypt would only slow every request.
+    return hashlib.sha256(token.encode()).hexdigest()
+
+
+def get_current_session(
+    credentials: HTTPAuthorizationCredentials | None = Depends(bearer),
+    db: Session = Depends(get_db),
+) -> UserSession:
+    """
+    FastAPI dependency: the login session for the request's
+    "Authorization: Bearer <token>" header, or 401.
+    """
+    session = None
+    if credentials:
+        session = db.scalar(select(UserSession).where(UserSession.token_hash == hash_token(credentials.credentials)))
+
+    if session is None or not session.is_valid or not session.user.is_active:
+        raise HTTPException(status_code=401, detail="Not logged in.", headers={"WWW-Authenticate": "Bearer"})
+    return session
 
 
 def get_local_user(db: Session) -> User:
@@ -47,6 +90,6 @@ def get_local_user(db: Session) -> User:
 def get_current_user(db: Session = Depends(get_db)) -> User:
     """
     FastAPI dependency for "who is asking". Returns the local user for now;
-    replace with token authentication when login is added.
+    switch to get_current_session(...).user to make the API require login.
     """
     return get_local_user(db)
