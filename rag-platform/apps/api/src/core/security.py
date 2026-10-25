@@ -1,3 +1,4 @@
+import bcrypt
 from fastapi import Depends
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
@@ -10,6 +11,20 @@ from ..models.user import User
 # can't match any password, so nobody can log in as it.
 LOCAL_USER_EMAIL = "local@localhost"
 UNUSABLE_PASSWORD = "!"
+
+
+def hash_password(password: str) -> str:
+    # gensalt() picks a random salt per password, so two users with the
+    # same password still get different hashes.
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
+
+def verify_password(password: str, password_hash: str) -> bool:
+    try:
+        return bcrypt.checkpw(password.encode(), password_hash.encode())
+    except ValueError:
+        # Not a bcrypt hash, e.g. UNUSABLE_PASSWORD.
+        return False
 
 
 def get_local_user(db: Session) -> User:
