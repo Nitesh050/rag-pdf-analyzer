@@ -1,11 +1,15 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/layout/Sidebar';
 import UploadCard from '../components/upload/UploadCard';
 import ChatBox from '../components/chat/ChatBox';
 import ChatInput from '../components/chat/ChatInput';
 import { chatWithPdf } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 
 const Dashboard = () => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
   const [sources, setSources] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -44,8 +48,20 @@ const Dashboard = () => {
               <p className="text-sm uppercase tracking-[0.3em] text-sky-300">AI RAG Studio</p>
               <h1 className="text-xl font-semibold">Ask questions from your uploaded documents</h1>
             </div>
-            <div className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm text-slate-300">
-              {uploadedFile ? `Active file: ${uploadedFile}` : 'No document loaded yet'}
+            <div className="flex flex-wrap items-center justify-end gap-3">
+              <div className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm text-slate-300">
+                {uploadedFile ? `Active file: ${uploadedFile}` : 'No document loaded yet'}
+              </div>
+              <span className="text-sm text-slate-400">{user?.display_name || user?.email}</span>
+              <button
+                onClick={async () => {
+                  await logout();
+                  navigate('/');
+                }}
+                className="rounded-full border border-white/10 px-3 py-1 text-sm text-slate-300 transition hover:bg-white/10"
+              >
+                Logout
+              </button>
             </div>
           </div>
         </header>

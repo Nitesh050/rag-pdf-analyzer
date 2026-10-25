@@ -4,16 +4,30 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import Button from "../common/Button";
 import Input from "../common/Input";
+import { useAuth } from "../../context/AuthContext";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/chat");
+    setError("");
+    setSubmitting(true);
+
+    try {
+      await login(email, password);
+      navigate("/chat");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -76,8 +90,14 @@ function LoginForm() {
 
       </div>
 
-      <Button type="submit">
-        Login
+      {error && (
+        <p className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+          {error}
+        </p>
+      )}
+
+      <Button type="submit" disabled={submitting}>
+        {submitting ? "Logging in..." : "Login"}
       </Button>
 
       <p className="text-center text-slate-400">
@@ -86,6 +106,7 @@ function LoginForm() {
 
         <button
           type="button"
+          onClick={() => navigate("/signup")}
           className="ml-2 text-cyan-400 hover:text-cyan-300"
         >
           Register
